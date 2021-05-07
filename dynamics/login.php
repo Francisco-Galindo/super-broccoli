@@ -9,22 +9,6 @@
                 <legend>Inicio de sesión</legend>
                 <form action="index.php" method="POST">
                     <legend>
-                        Nombre <input type="text" name="nombre" required>
-                    </legend>
-                    <br><br>
-                    <legend>
-                        Apellidos <input type="text" name="apellidos" required>
-                    </legend>
-                    <br><br>
-                    <legend>
-                        Grupo: <input type="number" name="grupo" min="400" max="700" required>
-                    </legend>
-                    <br><br>
-                    <legend>
-                        Fecha de nacimiento: <input type="date" name="fecha" required>
-                    </legend>
-                    <br><br>
-                    <legend>
                         Correo electrónico: <input type="email" name="email" required>
                     </legend>
                     <br><br>
