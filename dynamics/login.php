@@ -1,24 +1,21 @@
 <?php
-	session_start();
+$contra = $_POST["contra"];
 
-	if (isset($_SESSION["nombre"])) {
-		header("location: ./index.php");
-	}
-	else {
-		echo '<fieldset>
-						<legend>Inicio de sesión</legend>
-						<form action="index.php" method="POST">
-							<legend>
-								Correo electrónico: <input type="email" name="email" required>
-							</legend>
-							<br><br>
-							<legend>
-								Contraseña: <input type="password" name="contra" required>
-							</legend>
-							<br><br>
-							<input type="submit" name="enviar">
-						</form>
-					</fieldset>';
-	}
+$email = $_POST["email"];
+
+$c = mysqli_connect("localhost", "root", "");
+$db = mysqli_select_db($c, "biblioteca");
+
+$consulta = "SELECT nombre FROM usuario WHERE correo='$email' AND contraseña='$contra'";
+
+
+$r = mysqli_query($c, $consulta);
+
+while($row=mysqli_fetch_array($r))
+{
+	echo($row["nombre"]);
+}
+
+mysqli_close($c);
 ?>
 

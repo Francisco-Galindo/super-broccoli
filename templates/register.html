@@ -9,17 +9,21 @@
 <body>
 	<fieldset>
 		<legend>Inicio de sesión</legend>
-		<form action="index.php" method="POST">
+		<form action="../dynamics/register.php" method="POST">
 			<legend>
 				Nombre <input type="text" name="nombre" required>
 			</legend>
 			<br><br>
 			<legend>
-				Apellidos <input type="text" name="apellidos" required>
+				Primer apellido <input type="text" name="primer_apellido" required>
 			</legend>
 			<br><br>
 			<legend>
-				Número de cuenta o RFC: <input type="number" name="grupo" min="400" max="700" required>
+				Segundo apellido <input type="text" name="segundo_apellido" required>
+			</legend>
+			<br><br>
+			<legend>
+				Número de cuenta o RFC: <input type="text" name="num_cuenta" maxlength="12" required>
 			</legend>
 			<br><br>
 			<legend>
@@ -33,6 +37,14 @@
 			<legend>
 				Contraseña: <input type="password" name="contra" required>
 			</legend>
+			<br>
+			<label>Tipo de usuario:
+				<select name="tipo" >
+					<option value="lector">Lector</option>
+					<option value="bibliotecario">Bibliotecario</option>
+					<option value="administrador">Carlos Alf</option>
+				  </select>
+			</label>
 			<br><br>
 			<input type="submit" name="enviar">
 		</form>
