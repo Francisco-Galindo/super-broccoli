@@ -23,6 +23,8 @@ while($row=mysqli_fetch_array($r))
 	$nombre = $row["nombre"];
 	$contadorCoincidencias ++;
 }
+
+
 mysqli_close($c);
 //Datos correctos redirigir a la pagina de inicio
 if($contadorCoincidencias === 1) {
