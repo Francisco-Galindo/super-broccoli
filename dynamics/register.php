@@ -34,5 +34,12 @@ if ($r) {
 }
 mysqli_close($c);
 
-$r ? header("location: ./index.php"); : header("location: ../templates/register.html");
+if ($r) {
+	session_start();
+	$_SESSION["nombre"] = $nombre;
+	header("location: ./index.php");
+} 
+else {
+	header("location: ../templates/register.html");
+}
 ?>

@@ -19,11 +19,18 @@ $r = mysqli_query($c, $consulta);
 $contadorCoincidencias = 0;
 while($row=mysqli_fetch_array($r))
 {
-	echo($row["nombre"]);
+	$nombre = $row["nombre"];
 	$contadorCoincidencias ++;
 }
 mysqli_close($c);
 
-$contadorCoincidencias === 1 ? header("location: ./index.php") : header("location: ../templates/login.html");
+if($contadorCoincidencias === 1) {
+	session_start();
+	$_SESSION["nombre"] = $nombre;
+	header("location: ./index.php");
+} 
+else {
+	header("location: ../templates/login.html");
+}
 ?>
 
