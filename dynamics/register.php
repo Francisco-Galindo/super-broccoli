@@ -9,7 +9,7 @@ if (isset($_POST["num_cuenta"])) {
 	$email = $_POST["email"];
 	$tipo = $_POST["tipo"];
 }
-//Redirigir a la pagina de registro si
+//Redirigir a la pagina de registro
 else {
 	header("location: ../templates/register.html");
 }
@@ -31,8 +31,19 @@ if ($r) {
 	$r = mysqli_query($c, $consulta);
 }
 //Otorgar permisos
-if ($r) {
-	$consulta = "GRANT ALL PRIVILEGES ON biblioteca.* TO  '$nombre'@'localhost'";
+if ($tipo=="lector") {
+	$consulta = "GRANT SELECT ON biblioteca.libros.autor.editorial.favorito TO  '$nombre'@'localhost'";
+	$r = mysqli_query($c, $consulta);
+}
+
+if ($tipo=="bibliotecario") {
+	$consulta = "GRANT SELECT, INSERT, UPDATE, CREATE ON biblioteca.libros.autor.editorial.reporte.
+	formulario.genero.histrial_descargas.categoria TO  '$nombre'@'localhost'";
+	$r = mysqli_query($c, $consulta);
+}
+
+if ($tipo=="administrador") {
+	$consulta = "GRANT PRIVILEGES ON biblioteca.* TO  '$nombre'@'localhost'";
 	$r = mysqli_query($c, $consulta);
 }
 //Cerrar conexión con base de datos

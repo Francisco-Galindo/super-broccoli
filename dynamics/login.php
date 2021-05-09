@@ -34,5 +34,7 @@ if($contadorCoincidencias === 1) {
 else {
 	header("location: ../templates/login.html");
 }
+//cerrar conexión con base de datos
+mysqli_close($c);
 ?>
 

@@ -21,6 +21,7 @@ while($row=mysqli_fetch_array($r))
 	echo $row["titulo"];
     echo "<br>";
 }
-
+//cerrar conexión con base de datos
+mysqli_close($c);
 
 ?>
