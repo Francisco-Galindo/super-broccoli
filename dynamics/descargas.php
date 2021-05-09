@@ -17,7 +17,7 @@ u.nombre
 u.primer apellido
 u.segundo apellido, 
 FROM
-usuario
+usuario u
 LEFT JOIN historial_descargas h USING(id_usuario)
 WHERE id_usuario IS NOT NULL";
 
