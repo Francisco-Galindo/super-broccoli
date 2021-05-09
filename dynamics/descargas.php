@@ -20,6 +20,4 @@ while($row=mysqli_fetch_array($r))
 	echo $row["titulo"];
     echo "<br>";
 }
-
-
 ?>
