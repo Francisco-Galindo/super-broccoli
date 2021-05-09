@@ -15,21 +15,117 @@ if (!isset($_SESSION["nombre"])) {
 </head>
 <body>
 	<h1>La biblioteca de Super-broccoli</h1>
+
 	<?php
 		echo "Bienvenido, <strong>" . $_SESSION["nombre"] . "</strong>";
 	?>
-
 	<br>
 	<a href="cerrar.php"><button>Cerrar sesión</button></a>
+	<br>
 
 	<br><br>
 	<fieldset>
 		<legend>Busca el libro que necesites</legend>
-		<form action="">
+		<form action="search_results.php" method="POST">
+
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Géneros</th>
+					<th>Autor</th>
+					<th>Editorial</th>
+					<th>Año</th>
+					<th>Categoría</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<?php
+						$c = mysqli_connect("localhost", "root", "");
+						$db = mysqli_select_db($c, "biblioteca");
+
+						$consulta = "SELECT id_genero, genero FROM genero";
+
+						$r = mysqli_query($c, $consulta);
+
+						$generos = [];
+						while($row=mysqli_fetch_array($r)) {
+							$generos += [$row["id_genero"]=>$row["genero"]];
+						}
+
+						foreach ($generos as $id => $genero) {
+							echo "<input type='checkbox' name='genero[]' value='$id'> $genero <br>";
+						}
+						?>
+					</td>
+					<td>
+						<?php
+						$c = mysqli_connect("localhost", "root", "");
+						$db = mysqli_select_db($c, "biblioteca");
+
+						$consulta = "SELECT id_autor, nombre FROM autor";
+
+						$r = mysqli_query($c, $consulta);
+
+						$autores = [];
+						while($row=mysqli_fetch_array($r)) {
+							$autores += [$row["id_autor"]=>$row["nombre"]];
+						}
+
+						foreach ($autores as $id => $autor) {
+							echo "<input type='checkbox' name='autor[]' value='$id'> $autor <br>";
+						}
+						?>
+					</td>
+					<td>
+						<?php
+						$consulta = "SELECT id_editorial, editorial FROM editorial";
+
+						$r = mysqli_query($c, $consulta);
+						
+						$editoriales = [];
+						while($row=mysqli_fetch_array($r)) {
+							$editoriales += [$row["id_editorial"]=>$row["editorial"]];
+						}
+
+						foreach ($editoriales as $id => $editorial) {
+							echo "<input type='checkbox' name='editorial[]' value='$id'> $editorial <br>";
+						}
+						?>
+					
+					</td>
+					<td>
+						<?php
+						echo 'Desde: <input type="number" name="anno_min" max="' . date("Y") .'">';
+						echo ' Hasta: <input type="number" name="anno_max" max="' . date("Y") .'">';
+						?>
+					</td>
+					<td>
+					<?php
+						$consulta = "SELECT id_categoria, categoria FROM categoria";
+
+						$r = mysqli_query($c, $consulta);
+						
+						$categorias = [];
+						while($row=mysqli_fetch_array($r)) {
+							$categorias += [$row["id_categoria"]=>$row["categoria"]];
+						}
+
+						foreach ($categorias as $id => $categoria) {
+							echo "<input type='checkbox' name='categoria[]' value='$id'> $categoria <br>";
+						}
+						?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
 			<label> Libro a buscar <br>
 				<input type="text">
 			</label>
-			<input type="sumbit" value="Buscar">
+			<input type="hidden" name="busqueda" value="busqueda xd">
+			<input type="submit" value="Buscar" name="busqueda">
 		</form>
 	</fieldset>
 

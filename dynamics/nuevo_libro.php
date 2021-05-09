@@ -33,22 +33,8 @@
 			$c = mysqli_connect("localhost", "root", "");
 			$db = mysqli_select_db($c, "biblioteca");
 
-			//Join tables para mostrar los datos de el historial de descargas
-			$consulta = "SELECT fecha, titulo, autor, nombre
-			FROM historial_descargas t1
-			INNER JOIN libros t2 ON t1.id_libro = t2.id_libro
-			INNER JOIN usuario t3 ON t1.id_usuario = t3.num_cuenta_rfc
-			ORDER BY fecha DESC;";
-
-			//Consulta de base
-			$r = mysqli_query($c, $consulta);
-
-
-			if (isset($_POST["autor"])) {
-
-				$id_autor = $_POST["autor"];
-			}
-			elseif ($_POST["nuevo_autor_apellido"]) {
+			
+			if ($_POST["nuevo_autor_apellido"]) {
 
 				$autorNombre = "";
 				$autorNombre .= $_POST["nuevo_autor_apellido"];
@@ -84,11 +70,12 @@
 					}
 				}
 			}
+			elseif (isset($_POST["autor"])) {
 
-			if (isset($_POST["editorial"])) {
-				$id_editorial = $_POST["editorial"];
+				$id_autor = $_POST["autor"];
 			}
-			elseif (isset($_POST["nueva_editorial"])) {
+
+			if (isset($_POST["nueva_editorial"]) && $_POST["nueva_editorial"] != "") {
 				$nuevaEditorialNombre = $_POST["nueva_editorial"];
 
 				//Join tables para mostrar los datos de el historial de descargas
@@ -97,7 +84,7 @@
 				$r = mysqli_query($c, $consulta);
 
 				//Join tables para mostrar los datos de el historial de descargas
-				$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
+				$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
 				//Consulta de base
 				$r = mysqli_query($c, $consulta);
 
@@ -105,9 +92,12 @@
 				$contadorCoincidencias = 0;
 				while($row=mysqli_fetch_array($r))
 				{
-					$id_editorial = $row["id_autor"];
+					$id_editorial = $row["id_editorial"];
 					$contadorCoincidencias ++;
 				}
+			}
+			elseif (isset($_POST["editorial"])) {
+				$id_editorial = $_POST["editorial"];
 			}
 
 
@@ -133,16 +123,39 @@
 				if ($ext == "pdf") {
 					$nombreArchivo = "";
 					$nombreArchivo .= $_POST["titulo"] . "_" . $id_autor . "." . $ext;
-					$rutaLibro = '../libros/' . $nombreArchivo;
+					$rutaLibro = '../statics/libros/' . $nombreArchivo;
 					rename($arch, $rutaLibro);
 				}
 			}
+
+			$rutaImagen = '../statics/img_referencia/imagen_default.png';
+			if (isset($_FILES['imagen'])) {
+				$arch = $_FILES['imagen']['tmp_name'];
+				$name = $_FILES['imagen']['name'];
+				$ext = pathinfo($name, PATHINFO_EXTENSION);
+				if ($ext == "png" || $ext == "jpg" || $ext == "jpeg") {
+					$nombreArchivo = "";
+					$nombreArchivo .= $_POST["titulo"] . "_" . $id_autor . "." . $ext;
+					$rutaImagen = '../statics/img_referencia/' . $nombreArchivo;
+					rename($arch, $rutaImagen);
+				}
+			}
+
+
+
 			$titulo = $_POST["titulo"];
 
 			//Join tables para mostrar los datos de el historial de descargas
-			$consulta = "INSERT INTO libros (year, editorial, autor, titulo, libro) VALUES ($year, $id_editorial, $id_autor, '$titulo', '$rutaLibro');";
+			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, titulo, libro) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$titulo', '$rutaLibro');";
 			//Consulta de base
 			$r = mysqli_query($c, $consulta);
+
+
+			//Join tables para mostrar los datos de el historial de descargas
+			$consulta = "INSERT INTO libro_has_genero (id_libro, id_genero) VALUES ();";
+			//Consulta de base
+			$r = mysqli_query($c, $consulta);
+
 			//header("location: nuevo_libro.php");
 			mysqli_close($c);
 
@@ -150,7 +163,7 @@
 
 
 
-		
+
     else {
 
 			if (isset($_SESSION["Error"])) {
