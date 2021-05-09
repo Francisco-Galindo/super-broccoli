@@ -19,8 +19,6 @@ while($row=mysqli_fetch_array($r))
     echo "<br>";
 	echo $row["titulo"];
     echo "<br>";
-	echo $row["autor"];
-    echo "<br>";
 }
 
 
