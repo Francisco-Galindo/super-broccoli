@@ -8,8 +8,12 @@
     <title>Resultados de búsqueda</title>
 </head>
 <body>
+
+<a href="cerrar.php"><button>Cerrar sesión</button></a>
+
 <?php
 session_start();
+
 
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
@@ -63,7 +67,7 @@ if (isset($_POST["busqueda"])) {
 
 	$consulta = "SELECT * FROM libros WHERE" . $filtros . ";";
 	//Consulta de base
-
+	echo "<br>" . $consulta . "<br>";
 	$r = mysqli_query($c, $consulta);
 
 	echo "<table border='1'><tbody>";
@@ -96,45 +100,6 @@ if (isset($_POST["busqueda"])) {
 // }
 
 ?>
-
-<table>
-	<tbody>
-		<tr>
-			<td width="350"><img width="300" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.60LB7Mok7rF7KOdwagc-QQHaFj%26pid%3DApi&f=1">
-				<br>
-				<br>
-				Autor:
-				<br>
-				Título:
-				<br>
-				<button type="button" class="btn btn-primary">Más información</button>
-			</td>
-			<td width="350"><img width="300" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.60LB7Mok7rF7KOdwagc-QQHaFj%26pid%3DApi&f=1">
-				<br>
-				<br>
-				Autor:
-				<br>
-				Título:
-				<br>
-				<button type="button" class="btn btn-primary">Más información</button>
-			</td>
-				<td width="350"><img width="300" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.60LB7Mok7rF7KOdwagc-QQHaFj%26pid%3DApi&f=1">
-					<br>
-					<br>
-					Autor:
-					<br>
-					Título:
-					<br>
-					<button type="button" class="btn btn-primary">Más información</button>
-			</td>
-		</tr>
-			
-	</tbody>
-</table>
-
-<form action="cerrar.php" method="POST">
-    <input type="submit" value="Cerrar sesión">
-</form>
 
 </body>
 </html>
