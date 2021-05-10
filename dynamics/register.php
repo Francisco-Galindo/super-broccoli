@@ -13,23 +13,23 @@ if (isset($_POST["num_cuenta"])) {
 else {
 	header("location: ../templates/register.html");
 }
+
 //Abrir conexión con base de datos
 $c = mysqli_connect("localhost", "root", "");
 $db = mysqli_select_db($c, "biblioteca");
+
 //Ingresar los valores del formulario en la tabla usuarios
 $consulta = "INSERT INTO usuario (num_cuenta_rfc, nombre, primer_apellido, segundo_apellido, contraseña, correo) VALUES ('$id', '$nombre', '$prim_ape', '$seg_ape', '$contra', '$email')";
 $r = mysqli_query($c, $consulta);
 //Crear cuenta en la base de datos
+
+
 if ($r) {
 	$consulta = "CREATE USER '$nombre'@'localhost' IDENTIFIED BY '$contra'";
 	$r = mysqli_query($c, $consulta);	
 }
-//Insertar en la tabla lector, biblotecario o admin
-if ($r) {
-	$id_tipo = "id_" . $tipo;
-	$consulta = "INSERT INTO $tipo VALUES ('$id_tipo', '$id')";
-	$r = mysqli_query($c, $consulta);
-}
+
+
 //Otorgar permisos
 if ($tipo=="lector") {
 	$consulta = "GRANT SELECT ON biblioteca.libros.autor.editorial.favorito TO  '$nombre'@'localhost'";
@@ -46,12 +46,15 @@ if ($tipo=="administrador") {
 	$consulta = "GRANT PRIVILEGES ON biblioteca.* TO  '$nombre'@'localhost'";
 	$r = mysqli_query($c, $consulta);
 }
+
+
 //Cerrar conexión con base de datos
 mysqli_close($c);
 //Redirigir a la página de inicio
 if ($r) {
 	session_start();
 	$_SESSION["nombre"] = $nombre;
+
 	header("location: ./index.php");
 } 
 //Redirigir a la pagina de registro

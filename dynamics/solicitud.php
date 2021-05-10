@@ -10,7 +10,7 @@ $razon = $_POST["razon"];
 $c = mysqli_connect("localhost", "root", "");
 $db = mysqli_select_db($c, "biblioteca");
 //Insertar valores en base de datos
-$consulta = "INSERT INTO formulario (obra, autor, publicacion, editorial, edicion, razon) VALUES ('$obra','$autor', '$año', '$editorial', '$edición', '$razon')";
+$consulta = "INSERT INTO formulario (obra, autor, publicacion, editorial, edicion, razon) VALUES ('$obra','$autor', '$año', '$editorial', '$edición', '$razon');";
 //resultado de la busqueda
 $r = mysqli_query($c, $consulta);
 //cerrar conexion con base de datos

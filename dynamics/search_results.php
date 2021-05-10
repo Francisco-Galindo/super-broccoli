@@ -21,51 +21,107 @@ if (isset($_POST["busqueda"])) {
 	$db = mysqli_select_db($c, "biblioteca");
 
 	$filtros = "";
+	$filtrosGenero = "";
 	
-	// $contador = 0;
-	// foreach ($_POST["genero"] as $genero) {
-	// 	if ($contador  > 0) {
-	// 		$filtros .= "OR ";
-	// 	}
-	// 	$filtros .= "id"$genero;
-	// 	$contador ++;
-	// }
-
-
 	$contador = 0;
-	foreach ($_POST["autor"] as $autor) {
-		if ($contador== 0) {
-			$filtros .= " (";
+	if (isset($_POST["genero"])) {
+		foreach ($_POST["genero"] as $genero) {
+			if ($contador == 0) {
+				$filtrosGenero .= " (";
+			}
+			if ($contador  > 0) {
+				$filtrosGenero .= " OR ";
+			}
+			$filtrosGenero .= "id_genero = " . $genero;
+			$contador ++;
 		}
-		elseif ($contador  > 0) {
-			$filtros .= " OR ";
-		}
-		$filtros .= "autor = " . $autor;
-		$contador ++;
+	}	
+	if ($contador > 0) {
+		$filtrosGenero .= " ) ";
+	}
+	else if ($contador == 0) {
+		$filtrosGenero = (' 1=1 ');
 	}
 
+	$contador = 0;
+	if (isset($_POST["autor"])) {
+		foreach ($_POST["autor"] as $autor) {
+			if ($contador== 0) {
+				$filtros .= " ( ";
+			}
+			elseif ($contador  > 0) {
+				$filtros .= " OR ";
+			}
+			$filtros .= "autor = " . $autor;
+			$contador ++;
+		}
+	}
 	if ($contador > 0) {
 		$filtros .= ") ";
 	}
 	else if ($contador == 0) {
-		$filtros = (' 1=1 ');
-	}
-	$contador = 0;
-	foreach ($_POST["editorial"] as $editorial) {
-		if ($contador== 0) {
-			$filtros .= "AND (";
-		}
-		elseif ($contador  > 0) {
-			$filtros .= " OR ";
-		}
-		$filtros .= "editorial = " . $editorial;
-		$contador ++;
-	}
-	if ($contador > 0) {
-		$filtros .= ")";
+		$filtros = (' (1=1) ');
 	}
 
-	$consulta = "SELECT * FROM libros WHERE" . $filtros . ";";
+
+	$contador = 0;
+	if (isset($_POST["editorial"])) {
+		foreach ($_POST["editorial"] as $editorial) {
+			if ($contador== 0) {
+				$filtros .= " AND (";
+			}
+			elseif ($contador  > 0) {
+				$filtros .= " OR ";
+			}
+			$filtros .= "editorial = " . $editorial;
+			$contador ++;
+		}
+	}
+	if ($contador > 0) {
+		$filtros .= ") ";
+	}
+	else if ($contador == 0) {
+		$filtros .= (' AND (1=1) ');
+	}
+
+	if ((isset($_POST["anno_min"]) && $_POST["anno_min"] != "") && (isset($_POST["anno_max"]) && $_POST["anno_max"] != "")) {
+		$filtros .= " AND (year BETWEEN " . $_POST["anno_min"] . " AND " . $_POST["anno_max"] . ") ";
+	}
+	elseif (isset($_POST["anno_min"]) && $_POST["anno_min"] != "") {
+		$filtros .= "AND (year >= " . $_POST["anno_min"] . ") ";
+	}
+	elseif (isset($_POST["anno_max"]) && $_POST["anno_max"] != "") {
+		$filtros .= "AND (year <= " . $_POST["anno_max"] . ") ";
+	}
+	else {
+		$filtros .= "AND (1=1) ";
+	}
+
+	$contador = 0;
+	if (isset($_POST["categoria"])) {
+		foreach ($_POST["categoria"] as $categoria) {
+			if ($contador== 0) {
+				$filtros .= " AND (";
+			}
+			elseif ($contador  > 0) {
+				$filtros .= " OR ";
+			}
+			$filtros .= "categoria = " . $categoria;
+			$contador ++;
+		}
+	}
+	if ($contador > 0) {
+		$filtros .= ") ";
+	}
+	else if ($contador == 0) {
+		$filtros .= (' AND (1=1) ');
+	}
+
+	$filtros .= " AND ( ";
+	$filtros .= isset($_POST["palabra_clave"]) && $_POST["palabra_clave"] != "" ? "titulo LIKE '%" . $_POST["palabra_clave"] . "%')" : "1=1)" ;
+
+
+	$consulta = "SELECT * FROM libros WHERE (" . $filtros . ")" . " AND id_libro IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ");";
 	//Consulta de base
 	echo "<br>" . $consulta . "<br>";
 	$r = mysqli_query($c, $consulta);
@@ -82,17 +138,20 @@ if (isset($_POST["busqueda"])) {
 		echo "<br>editorial: " . $row["editorial"];
 		echo "<br>autor: " . $row["autor"];
 		echo '<br>';
+		$id_libro = $row["id_libro"];
+		echo'<form action="./mas_informacion.php" method= "POST">
+		<input type="hidden" name="id_libro" value="' . $id_libro . '">
+		<input type="submit" value="mas información" name="mas información">
+		</form>';
 		echo "</td>";
+		
 		echo "</tr>";
-		echo'<form action="./mas_información.php" method= "POST">
-	<input type="submit" value="mas información" name="mas información">
-	</form>';
+		
 	}
+	
 	echo "</tbody></table>";
-	echo "<br>"
-	echo'<form action="./mas_información.php" method= "POST">
-	<input type="submit" value="mas información" name="mas información">
-	</form>';
+	echo "<br>";
+	
 
 	mysqli_close($c);
 }

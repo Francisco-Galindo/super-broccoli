@@ -57,8 +57,7 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($generos as $id => $genero) {
 							echo "<input type='checkbox' name='genero[]' value='$id'> $genero <br>";
 						}
-						//cerrar conexión con base de datos
-						mysqli_close($c);
+			
 						?>
 					</td>
 					<td>
@@ -78,8 +77,7 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($autores as $id => $autor) {
 							echo "<input type='checkbox' name='autor[]' value='$id'> $autor <br>";
 						}
-						//cerrar conexión con base de datos
-						mysqli_close($c);
+
 						?>
 					</td>
 					<td>
@@ -96,8 +94,7 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($editoriales as $id => $editorial) {
 							echo "<input type='checkbox' name='editorial[]' value='$id'> $editorial <br>";
 						}
-						//cerrar conexión con base de datos
-						mysqli_close($c);
+
 						?>
 					
 					</td>
@@ -131,7 +128,7 @@ if (!isset($_SESSION["nombre"])) {
 		</table>
 		<br><br>
 			<label> Libro a buscar <br>
-				<input type="text">
+				<input type="text" name="palabra_clave">
 			</label>
 			<input type="hidden" name="busqueda" value="busqueda xd">
 			<input type="submit" value="Buscar" name="busqueda">

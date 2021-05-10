@@ -101,6 +101,14 @@
 				$year = NULL;
 			}
 
+			if (isset($_POST["categoria"])) {
+				$categoria = $_POST["categoria"];
+			} 
+			else {
+				$categoria = NULL;
+			}
+			echo $categoria;
+
 			if (isset($_FILES['archivo'])) {
 				$arch = $_FILES['archivo']['tmp_name'];
 				$name = $_FILES['archivo']['name'];
@@ -132,7 +140,7 @@
 			$desc = $_POST["desc"];
 
 
-			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, descripcion, titulo, libro) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro');";
+			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
 
 			$r = mysqli_query($c, $consulta);
 
@@ -198,6 +206,17 @@
 				$autores += [$row["id_autor"]=>$row["nombre"]];
 			}
 
+
+			$consulta = "SELECT id_categoria, categoria FROM categoria";
+
+			$r = mysqli_query($c, $consulta);
+
+			$categorias = [];
+			while($row=mysqli_fetch_array($r)) {
+				$categorias += [$row["id_categoria"]=>$row["categoria"]];
+			}
+
+
 			mysqli_close($c);
 
 			echo '<fieldset>
@@ -259,6 +278,12 @@
 									foreach ($generos as $id => $genero) {
 										echo '<label><input type="checkbox" name="generos[]" value="' . $id . '">' . $genero . '</label><br>';
 									}
+									echo "<br><br>Categoría:
+									<select name='categoria'>";
+									foreach ($categorias as $id => $categoria) {
+										echo '<option value="' . $id . '">' . $categoria . '</option>';
+									}
+									echo "</select>";
 
 									echo '<br><br>
 									<label>
