@@ -121,27 +121,36 @@ if (isset($_POST["busqueda"])) {
 	$filtros .= isset($_POST["palabra_clave"]) && $_POST["palabra_clave"] != "" ? "titulo LIKE '%" . $_POST["palabra_clave"] . "%')" : "1=1)" ;
 
 
-	$consulta = "SELECT * FROM libros WHERE (" . $filtros . ")" . " AND id_libro IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ");";
+	$consulta = "SELECT * FROM libros t1
+	INNER JOIN autor t2 ON t1.autor = t2.id_autor 
+	INNER JOIN editorial t3 ON t1.editorial = t3.id_editorial 
+	WHERE (" . $filtros . ")" . 
+	" AND id_libro 
+	IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ");";
 	//Consulta de base
 	echo "<br>" . $consulta . "<br>";
 	$r = mysqli_query($c, $consulta);
 
 	echo "<table border='1'><tbody>";
 	while($row=mysqli_fetch_array($r)) {
+		$id_libro = $row["id_libro"];
 
 		echo "<tr>";
 		echo "<td>";
 		echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
-		echo "<br>Titulo: " . $row["titulo"];
-		echo "<br>id: " . $row["id_libro"];
-		echo "<br>year: " . $row["year"];
-		echo "<br>editorial: " . $row["editorial"];
-		echo "<br>autor: " . $row["autor"];
+		echo "<br><strong>Titulo: </strong>" . $row["titulo"];
+		echo "<br><strong>ID: </strong>" . $row["id_libro"];
+		echo "<br><strong>Año de publicación: </strong>" . $row["year"];
+
+		echo "<br><strong>Editorial: </strong>" . $row["editorial"];
+
+		echo "<br><strong>Autor: </strong>" . $row["nombre"];
 		echo '<br>';
-		$id_libro = $row["id_libro"];
+
+
 		echo'<form action="./mas_informacion.php" method= "POST">
 		<input type="hidden" name="id_libro" value="' . $id_libro . '">
-		<input type="submit" value="mas información" name="mas información">
+		<input type="submit" value="Mas información" name="mas información">
 		</form>';
 		echo "</td>";
 		
