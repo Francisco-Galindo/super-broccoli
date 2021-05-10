@@ -58,4 +58,6 @@ if ($r) {
 else {
 	header("location: ../templates/register.html");
 }
+//cerrar conexión con base de datos
+mysqli_close($c);
 ?>

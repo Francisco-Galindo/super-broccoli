@@ -57,6 +57,8 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($generos as $id => $genero) {
 							echo "<input type='checkbox' name='genero[]' value='$id'> $genero <br>";
 						}
+						//cerrar conexión con base de datos
+						mysqli_close($c);
 						?>
 					</td>
 					<td>
@@ -76,6 +78,8 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($autores as $id => $autor) {
 							echo "<input type='checkbox' name='autor[]' value='$id'> $autor <br>";
 						}
+						//cerrar conexión con base de datos
+						mysqli_close($c);
 						?>
 					</td>
 					<td>
@@ -92,6 +96,8 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($editoriales as $id => $editorial) {
 							echo "<input type='checkbox' name='editorial[]' value='$id'> $editorial <br>";
 						}
+						//cerrar conexión con base de datos
+						mysqli_close($c);
 						?>
 					
 					</td>
@@ -115,6 +121,9 @@ if (!isset($_SESSION["nombre"])) {
 						foreach ($categorias as $id => $categoria) {
 							echo "<input type='checkbox' name='categoria[]' value='$id'> $categoria <br>";
 						}
+						//cerrar conexión con base de datos
+						mysqli_close($c);
+						
 						?>
 					</td>
 				</tr>

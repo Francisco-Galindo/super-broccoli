@@ -77,11 +77,15 @@ if (isset($_POST["busqueda"])) {
 		echo "<br>year: " . $row["year"];
 		echo "<br>editorial: " . $row["editorial"];
 		echo "<br>autor: " . $row["autor"];
-		echo "<br>";
+		echo '<br>';
 		echo "</td>";
 		echo "</tr>";
 	}
 	echo "</tbody></table>";
+	echo "<br>"
+	echo'<form action="./mas_información.php" method= "POST">
+	<input type="submit" value="mas información" name="mas información">
+	</form>';
 
 	mysqli_close($c);
 }
