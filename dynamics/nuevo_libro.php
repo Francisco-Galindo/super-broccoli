@@ -5,17 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
-    <title>Document</title>
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería</title>
 </head>
+
 <body>
     <?php
 
@@ -109,13 +101,6 @@
 				$year = NULL;
 			}
 
-			if (isset($_POST["genero"])) {
-				$genero = $_POST["genero"];
-			} 
-			else {
-				$genero = NULL;
-			}
-
 			if (isset($_FILES['archivo'])) {
 				$arch = $_FILES['archivo']['tmp_name'];
 				$name = $_FILES['archivo']['name'];
@@ -144,17 +129,30 @@
 
 
 			$titulo = $_POST["titulo"];
+			$desc = $_POST["desc"];
 
-			//Join tables para mostrar los datos de el historial de descargas
-			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, titulo, libro) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$titulo', '$rutaLibro');";
-			//Consulta de base
+
+			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, descripcion, titulo, libro) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro');";
+
 			$r = mysqli_query($c, $consulta);
 
 
-			//Join tables para mostrar los datos de el historial de descargas
-			$consulta = "INSERT INTO libro_has_genero (id_libro, id_genero) VALUES ();";
-			//Consulta de base
+			$consulta = "SELECT id_libro FROM libros WHERE titulo='$titulo' AND autor=$id_autor;";
+
 			$r = mysqli_query($c, $consulta);
+			while($row=mysqli_fetch_array($r)) {
+				$id_libro = $row["id_libro"];
+			}
+
+			var_dump($_POST["generos"]);
+			if (isset($_POST["generos"])) {
+				foreach ($_POST["generos"] as $id_genero) {
+
+					$consulta = "INSERT INTO libro_has_genero (id_libro, id_genero) VALUES ($id_libro, $id_genero);";
+
+					$r = mysqli_query($c, $consulta);
+				}
+			}
 
 			//header("location: nuevo_libro.php");
 			mysqli_close($c);
@@ -264,6 +262,11 @@
 
 									echo '<br><br>
 									<label>
+										Descripción: <br> 
+										<textarea  rows="4" cols="50" name="desc"></textarea>
+									</label>
+									<br><br>
+									<label>
 										Sube el archivo del libro:
 										<input type="file" name="archivo" required>
 									</label>
@@ -278,7 +281,7 @@
 						</fieldset>';
     }
     ?>
-    
+
 </body>
 </html>
 </body>
