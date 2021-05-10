@@ -8,19 +8,10 @@
 
 <?php
 
+if (isset($_POST["id_libro"])){
 
-$id_libro = $_POST["id_libro"];
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
-
-if (isset($_POST["pestaña"])) {
-    $consulta = "SELECT libro FROM libros WHERE id_libro=$id_libro;" ;
-    $r = mysqli_query($c, $consulta);
-    $row=mysqli_fetch_array($r);
-    echo '<a href="' . $row["libro"] . '" target="_blank">HOla</a>';
-}
-
-elseif (isset($_POST["id_libro"])){
+    $c = mysqli_connect("localhost", "root", "");
+    $db = mysqli_select_db($c, "biblioteca");
     
     $id_libro = $_POST["id_libro"];
 
@@ -49,19 +40,24 @@ elseif (isset($_POST["id_libro"])){
     //Falta agregar liga hacia favorito y de descarga
     echo'<br><a href="' . $row["libro"] . '" target="_blank"><button>Abrir en otra pestaña</button></a> 
 
-    <form action="">
-        <input type="submit" value="Descargar" name="descargar">
-    </form>
+    <br>
+
+    <a title="Descargar Archivo" href="' . $row["libro"] . '" download="' . $row["titulo"] . '" style="color: blue; font-size:18px;"><button>Descargar</button></a>
 
     <form action="">
         <input type="submit" value="Agreagar a favoritos" name="favoritos">
     </form>';
 
+    
+
+
     mysqli_close($c);
 }
 
-
-
 ?>
+
+
+
+
 </body>
 </html>
