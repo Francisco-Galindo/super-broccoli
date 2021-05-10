@@ -84,6 +84,9 @@ if (isset($_POST["busqueda"])) {
 		echo '<br>';
 		echo "</td>";
 		echo "</tr>";
+		echo'<form action="./mas_información.php" method= "POST">
+	<input type="submit" value="mas información" name="mas información">
+	</form>';
 	}
 	echo "</tbody></table>";
 	echo "<br>"
