@@ -1,6 +1,8 @@
 <?php
+	require "./config.php"
 	require './util.php';
 	session_start();
+	
 	if (!isset($_SESSION["nombre"])) {
 		header("location: login.php");
 	}
@@ -12,8 +14,7 @@
 		//ACCEDER A LA BASE DE DATOS Y ELIMINAR LOS REGISTROS
 
 		//Conexión con base de datos
-		$c = mysqli_connect("localhost", "root", "");
-		$db = mysqli_select_db($c, "biblioteca");
+		$c = conectdb($id_usuario, $password);
 		//Insertar valores para nuevos usuarios
 		$id_usuario = $_SESSION["id_usuario"];
 

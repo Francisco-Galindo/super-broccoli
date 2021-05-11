@@ -1,4 +1,17 @@
 <?php
+require "./config.php"
+?>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
+	<title>Log in</title>
+</head>
+<body>
+<?php
 //Declarar los valores ingresados en el inicio de sesión
 if (isset($_POST["email"])) {
 	$contra = $_POST["contra"];
@@ -9,8 +22,7 @@ else {
 	header("location: ../templates/login.html");
 }
 //conexión con base de datos
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
+$c = conectdb($id_usuario, $password);
 //comprueba que el email y la contraseña correspondan
 $consulta = "SELECT num_cuenta_rfc, nombre FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 

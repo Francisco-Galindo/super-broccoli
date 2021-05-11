@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 session_start();
 if (!isset($_SESSION["nombre"])) {
 	header("location: login.php");
@@ -43,8 +44,7 @@ if (!isset($_SESSION["nombre"])) {
 				<tr>
 					<td>
 						<?php
-						$c = mysqli_connect("localhost", "root", "");
-						$db = mysqli_select_db($c, "biblioteca");
+						$c = conectdb($id_usuario, $password);
 
 						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";
 
@@ -63,12 +63,11 @@ if (!isset($_SESSION["nombre"])) {
 					</td>
 					<td>
 						<?php
-						$c = mysqli_connect("localhost", "root", "");
-						$db = mysqli_select_db($c, "biblioteca");
+						$c = conectdb($id_usuario, $password);
 
-						$consulta = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
+						$consulta1 = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
 
-						$r = mysqli_query($c, $consulta);
+						$r = mysqli_query($c, $consulta1);
 
 						$autores = [];
 						while($row=mysqli_fetch_array($r)) {
@@ -83,9 +82,9 @@ if (!isset($_SESSION["nombre"])) {
 					</td>
 					<td>
 						<?php
-						$consulta = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
+						$consulta2 = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
 
-						$r = mysqli_query($c, $consulta);
+						$r = mysqli_query($c, $consulta2);
 						
 						$editoriales = [];
 						while($row=mysqli_fetch_array($r)) {
@@ -107,9 +106,9 @@ if (!isset($_SESSION["nombre"])) {
 					</td>
 					<td>
 					<?php
-						$consulta = "SELECT id_categoria, categoria FROM categoria";
+						$consulta3 = "SELECT id_categoria, categoria FROM categoria";
 
-						$r = mysqli_query($c, $consulta);
+						$r = mysqli_query($c, $consulta3);
 						
 						$categorias = [];
 						while($row=mysqli_fetch_array($r)) {

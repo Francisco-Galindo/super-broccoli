@@ -1,12 +1,24 @@
 <?php
+require "./config.php"
 session_start();
 if (!isset($_SESSION["nombre"])) {
     header("location: login.php");
 }
+?>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
+	<title>Favoritos</title>
+</head>
+<body>
+<?php
 
 if(isset($_POST["favoritos"]));{
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
 
     $consulta = "SELECT * FROM libro t1
 	INNER JOIN favoritos t2 ON t1.id_libro = t2.id_libro 

@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 //Declarar valores de crear cuenta
 $id = $_POST["num_cuenta"];
 $nombre = $_POST["nombre"];
@@ -18,8 +19,8 @@ $r = mysqli_query($c, $consulta);
 var_dump($r);
 echo "<br>";
 //Creación de usuario con lo contestado en el formulario para crear cuenta
-$consulta = "CREATE USER '$nombre'@'localhost' IDENTIFIED BY '$contra'";
-$r = mysqli_query($c, $consulta);
+$consulta1 = "CREATE USER '$nombre'@'localhost' IDENTIFIED BY '$contra'";
+$r = mysqli_query($c, $consulta1);
 var_dump($r);
 //cerrar conexión con base de datos
 mysqli_close($c);

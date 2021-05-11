@@ -16,10 +16,10 @@
 <body>
     <table>
         <?php
+        require "./config.php"
 
         //Conexión con base de datos
-        $c = mysqli_connect("localhost", "root", "");
-        $db = mysqli_select_db($c, "biblioteca");
+        $c = conectdb($id_usuario, $password);
 
         $id = $_SESSION["id_usuario"];
         $consulta = "SELECT * FROM usuario t1

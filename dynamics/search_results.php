@@ -13,12 +13,12 @@
 
 <?php
 session_start();
+require "./config.php"
 
 
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
-	$c = mysqli_connect("localhost", "root", "");
-	$db = mysqli_select_db($c, "biblioteca");
+	$c = conectdb($id_usuario, $password);
 
 	$filtros = "";
 	$filtrosGenero = "";
