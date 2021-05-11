@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Más información</title>
 </head>
 <body>
 
@@ -44,6 +44,12 @@ if (isset($_POST["id_libro"])){
 
     <a title="Descargar Archivo" href="' . $row["libro"] . '" download="' . $row["titulo"] . '" style="color: blue; font-size:18px;"><button>Descargar</button></a>
 
+    <form action="mas_informacion.php" method="POST">
+        <input type="hidden" value="'. $id_libro .'" name="id_descarga">
+        <input type="hidden" value="'. $row["libro"] .'" name="contenido">
+        <input type="submit" value="WAPO" name="descarga">
+    </form>
+
     <form action="">
         <input type="submit" value="Agreagar a favoritos" name="favoritos">
     </form>';
@@ -52,6 +58,14 @@ if (isset($_POST["id_libro"])){
 
 
     mysqli_close($c);
+}
+elseif (isset($_POST["id_descarga"])) {
+    echo $_POST["i"];
+    header("Content-type: application/pdf");
+    header("Content-Disposition: attachment; filename=xd.pdf");
+    readfile($_POST["contenido"]);
+    
+    header("location: index.php");
 }
 
 ?>
