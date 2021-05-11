@@ -2,12 +2,12 @@
 function encabezadol($hola){
     echo"<table>";
          echo"<thead>"; 
-            echo"<th><form action= method=POST>";
+            echo"<th><form action=\"./favoritos.php\" method=POST>";
                 echo"<label>";
                     echo"<input type=submit nombre=\"favoritos\" value=\"favoritos\">";
                 echo"</label>";
             echo"</form></th>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
                     echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
             echo"</form></th>";
         echo"</thead>";
@@ -17,12 +17,12 @@ function encabezadol($hola){
 function encabezadob($hola){
     echo"<table>";
         echo"<thead>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./favoritos.php\" method=\"POST\">";
                 echo"<label>";
                     echo"<input type=\"submit\" nombre=\"favoritos\" value=\"favoritos\">";
                 echo"</label>";
             echo"</form></th>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
                     echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
             echo"</form></th>";
             echo"<th><form action=\"./descargas.php\" method=\"POST\">";
@@ -35,15 +35,15 @@ function encabezadob($hola){
     echo"</table>";
 return $hf;
 }
-function encabezadoa($hola){
+function encabezadoa($hola){ 
     echo"<table>";
         echo"<thead>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./favoritos.php\" method=\"POST\">";
                 echo"<label>";
                     echo"<input type=\"submit\" nombre=\"favoritos\" value=\"favoritos\">";
                 echo"</label>";
             echo"</form></th>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
                 echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
             echo"</form></th>";
             echo"<th><form action=\"./descargas.php\" method=\"POST\">";

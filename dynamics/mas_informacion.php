@@ -7,6 +7,10 @@
 <body>
 
 <?php
+session_start();
+if (!isset($_SESSION["nombre"])) {
+    header("location: login.php");
+}
 
 if (isset($_POST["id_libro"])){
 
@@ -57,6 +61,12 @@ if (isset($_POST["id_libro"])){
     if (isset($_POST["favoritos"])) {
         $consulta1 = "INSERT INTO favoritos (id_libro, id_usuario) VALUES ('$id_libro', '$_SESSION["id"]' )";
     }
+    echo'
+    <form action="./reporte.php" method="POST">
+        <input type="submit" value="Reportar" name="reportar">
+    </form>';
+    
+
 
     
 

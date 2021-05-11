@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["nombre"])) {
+    header("location: login.php");
+}
+
 if(isset($_POST["favoritos"]));{
     $c = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($c, "biblioteca");
