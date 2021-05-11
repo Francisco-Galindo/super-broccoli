@@ -45,7 +45,7 @@ if (!isset($_SESSION["nombre"])) {
 						$c = mysqli_connect("localhost", "root", "");
 						$db = mysqli_select_db($c, "biblioteca");
 
-						$consulta = "SELECT id_genero, genero FROM genero";
+						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";
 
 						$r = mysqli_query($c, $consulta);
 
@@ -65,7 +65,7 @@ if (!isset($_SESSION["nombre"])) {
 						$c = mysqli_connect("localhost", "root", "");
 						$db = mysqli_select_db($c, "biblioteca");
 
-						$consulta = "SELECT id_autor, nombre FROM autor";
+						$consulta = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
 
 						$r = mysqli_query($c, $consulta);
 
@@ -82,7 +82,7 @@ if (!isset($_SESSION["nombre"])) {
 					</td>
 					<td>
 						<?php
-						$consulta = "SELECT id_editorial, editorial FROM editorial";
+						$consulta = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
 
 						$r = mysqli_query($c, $consulta);
 						

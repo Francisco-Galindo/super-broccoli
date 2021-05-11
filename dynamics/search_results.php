@@ -52,7 +52,7 @@ if (isset($_POST["busqueda"])) {
 			elseif ($contador  > 0) {
 				$filtros .= " OR ";
 			}
-			$filtros .= "autor = " . $autor;
+			$filtros .= "t1.autor = " . $autor;
 			$contador ++;
 		}
 	}
@@ -73,16 +73,16 @@ if (isset($_POST["busqueda"])) {
 			elseif ($contador  > 0) {
 				$filtros .= " OR ";
 			}
-			$filtros .= "editorial = " . $editorial;
+			$filtros .= "t1.editorial = " . $editorial;
 			$contador ++;
 		}
 	}
 	if ($contador > 0) {
 		$filtros .= ") ";
 	}
-	else if ($contador == 0) {
-		$filtros .= (' AND (1=1) ');
-	}
+	// else if ($contador == 0) {
+	// 	$filtros .= (' AND (1=1) ');
+	// }
 
 	if ((isset($_POST["anno_min"]) && $_POST["anno_min"] != "") && (isset($_POST["anno_max"]) && $_POST["anno_max"] != "")) {
 		$filtros .= " AND (year BETWEEN " . $_POST["anno_min"] . " AND " . $_POST["anno_max"] . ") ";
@@ -93,9 +93,9 @@ if (isset($_POST["busqueda"])) {
 	elseif (isset($_POST["anno_max"]) && $_POST["anno_max"] != "") {
 		$filtros .= "AND (year <= " . $_POST["anno_max"] . ") ";
 	}
-	else {
-		$filtros .= "AND (1=1) ";
-	}
+	// else {
+	// 	$filtros .= "AND (1=1) ";
+	// }
 
 	$contador = 0;
 	if (isset($_POST["categoria"])) {
@@ -113,9 +113,9 @@ if (isset($_POST["busqueda"])) {
 	if ($contador > 0) {
 		$filtros .= ") ";
 	}
-	else if ($contador == 0) {
-		$filtros .= (' AND (1=1) ');
-	}
+	// else if ($contador == 0) {
+	// 	$filtros .= (' AND (1=1) ');
+	// }
 
 	$filtros .= " AND ( ";
 	$filtros .= isset($_POST["palabra_clave"]) && $_POST["palabra_clave"] != "" ? "titulo LIKE '%" . $_POST["palabra_clave"] . "%')" : "1=1)" ;
@@ -126,37 +126,46 @@ if (isset($_POST["busqueda"])) {
 	INNER JOIN editorial t3 ON t1.editorial = t3.id_editorial 
 	WHERE (" . $filtros . ")" . 
 	" AND id_libro 
-	IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ");";
+	IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ") 
+	ORDER BY titulo;";
 	//Consulta de base
 	echo "<br>" . $consulta . "<br>";
 	$r = mysqli_query($c, $consulta);
 
 	echo "<table border='1'><tbody>";
-	while($row=mysqli_fetch_array($r)) {
-		$id_libro = $row["id_libro"];
 
-		echo "<tr>";
-		echo "<td>";
-		echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
-		echo "<br><strong>Titulo: </strong>" . $row["titulo"];
-		echo "<br><strong>ID: </strong>" . $row["id_libro"];
-		echo "<br><strong>Año de publicación: </strong>" . $row["year"];
-
-		echo "<br><strong>Editorial: </strong>" . $row["editorial"];
-
-		echo "<br><strong>Autor: </strong>" . $row["nombre"];
-		echo '<br>';
-
-
-		echo'<form action="./mas_informacion.php" method= "POST">
-		<input type="hidden" name="id_libro" value="' . $id_libro . '">
-		<input type="submit" value="Mas información" name="mas información">
-		</form>';
-		echo "</td>";
-		
-		echo "</tr>";
-		
+	if ($r !== false) {
+		while($row=mysqli_fetch_array($r)) {
+			$id_libro = $row["id_libro"];
+	
+			echo "<tr>";
+			echo "<td>";
+			echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
+			echo "<br><strong>Titulo: </strong>" . $row["titulo"];
+			echo "<br><strong>ID: </strong>" . $row["id_libro"];
+			echo "<br><strong>Año de publicación: </strong>" . $row["year"];
+	
+			echo "<br><strong>Editorial: </strong>" . $row["editorial"];
+	
+			echo "<br><strong>Autor: </strong>" . $row["nombre"];
+			echo '<br>';
+	
+	
+			echo'<form action="./mas_informacion.php" method= "POST">
+			<input type="hidden" name="id_libro" value="' . $id_libro . '">
+			<input type="submit" value="Mas información" name="mas información">
+			</form>';
+			echo "</td>";
+			
+			echo "</tr>";
+			
+		}
 	}
+	else {
+		echo "<h2>No hay libros que cumplan los parámetros pedidos</h2>";
+		echo "<br> <a href='index.php'><button>Regresar</button></a>";
+	}
+	
 	
 	echo "</tbody></table>";
 	echo "<br>";

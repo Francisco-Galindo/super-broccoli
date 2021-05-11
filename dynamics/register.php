@@ -18,7 +18,7 @@ else {
 $c = mysqli_connect("localhost", "root", "");
 $db = mysqli_select_db($c, "biblioteca");
 
-$consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';"
+$consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);
 $row=mysqli_fetch_array($r);
 $id_tipo_usuario = isset($row["id_tipo"]) ? $row["id_tipo"] : 1;
@@ -35,34 +35,32 @@ if ($r) {
 
 	//Otorgar permisos
 	if ($tipo=="Lector") {
-		$consulta = "GRANT SELECT ON biblioteca.libro TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT ON biblioteca.autor TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT ON biblioteca.editorial TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT ON biblioteca.categoria TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT ON biblioteca.genero TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT ON biblioteca.libro_has_genero TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
+
+		$tablas = ["libro", "autor", "editorial", "categoria", "genero", "biblioteca.libro_has_genero"];
+		foreach ($tablas as $tabla) {
+			$consulta = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta);
+		}
+
 		$consulta = "GRANT SELECT, INSERT, DELETE ON biblioteca.favorito TO  '$id'@'localhost'";
 		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT INSERT ON biblioteca.historial_descargas TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT INSERT ON biblioteca.reporte TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
-		$consulta = "GRANT INSERT ON biblioteca.formulario TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta);
+
+		$tablas = ["historial_descargas", "reporte", "formulario"];
+		foreach ($tablas as $tabla) {
+			$consulta = "GRANT SELECT, INSERT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta);
+		}
 	}
 
 	elseif ($tipo=="Bibliotecario") {
-		// $consulta = "GRANT SELECT, INSERT, UPDATE, CREATE ON biblioteca.libro.autor.editorial.reporte.formulario.genero.histrial_descargas.categoria TO  '$id'@'localhost'";
-		// $r = mysqli_query($c, $consulta);
-		$consulta = "GRANT SELECT, INSERT, UPDATE ON biblioteca.* TO  '$id'@'localhost'";
+		$consulta = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca.* TO  '$id'@'localhost'";
 		$r = mysqli_query($c, $consulta);
-		$consulta = "REVOKE ALL PRIVELEGES ON biblioteca.usuario TO  '$id'@'localhost'";
+
+		$tablas = ["usuario", "tipo_usuario", "categoria"];
+		foreach ($tablas as $tabla) {
+			$consulta = "REVOKE INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta);
+		}
 	}
 
 	elseif ($tipo=="Administrador") {
@@ -87,6 +85,4 @@ if ($r) {
 else {
 	header("location: ../templates/register.html");
 }
-//cerrar conexión con base de datos
-mysqli_close($c);
 ?>
