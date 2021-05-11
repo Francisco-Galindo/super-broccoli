@@ -22,6 +22,7 @@ if (isset($_POST[$usuarios])) {
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
         usuarioEliminar($row["num_cuenta_rfc"]);
 		
+    }
 }
 
 

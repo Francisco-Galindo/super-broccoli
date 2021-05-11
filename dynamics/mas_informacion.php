@@ -104,12 +104,19 @@ elseif (isset($_POST["id_libro"])){
     mysqli_close($c);
 }
 elseif (isset($_POST["id_descarga"])) {
-    echo $_POST["i"];
+    $id_usuario = $_SESSION["id_usuario"];
+    $id_libro = $_POST["id_descarga"];
+    $c = mysqli_connect("localhost", "root", "");
+    $db = mysqli_select_db($c, "biblioteca");
+    $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
+    $r = mysqli_query($c, $consulta);
+
+
     header("Content-type: application/pdf");
     header("Content-Disposition: attachment; filename=xd.pdf");
     readfile($_POST["contenido"]);
     
-    header("location: index.php");
+    header("location: ./index.php");
 }
 ?>
 

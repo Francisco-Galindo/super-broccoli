@@ -80,9 +80,6 @@ if (isset($_POST["busqueda"])) {
 	if ($contador > 0) {
 		$filtros .= ") ";
 	}
-	// else if ($contador == 0) {
-	// 	$filtros .= (' AND (1=1) ');
-	// }
 
 	if ((isset($_POST["anno_min"]) && $_POST["anno_min"] != "") && (isset($_POST["anno_max"]) && $_POST["anno_max"] != "")) {
 		$filtros .= " AND (year BETWEEN " . $_POST["anno_min"] . " AND " . $_POST["anno_max"] . ") ";
@@ -93,9 +90,6 @@ if (isset($_POST["busqueda"])) {
 	elseif (isset($_POST["anno_max"]) && $_POST["anno_max"] != "") {
 		$filtros .= "AND (year <= " . $_POST["anno_max"] . ") ";
 	}
-	// else {
-	// 	$filtros .= "AND (1=1) ";
-	// }
 
 	$contador = 0;
 	if (isset($_POST["categoria"])) {
@@ -113,9 +107,6 @@ if (isset($_POST["busqueda"])) {
 	if ($contador > 0) {
 		$filtros .= ") ";
 	}
-	// else if ($contador == 0) {
-	// 	$filtros .= (' AND (1=1) ');
-	// }
 
 	$filtros .= " AND ( ";
 	$filtros .= isset($_POST["palabra_clave"]) && $_POST["palabra_clave"] != "" ? "titulo LIKE '%" . $_POST["palabra_clave"] . "%')" : "1=1)" ;
@@ -172,6 +163,9 @@ if (isset($_POST["busqueda"])) {
 	
 
 	mysqli_close($c);
+}
+else {
+	header("location: ./index.php");
 }
 
 // if (!isset($_SESSION["nombre"])) {
