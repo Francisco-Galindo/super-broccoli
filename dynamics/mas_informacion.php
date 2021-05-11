@@ -7,6 +7,10 @@
 <body>
 
 <?php
+session_start();
+if (!isset($_SESSION["nombre"])) {
+    header("location: login.php");
+}
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
