@@ -44,9 +44,12 @@ if (isset($_POST["id_libro"])){
 
     <a title="Descargar Archivo" href="' . $row["libro"] . '" download="' . $row["titulo"] . '" style="color: blue; font-size:18px;"><button>Descargar</button></a>
 
-    <form action="">
+    <form action="./mas_informacion.php" method="POST">
         <input type="submit" value="Agreagar a favoritos" name="favoritos">
     </form>';
+    if (isset($_POST["favoritos"])) {
+        $consulta1 = "INSERT INTO favoritos (id_libro, id_usuario) VALUES ('$id_libro', '$_SESSION["id"]' )";
+    }
 
     
 
