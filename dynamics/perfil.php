@@ -16,31 +16,46 @@
 <body>
     <table>
         <?php
+
+        //Conexión con base de datos
+        $c = mysqli_connect("localhost", "root", "");
+        $db = mysqli_select_db($c, "biblioteca");
+
+        $id = $_SESSION["id_usuario"];
+        $consulta = "SELECT * FROM usuario t1
+        INNER JOIN tipo_usuario t2 ON t1.id_tipo_usuario = t2.id_tipo 
+        WHERE num_cuenta_rfc='$id';";
+
+        //consulta de usuarios
+        $r = mysqli_query($c, $consulta);
+        $row = mysqli_fetch_array($r);
+
         echo '
         <thead>
             <tr>
-                <th colspan="2">Tipo de usuario: '.$_SESSION["tipo"].'</th>
+                <th colspan="2">Tipo de usuario: '. $row["tipo"] .'</th>
             </tr>
         <thead>
         <tbody>
             <tr>
                <td>Número de cuenta o RFC: </td>
-               <td>'.$_SESSION["id"].'</td>
+               <td>'. $row["num_cuenta_rfc"] .'</td>
             </tr>
             <tr>
                 <td>Correo electrónico: </td>
-                <td>'.$_SESSION["email"].'</td>
+                <td>'. $row["correo"].'</td>
             </tr>
             <tr>
                 <td>StronNombre de usuario: </td>
-                <td>'.$_SESSION["nombre"].'</td>
+                <td>'.$row["nombre"].'</td>
             </tr>
             <tr>
                 <td>Apellidos</td>
-                <td>'.$_SESSION["prim_ape"].' '.$_SESSION["seg_ape"].'</td>
+                <td>'. $row["primer_apellido"] .' '. $row["segundo_apellido"] .'</td>
             </tr>
         </tbody>
         ';
+        mysqli_close($c);
         ?>
     </table>
     <br><br>
