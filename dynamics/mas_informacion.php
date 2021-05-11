@@ -50,9 +50,13 @@ if (isset($_POST["id_libro"])){
         <input type="submit" value="WAPO" name="descarga">
     </form>
 
-    <form action="">
+
+    <form action="./mas_informacion.php" method="POST">
         <input type="submit" value="Agreagar a favoritos" name="favoritos">
     </form>';
+    if (isset($_POST["favoritos"])) {
+        $consulta1 = "INSERT INTO favoritos (id_libro, id_usuario) VALUES ('$id_libro', '$_SESSION["id"]' )";
+    }
 
     
 
