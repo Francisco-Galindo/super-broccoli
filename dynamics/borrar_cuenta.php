@@ -1,4 +1,5 @@
 <?php
+    require './util.php';
     session_start();
     if (!isset($_SESSION["nombre"])) {
         header("location: login.php");
@@ -6,9 +7,7 @@
 
     if(isset($_POST["passwrd"])){
 
-        //session_start();
-        //session_unset();
-        //session_destroy();
+        session_start();
 
         //ACCEDER A LA BASE DE DATOS Y ELIMINAR LOS REGISTROS
 
@@ -27,13 +26,19 @@
         while($row=mysqli_fetch_array($r)) {
             $contadorCoincidencias ++;
         }
+        mysqli_close($c);
+
         if ($contadorCoincidencias === 1) {
-            echo "borrar";
+            usuarioEliminar($id_usuario);
+
+            session_unset();
+            session_destroy();
+            header("location: ./login.php");
+
         }
         else {
             echo '<a href="./confirm.php"><button>Contraseña incorrecta, volver a intentar</button></a>';
         }
-        ///header("location: ./login.php");
 
     }
 

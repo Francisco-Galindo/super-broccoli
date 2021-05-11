@@ -60,4 +60,23 @@ function encabezadoa($hola){
     echo"</table>";
 return;
 }
+
+function usuarioEliminar($id_usuario) {
+    //Conexión con base de datos
+    $c = mysqli_connect("localhost", "root", "");
+    $db = mysqli_select_db($c, "biblioteca");
+    $consulta = "DELETE FROM formulario WHERE id_usuario='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
+    $consulta = "DELETE FROM favorito WHERE id_usuario='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
+    $consulta = "DELETE FROM historial_descargas WHERE id_usuario='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
+    $consulta = "DELETE FROM usuario WHERE num_cuenta_rfc='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
+    $consulta = "DROP USER '$id_usuario'@'localhost';";
+    $r = mysqli_query($c, $consulta);
+    mysqli_close($c);
+    
+    return ($r);
+}
 ?>
