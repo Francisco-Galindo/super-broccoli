@@ -13,13 +13,12 @@
 
 <?php
 session_start();
-require "./config.php"
+require "./config.php";
 
 
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
-	$c = conectdb($id_usuario, $password);
-
+	$c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
 	$filtros = "";
 	$filtrosGenero = "";
 	

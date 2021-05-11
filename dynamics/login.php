@@ -1,5 +1,5 @@
 <?php
-require "./config.php"
+require "./config.php";
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@ else {
 	header("location: ../templates/login.html");
 }
 //conexión con base de datos
-$c = conectdb($id_usuario, $password);
+$c = mysqli_connect("localhost", "root", "", "biblioteca");
 //comprueba que el email y la contraseña correspondan
 $consulta = "SELECT num_cuenta_rfc, nombre FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 

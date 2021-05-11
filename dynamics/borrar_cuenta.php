@@ -14,7 +14,7 @@
 		//ACCEDER A LA BASE DE DATOS Y ELIMINAR LOS REGISTROS
 
 		//Conexión con base de datos
-		$c = conectdb($id_usuario, $password);
+		$c = mysqli_connect("localhost", "root", "", "biblioteca");
 		//Insertar valores para nuevos usuarios
 		$id_usuario = $_SESSION["id_usuario"];
 

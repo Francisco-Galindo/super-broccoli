@@ -33,7 +33,7 @@ else {
 }
 
 //Abrir conexión con base de datos
-$c = conectdb($id_usuario, $password);
+$c = mysqli_connect("localhost", "root", "", "biblioteca");
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);
@@ -114,7 +114,7 @@ if (! (isset($error) && $error != "")) {
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["password"] = $contra;
 
-	//header("location: ./index.php");
+	header("location: ./index.php");
 } 
 //Redirigir a la pagina de registro
 else {

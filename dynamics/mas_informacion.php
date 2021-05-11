@@ -9,7 +9,7 @@
 <body>
 
 <?php
-require "./config.php"
+require "./config.php";
 session_start();
 if (!isset($_SESSION["nombre"])) {
     header("location: login.php");
@@ -17,7 +17,7 @@ if (!isset($_SESSION["nombre"])) {
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
     $id_libro = $_POST["id_libro"];
     $id_usuario = $_POST["id_usuario"];
 
@@ -45,10 +45,9 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
         <input type="submit" value="Regresar al libro">
     </form>';
 }
-elseif (isset($_POST["id_libro"])){
-    session_start();
+elseif (isset($_POST["id_libro"])) {
 
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
     
     $id_libro = $_POST["id_libro"];
 
@@ -107,7 +106,8 @@ elseif (isset($_POST["id_libro"])){
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
-    $c = mysqli_connect("localhost", "root", "");
+    
+    $c = conectdb($id_usuario, $_SESSION["password"]);
     $db = mysqli_select_db($c, "biblioteca");
     $consulta3 = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
     $r = mysqli_query($c, $consulta3);
