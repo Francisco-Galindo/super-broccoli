@@ -1,12 +1,17 @@
 <?php
+session_start();
+session_unset();
+session_destroy();
 //Declarar valores de crear cuenta
 if (isset($_POST["num_cuenta"])) {
-	$id = $_POST["num_cuenta"];
-	$nombre = $_POST["nombre"];
-	$prim_ape = $_POST["primer_apellido"];
-	$seg_ape = $_POST["segundo_apellido"];
+	$id = strtoupper($_POST["num_cuenta"]);
+	$nombre = strtoupper($_POST["nombre"]);
+	$prim_ape = strtoupper($_POST["primer_apellido"]);
+	$seg_ape = strtoupper($_POST["segundo_apellido"]);
 	$contra = $_POST["contra"];
+	$fecha = $_POST["fecha"];
 	$email = $_POST["email"];
+	$dominio = explode("@", $email)[1];
 	$tipo = $_POST["tipo"];
 }
 //Redirigir a la pagina de registro
@@ -23,20 +28,34 @@ $r = mysqli_query($c, $consulta);
 $row=mysqli_fetch_array($r);
 $id_tipo_usuario = isset($row["id_tipo"]) ? $row["id_tipo"] : 1;
 
-//Ingresar los valores del formulario en la tabla usuarios
-$consulta = "INSERT INTO usuario (num_cuenta_rfc, nombre, primer_apellido, segundo_apellido, contraseña, correo,  id_tipo_usuario) VALUES ('$id', '$nombre', '$prim_ape', '$seg_ape', '$contra', '$email', $id_tipo_usuario)";
+if (! ($dominio == "enp.unam.mx" || $dominio == "comunidad.unam.mx")) {
+	$error = "El dominio de correo electrónico no es válido. Utilizar alguno con el dominio 'enp.unam.mx' o 'comunidad.unam.mx'.";
+}
+
+$consulta = "SELECT num_cuenta_rfc FROM usuario  
+WHERE num_cuenta_rfc='$id' 
+OR (nombre='$nombre' AND primer_apellido='$prim_ape' AND segundo_apellido='$seg_ape') 
+OR correo='$email'";
 $r = mysqli_query($c, $consulta);
+
+if (mysqli_num_rows($r) == 0 && !(isset($error) && $error != "")) {
+	//Ingresar los valores del formulario en la tabla usuarios
+	$consulta = "INSERT INTO usuario (num_cuenta_rfc, nombre, primer_apellido, segundo_apellido, contraseña, correo,  id_tipo_usuario, fecha_nacimiento) VALUES ('$id', '$nombre', '$prim_ape', '$seg_ape', '$contra', '$email', $id_tipo_usuario, '$fecha')";
+	$r = mysqli_query($c, $consulta);
+}
+else {
+	$error = "Ya existe una cuenta relacionada con esta persona.";
+}
+
 //Crear cuenta en la base de datos
-
-
-if ($r) {
+if (!(isset($error) && $error != "")) {
 	$consulta = "CREATE USER '$id'@'localhost' IDENTIFIED BY '$contra'";
 	$r = mysqli_query($c, $consulta);	
 
 	//Otorgar permisos
 	if ($tipo=="Lector") {
 
-		$tablas = ["libro", "autor", "editorial", "categoria", "genero", "biblioteca.libro_has_genero"];
+		$tablas = ["libro", "autor", "editorial", "categoria", "genero", "biblioteca.libro_has_genero", "usuario"];
 		foreach ($tablas as $tabla) {
 			$consulta = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
 			$r = mysqli_query($c, $consulta);
@@ -75,7 +94,7 @@ if ($r) {
 //Cerrar conexión con base de datos
 mysqli_close($c);
 //Redirigir a la página de inicio
-if ($r) {
+if (! (isset($error) && $error != "")) {
 	session_start();
 
 	//Guardado de los datos del usuario en variables de sesión.
@@ -83,10 +102,13 @@ if ($r) {
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["password"] = $contra;
 
-	header("location: ./index.php");
+	//header("location: ./index.php");
 } 
 //Redirigir a la pagina de registro
 else {
-	header("location: ../templates/register.html");
+	echo "ERROR: " . $error;
+	echo '<br><a href="../templates/register.html"><button>Volver a intentar</button></a>';
 }
 ?>
+
+

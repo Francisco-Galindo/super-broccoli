@@ -67,6 +67,7 @@
 				$id_autor = $_POST["autor"];
 			}
 
+
 			if (isset($_POST["nueva_editorial"]) && $_POST["nueva_editorial"] != "") {
 				$nuevaEditorialNombre = $_POST["nueva_editorial"];
 
@@ -107,7 +108,6 @@
 			else {
 				$categoria = NULL;
 			}
-			echo $categoria;
 
 			if (isset($_FILES['archivo'])) {
 				$arch = $_FILES['archivo']['tmp_name'];
@@ -171,10 +171,6 @@
 
 
     else {
-
-			if (isset($_SESSION["Error"])) {
-				echo $_SESSION["Error"] . "<br>";
-			}
 
 			$c = mysqli_connect("localhost", "root", "");
 			$db = mysqli_select_db($c, "biblioteca");

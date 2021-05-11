@@ -2,7 +2,7 @@
     define("DBUSER", "root");
     define("DBHOST", "localhost");
     define("PASSWORD", "");
-    define("DB", "Act8");
+    define("DB", "biblioteca");
 
     function conectdb($id_usuario, $password)
     {
