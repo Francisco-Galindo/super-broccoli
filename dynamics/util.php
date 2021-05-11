@@ -52,7 +52,7 @@ function encabezadoa($hola){
             echo"<th><form action=\"./nuevo_libro.php\" method=\"POST\">";
                 echo"<input type=\"submit\" nombre=\"nlibro\" value=\"subir libro\">";
             echo"</form></th>";
-            echo"<th><form action= method=\"POST\">";
+            echo"<th><form action=\"./Usuarios.php\" method=\"POST\">";
                 echo"<input type=\"submit\" nombre=\"usuarios\" value=\"usuarios\">";
             echo"</form></th>";
             
