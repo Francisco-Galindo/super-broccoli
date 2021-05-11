@@ -3,7 +3,7 @@ if(isset($_POST["favoritos"]));{
     $c = mysqli_connect("localhost", "root", "");
     $db = mysqli_select_db($c, "biblioteca");
 
-    $consulta = "SELECT * FROM libros t1
+    $consulta = "SELECT * FROM libro t1
 	INNER JOIN favoritos t2 ON t1.id_libro = t2.id_libro 
     INNER JOIN usuario t3 ON t3.id_usuario = t2.id_usuario;";
 	//Consulta de base

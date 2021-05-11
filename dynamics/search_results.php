@@ -121,7 +121,7 @@ if (isset($_POST["busqueda"])) {
 	$filtros .= isset($_POST["palabra_clave"]) && $_POST["palabra_clave"] != "" ? "titulo LIKE '%" . $_POST["palabra_clave"] . "%')" : "1=1)" ;
 
 
-	$consulta = "SELECT * FROM libros t1
+	$consulta = "SELECT * FROM libro t1
 	INNER JOIN autor t2 ON t1.autor = t2.id_autor 
 	INNER JOIN editorial t3 ON t1.editorial = t3.id_editorial 
 	WHERE (" . $filtros . ")" . 

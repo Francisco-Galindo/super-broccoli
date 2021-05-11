@@ -140,12 +140,12 @@
 			$desc = $_POST["desc"];
 
 
-			$consulta = "INSERT INTO libros (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
+			$consulta = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
 
 			$r = mysqli_query($c, $consulta);
 
 
-			$consulta = "SELECT id_libro FROM libros WHERE titulo='$titulo' AND autor=$id_autor;";
+			$consulta = "SELECT id_libro FROM libro WHERE titulo='$titulo' AND autor=$id_autor;";
 
 			$r = mysqli_query($c, $consulta);
 			while($row=mysqli_fetch_array($r)) {

@@ -16,7 +16,7 @@ if (isset($_POST["id_libro"])){
     $id_libro = $_POST["id_libro"];
 
     $consulta = "SELECT *
-    FROM libros t1
+    FROM libro t1
     INNER JOIN autor t2 ON t1.autor = t2.id_autor
     INNER JOIN editorial t3 ON t1.editorial = t3.id_editorial
     WHERE id_libro=$id_libro

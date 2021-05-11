@@ -12,7 +12,7 @@ function encabezadol($hola){
             echo"</form></th>";
         echo"</thead>";
     echo"</table>";
-    return $hf;
+    return;
 }
 function encabezadob($hola){
     echo"<table>";
@@ -33,7 +33,7 @@ function encabezadob($hola){
             echo"</form></th>";
         echo"</thead>";
     echo"</table>";
-return $hf;
+return;
 }
 function encabezadoa($hola){
     echo"<table>";
@@ -58,6 +58,6 @@ function encabezadoa($hola){
             
         echo"</thead>";
     echo"</table>";
-return $hf;
+return;
 }
 ?>
