@@ -32,6 +32,7 @@ if($contadorCoincidencias === 1) {
 	session_start();
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["id_usuario"] = $id_usuario;
+	$_SESSION["password"] = $contra;
 	header("location: ./index.php");
 } 
 //redirigir a la pagina de inicio de sesión

@@ -4,9 +4,9 @@
     define("PASSWORD", "");
     define("DB", "Act8");
 
-    function conectdb()
+    function conectdb($id_usuario, $password)
     {
-        $c=mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
+        $c=mysqli_connect(DBHOST, $id_usuario, $password, DB);
         if(!$c)
         {
             /*mysqli_connect_error();
