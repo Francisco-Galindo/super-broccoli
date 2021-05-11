@@ -10,6 +10,7 @@
 
 <body>
     <?php
+	require "./config.php"
 
 		session_start();
 		if (!isset($_SESSION["nombre"])) {
@@ -22,8 +23,7 @@
 
 
 			//Conexión con base de datos
-			$c = mysqli_connect("localhost", "root", "");
-			$db = mysqli_select_db($c, "biblioteca");
+			$c = conectdb($id_usuario, $password);
 
 			
 			if ($_POST["nuevo_autor_apellido"]) {
@@ -176,8 +176,7 @@
 				echo $_SESSION["Error"] . "<br>";
 			}
 
-			$c = mysqli_connect("localhost", "root", "");
-			$db = mysqli_select_db($c, "biblioteca");
+			$c = conectdb($id_usuario, $password);
 
 			$consulta = "SELECT id_genero, genero FROM genero";
 

@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 
 session_start();
 	if (!isset($_SESSION["nombre"])) {
@@ -33,8 +34,7 @@ session_start();
     
    
     
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
 
     $consulta = "SELECT id_libro FROM libro WHERE id_libro='$libro';";
     $r = mysqli_query($c, $consulta);

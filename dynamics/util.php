@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 function encabezadol($hola){
     echo"<table>";
          echo"<thead>"; 
@@ -63,8 +64,7 @@ return;
 
 function usuarioEliminar($id_usuario) {
     //Conexión con base de datos
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
     $consulta = "DELETE FROM formulario WHERE id_usuario='$id_usuario';";
     $r = mysqli_query($c, $consulta);
     $consulta = "DELETE FROM favorito WHERE id_usuario='$id_usuario';";

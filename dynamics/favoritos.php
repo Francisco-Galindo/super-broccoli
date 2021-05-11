@@ -1,12 +1,12 @@
 <?php
+require "./config.php"
 session_start();
 if (!isset($_SESSION["nombre"])) {
     header("location: login.php");
 }
 
 if(isset($_POST["favoritos"]));{
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
 
     $consulta = "SELECT * FROM libro t1
 	INNER JOIN favoritos t2 ON t1.id_libro = t2.id_libro 

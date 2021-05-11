@@ -1,8 +1,7 @@
 <?php
-
+    require "./config.php"
 //Conexión con base de datos
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
+$c = conectdb($id_usuario, $password);
 
 //Join tables para mostrar los datos de el historial de descargas
 $consulta = "SELECT fecha, titulo, autor, nombre

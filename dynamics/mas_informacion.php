@@ -7,6 +7,7 @@
 <body>
 
 <?php
+require "./config.php"
 session_start();
 if (!isset($_SESSION["nombre"])) {
     header("location: login.php");
@@ -14,8 +15,7 @@ if (!isset($_SESSION["nombre"])) {
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
     $id_libro = $_POST["id_libro"];
     $id_usuario = $_POST["id_usuario"];
 
@@ -46,8 +46,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
 elseif (isset($_POST["id_libro"])){
     session_start();
 
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
+    $c = conectdb($id_usuario, $password);
     
     $id_libro = $_POST["id_libro"];
 

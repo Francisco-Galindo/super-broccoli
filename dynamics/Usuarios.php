@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 require "./util.php";
 
 
@@ -8,9 +9,7 @@ if (!isset($_SESSION["nombre"])) {
 }
 
 if (isset($_POST[$usuarios])) {
-    $c = mysqli_connect("localhost", "root", "");
-    $db = mysqli_select_db($c, "biblioteca");
-
+    $c = conectdb($id_usuario, $password);
     $consulta = "SELECT * FROM usuarios;";
     $r = mysqli_query($c, $consulta);
 

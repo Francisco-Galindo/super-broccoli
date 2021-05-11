@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 //Declarar lo ingresado en el formulario
 $obra = $_POST["Obra"];
 $autor = $_POST["Autor"];
@@ -7,8 +8,7 @@ $editorial = $_POST["editorial"];
 $edición = $_POST["Edición"];
 $razon = $_POST["razon"];
 //Conectar con la base de datos
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
+$c = conectdb($id_usuario, $password);
 //Insertar valores en base de datos
 $consulta = "INSERT INTO formulario (obra, autor, publicacion, editorial, edicion, razon) VALUES ('$obra','$autor', '$año', '$editorial', '$edición', '$razon');";
 //resultado de la busqueda

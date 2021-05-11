@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 //Declarar valores de crear cuenta
 if (isset($_POST["num_cuenta"])) {
 	$id = $_POST["num_cuenta"];
@@ -15,8 +16,7 @@ else {
 }
 
 //Abrir conexión con base de datos
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
+$c = conectdb($id_usuario, $password);
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);

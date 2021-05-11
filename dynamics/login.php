@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 //Declarar los valores ingresados en el inicio de sesión
 if (isset($_POST["email"])) {
 	$contra = $_POST["contra"];
@@ -9,8 +10,7 @@ else {
 	header("location: ../templates/login.html");
 }
 //conexión con base de datos
-$c = mysqli_connect("localhost", "root", "");
-$db = mysqli_select_db($c, "biblioteca");
+$c = conectdb($id_usuario, $password);
 //comprueba que el email y la contraseña correspondan
 $consulta = "SELECT num_cuenta_rfc, nombre FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 

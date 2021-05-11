@@ -1,4 +1,5 @@
 <?php
+require "./config.php"
 session_start();
 if (!isset($_SESSION["nombre"])) {
 	header("location: login.php");
@@ -43,8 +44,7 @@ if (!isset($_SESSION["nombre"])) {
 				<tr>
 					<td>
 						<?php
-						$c = mysqli_connect("localhost", "root", "");
-						$db = mysqli_select_db($c, "biblioteca");
+						$c = conectdb($id_usuario, $password);
 
 						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";
 
@@ -63,8 +63,7 @@ if (!isset($_SESSION["nombre"])) {
 					</td>
 					<td>
 						<?php
-						$c = mysqli_connect("localhost", "root", "");
-						$db = mysqli_select_db($c, "biblioteca");
+						$c = conectdb($id_usuario, $password);
 
 						$consulta = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
 
