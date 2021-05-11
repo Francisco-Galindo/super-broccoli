@@ -32,6 +32,9 @@ function encabezadob($hola){
             echo"<th><form action=\"./nuevo_libro.php\" method=\"POST\">";
                     echo"<input type=\"submit\" nombre=\"nlibro\" value=\"subir libro\">";
             echo"</form></th>";
+            echo"<th><form action=\"./ver_reporte.php\" method=\"POST\">";
+                echo"<input type=\"submit\" nombre=\"reporte\" value=\"reporte\">";
+            echo"</form></th>";
         echo"</thead>";
     echo"</table>";
 return;
@@ -52,6 +55,9 @@ function encabezadoa($hola){
             echo"</form></th>";
             echo"<th><form action=\"./nuevo_libro.php\" method=\"POST\">";
                 echo"<input type=\"submit\" nombre=\"nlibro\" value=\"subir libro\">";
+            echo"</form></th>";
+            echo"<th><form action=\"./ver_reporte.php\" method=\"POST\">";
+                echo"<input type=\"submit\" nombre=\"reporte\" value=\"reporte\">";
             echo"</form></th>";
             echo"<th><form action=\"./Usuarios.php\" method=\"POST\">";
                 echo"<input type=\"submit\" nombre=\"usuarios\" value=\"usuarios\">";
