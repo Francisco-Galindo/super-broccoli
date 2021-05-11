@@ -77,7 +77,15 @@ mysqli_close($c);
 //Redirigir a la página de inicio
 if ($r) {
 	session_start();
+
+	//Guardado de los datos del usuario en variables de sesión.
+	$_SESSION["id"] = $id;
 	$_SESSION["nombre"] = $nombre;
+	$_SESSION["prim_ape"] = $prim_ape;
+	$_SESSION["seg_ape"] = $seg_ape;
+	$_SESSION["email"] = $email;
+	$_SESSION["tipo"] = $tipo;
+	$_SESSION["contra"] = $contra;
 
 	header("location: ./index.php");
 } 
