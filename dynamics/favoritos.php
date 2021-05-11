@@ -31,6 +31,6 @@ if(isset($_POST["favoritos"]));{
         $consulta1="DELETE FROM favoritos WHERE id_libro=$id_libro;";
         }
     } 
-    
+    mysqli_close($c);
 }
 ?>
