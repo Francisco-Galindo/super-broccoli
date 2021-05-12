@@ -14,40 +14,32 @@ function encabezados($tipo) {
     switch ($tipo)
     {
         case 'Lector': 
-            echo"<a href=\"./index.php\"><button>Inicio</button></a>";
-            echo"<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
-            echo"<a href=\"../templates/Solicitud.html\"><button>Solicitud de libro</button></a>";
-            echo"<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
-            echo"<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
+            echo "<a href=\"./index.php\"><button>Inicio</button></a>";
+            echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
+            echo "<a href=\"../templates/Solicitud.html\"><button>Solicitud de libro</button></a>";
+            echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
+            echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;
 
         case 'Bibliotecario':
-            echo"<a href=\"./index.php\"><button>Inicio</button></a>";
-            echo"<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
-            echo"<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
-<<<<<<< HEAD
-            echo"<a href=\"./formulario_libro.php\"><button>Subir libro</button></a>";
-=======
-            echo"<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
-            echo"<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
->>>>>>> cb2cac7468caf9a1b35361dc6d8bde70fbb0470c
-            echo"<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
-            echo"<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
+            echo "<a href=\"./index.php\"><button>Inicio</button></a>";
+            echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
+            echo "<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
+            echo "<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
+            echo "<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
+            echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
+            echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;
                                                                               
         case 'Administrador':
-            echo"<a href=\"./index.php\"><button>Inicio</button></a>";
-            echo"<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
-            echo"<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
-<<<<<<< HEAD
-            echo"<a href=\"./formulario_libro.php\"><button>Subir libro</button></a>";
-=======
-            echo"<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
-            echo"<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
->>>>>>> cb2cac7468caf9a1b35361dc6d8bde70fbb0470c
-            echo"<a href=\"./Usuarios.php\"><button>Usuarios</button></a>";
-            echo"<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
-            echo"<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
+            echo "<a href=\"./index.php\"><button>Inicio</button></a>";
+            echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
+            echo "<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
+            echo "<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
+            echo "<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
+            echo "<a href=\"./Usuarios.php\"><button>Usuarios</button></a>";
+            echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
+            echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;                                                                          
     }
     echo"</td></tr>";
