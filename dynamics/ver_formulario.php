@@ -15,8 +15,9 @@
 <?php
     $c = conectdb($id_usuario, $password);
     $consulta="SELECT * FROM formulario;";
-        $r = mysqli_query($c, $consulta);
-        $row=mysqli_fetch_array($r);
+    $r = mysqli_query($c, $consulta);
+    $row=mysqli_fetch_array($r);
+    
     while($row=mysqli_fetch_array($r)) {
             echo "<tr>";
             echo "<td>";
@@ -28,5 +29,5 @@
             echo "<br>Edición:" . $row["edicion"];
             echo "<br>razon:" . $row["razon"];
         }
-        mysqli_close($c);
+    mysqli_close($c);
 ?>

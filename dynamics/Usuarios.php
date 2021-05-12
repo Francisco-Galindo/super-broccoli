@@ -35,6 +35,4 @@ if (isset($_POST[$usuarios])) {
 		
     }
 }
-
-
 ?>

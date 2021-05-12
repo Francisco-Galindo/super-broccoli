@@ -16,10 +16,10 @@
 <body>
 	<table>
 		<?php
-		require "./config.php"
+		require "./config.php";
 
 		//Conexión con base de datos
-		$c = conectdb($id_usuario, $password);
+		$c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
 
 		$id = $_SESSION["id_usuario"];
 		$consulta = "SELECT * FROM usuario t1

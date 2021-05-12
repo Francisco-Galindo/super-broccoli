@@ -113,6 +113,7 @@ if (! (isset($error) && $error != "")) {
 	$_SESSION["id_usuario"] = $id;
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["password"] = $contra;
+	$_SESSION["tipo_usuario"] = $tipo;
 
 	header("location: ./index.php");
 } 

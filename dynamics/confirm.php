@@ -17,11 +17,6 @@
 <body>
     <h1>¿Estas seguro que quieres elimar tu cuenta?</h1>
     <br><br>
-    <?php
-        if(isset($_POST["incorrecta"]) && $_POST["incorrecta"] == "contra incorrecta") {
-            echo '<strong>Contraseña incorrecta.</strong><br>';
-        }
-    ?>
     <form action="./borrar_cuenta.php" method="POST">
         <label>Para confirmar, por favor introduce tu contraseña:
             <br><br>
