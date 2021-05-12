@@ -2,14 +2,9 @@
 function encabezadol($hola){
     echo"<table>";
          echo"<thead>"; 
-            echo"<th><form action=\"./favoritos.php\" method=POST>";
-                echo"<label>";
-                    echo"<input type=submit nombre=\"favoritos\" value=\"favoritos\">";
-                echo"</label>";
-            echo"</form></th>";
-            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
-                    echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
-            echo"</form></th>";
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
+            echo "<th><a href=\"./favoritos.php\"><button>Favoritos</button></a><th>";
+            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
     echo"</table>";
     return;
@@ -17,48 +12,27 @@ function encabezadol($hola){
 function encabezadob($hola){
     echo"<table>";
         echo"<thead>";
-            echo"<th><form action=\"./favoritos.php\" method=\"POST\">";
-                echo"<label>";
-                    echo"<input type=\"submit\" nombre=\"favoritos\" value=\"favoritos\">";
-                echo"</label>";
-            echo"</form></th>";
-            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
-                    echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
-            echo"</form></th>";
-            echo"<th><form action=\"./descargas.php\" method=\"POST\">";
-                    echo"<input type=\"submit\" nombre=\"historial\" value=\"Historial descargas\">";
-            echo"</form><th>";
-            echo"<th><form action=\"./nuevo_libro.php\" method=\"POST\">";
-                    echo"<input type=\"submit\" nombre=\"nlibro\" value=\"subir libro\">";
-            echo"</form></th>";
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
+            echo"<th><a href=\"./favoritos.php\"><button>Favoritos</button></a></th>";
+            echo"<th><a href=\"./descargas.php\"><button>Historial descargas</button></a></th>";
+            echo"<th><a href=\"./nuevo_libro.php\"><button>Subir libro</button></a></th>";
+            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
     echo"</table>";
-return;
+    return;
 }
 function encabezadoa($hola){ 
     echo"<table>";
         echo"<thead>";
-            echo"<th><form action=\"./favoritos.php\" method=\"POST\">";
-                echo"<label>";
-                    echo"<input type=\"submit\" nombre=\"favoritos\" value=\"favoritos\">";
-                echo"</label>";
-            echo"</form></th>";
-            echo"<th><form action=\"./perfil.php\" method=\"POST\">";
-                echo"<input type=\"submit\" nombre=\"perfil\" value=\"perfil\">";
-            echo"</form></th>";
-            echo"<th><form action=\"./descargas.php\" method=\"POST\">";
-                echo"<input type=\"submit\" nombre=\"historial\" value=\"Historial descargas\">";
-            echo"</form></th>";
-            echo"<th><form action=\"./nuevo_libro.php\" method=\"POST\">";
-                echo"<input type=\"submit\" nombre=\"nlibro\" value=\"subir libro\">";
-            echo"</form></th>";
-            echo"<th><form action=\"./Usuarios.php\" method=\"POST\">";
-                echo"<input type=\"submit\" nombre=\"usuarios\" value=\"usuarios\">";
-            echo"</form></th>";
-            
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
+            echo"<th><a href=\"./favoritos.php\"><button>Favoritos</button></a></th>";
+            echo"<th><a href=\"./descargas.php\"><button>Historial descargas</button></a></th>";
+            echo"<th><a href=\"./nuevo_libro.php\"><button>Subir libro</button></a></th>";
+            echo"<th><a href=\"./Usuarios.php\"><button>Usuarios</button></a></th>";
+            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
     echo"</table>";
-return;
+    return;
 }
 
 function usuarioEliminar($id_usuario) {
@@ -72,6 +46,8 @@ function usuarioEliminar($id_usuario) {
     $consulta = "DELETE FROM historial_descargas WHERE id_usuario='$id_usuario';";
     $r = mysqli_query($c, $consulta);
     $consulta = "DELETE FROM usuario WHERE num_cuenta_rfc='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
+    $consulta = "DROP USER '$id_usuario'@'localhost';";
     $r = mysqli_query($c, $consulta);
     mysqli_close($c);
 
