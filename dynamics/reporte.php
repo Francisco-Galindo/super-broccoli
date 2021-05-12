@@ -43,7 +43,7 @@ redireccionarSiSesionInvalida();
     
    
     
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb();
 
     $consulta = "SELECT id_libro FROM libro WHERE id_libro='$libro';";
     $r = mysqli_query($c, $consulta);

@@ -14,7 +14,7 @@
 </head>
 <body>
 <?php
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb();
     $consulta="SELECT * FROM formulario;";
     $r = mysqli_query($c, $consulta);
     $row=mysqli_fetch_array($r);

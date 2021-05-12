@@ -18,7 +18,7 @@
 
 
 			//Conexión con base de datos
-			$c = conectdb($id_usuario, $password);
+			$c = conectdb();
 
 			
 			if ($_POST["nuevo_autor_apellido"]) {

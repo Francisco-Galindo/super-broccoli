@@ -47,8 +47,6 @@ function usuarioEliminar($id_usuario) {
     $r = mysqli_query($c, $consulta);
     $consulta = "DELETE FROM usuario WHERE num_cuenta_rfc='$id_usuario';";
     $r = mysqli_query($c, $consulta);
-    $consulta = "DROP USER '$id_usuario'@'localhost';";
-    $r = mysqli_query($c, $consulta);
     mysqli_close($c);
 
     return ($r);

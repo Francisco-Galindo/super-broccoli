@@ -21,7 +21,7 @@ $editorial = $_POST["editorial"];
 $edición = $_POST["Edición"];
 $razon = $_POST["razon"];
 //Conectar con la base de datos
-$c = conectdb($id_usuario, $password);
+$c = conectdb();
 //Insertar valores en base de datos
 $consulta = "INSERT INTO formulario (obra, autor, publicacion, editorial, edicion, razon) VALUES ('$obra','$autor', '$año', '$editorial', '$edición', '$razon');";
 //resultado de la busqueda

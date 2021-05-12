@@ -16,7 +16,7 @@ redireccionarSiSesionInvalida();
 <?php
 
 if (isset($_POST[$usuarios])) {
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb();
     $consulta = "SELECT * FROM usuarios;";
     $r = mysqli_query($c, $consulta);
 

@@ -15,7 +15,7 @@
 <body>
 <?php
 //Conexión con base de datos
-$c = conectdb($id_usuario, $password);
+$c = conectdb();
 
 //Join tables para mostrar los datos de el historial de descargas
 $consulta = "SELECT fecha, titulo, autor, nombre

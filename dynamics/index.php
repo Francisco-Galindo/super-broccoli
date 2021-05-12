@@ -18,10 +18,6 @@ redireccionarSiSesionInvalida();
 	<?php
 		encabezadol("xd");
 		echo "Bienvenido, <strong>" . $_SESSION["nombre"] . "</strong>";
-		echo "<br>";
-		var_dump($_SESSION["tipo_usuario"]);
-		echo "<br>";
-		var_dump($_SESSION["id_usuario"]);
 	?>
 	<br>
 	<a href="cerrar.php"><button>Cerrar sesión</button></a>
@@ -47,7 +43,6 @@ redireccionarSiSesionInvalida();
 				<tr>
 					<td>
 						<?php
-						echo "<br>SESION: " . $_SESSION["tipo_usuario"];
 						$c = conectdb();
 
 						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";

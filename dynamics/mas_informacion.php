@@ -16,7 +16,7 @@ redireccionarSiSesionInvalida();
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
-    $c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
+    $c = conectdb();
     $id_libro = $_POST["id_libro"];
     $id_usuario = $_POST["id_usuario"];
 
@@ -46,7 +46,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
 }
 elseif (isset($_POST["id_libro"])) {
 
-    $c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
+    $c = conectdb();
     
     $id_libro = $_POST["id_libro"];
 
@@ -106,7 +106,7 @@ elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
 
-    $c = conectdb($id_usuario, $_SESSION["password"]);
+    $c = conectdb();
     $db = mysqli_select_db($c, "biblioteca");
     $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
     $r = mysqli_query($c, $consulta);

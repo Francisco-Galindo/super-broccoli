@@ -18,7 +18,7 @@ redireccionarSiSesionInvalida();
 
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
-	$c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
+	$c = conectdb();
 	$filtros = "";
 	$filtrosGenero = "";
 	

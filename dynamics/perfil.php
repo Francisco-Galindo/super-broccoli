@@ -17,7 +17,7 @@
 		<?php
 
 		//Conexión con base de datos
-		$c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
+		$c = conectdb();
 
 		$id = $_SESSION["id_usuario"];
 		$consulta = "SELECT * FROM usuario t1
