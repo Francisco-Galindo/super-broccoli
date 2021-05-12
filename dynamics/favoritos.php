@@ -1,6 +1,7 @@
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
@@ -15,9 +16,10 @@ redireccionarSiSesionInvalida();
 <body>
 <?php
 encabezados($_SESSION["tipo_usuario"]);
+echo "<h2>Tus favoritos:</h2>";
 
 if(isset($_POST["favoritos"]));{
-    $c = conectdb();
+    $c = connectdb();
 
 	$id_usuario = $_SESSION["id_usuario"];
     $consulta = "SELECT * FROM libro t1
@@ -25,7 +27,8 @@ if(isset($_POST["favoritos"]));{
     INNER JOIN usuario t3 ON t3.num_cuenta_rfc = t2.id_usuario
 	WHERE t3.num_cuenta_rfc='$id_usuario'";
 	//Consulta de base
-	echo "<br>" . $consulta . "<br>";
+
+
 	$r = mysqli_query($c, $consulta);
     
     echo "<table border='1'><tbody>";

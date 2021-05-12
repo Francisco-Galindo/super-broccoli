@@ -5,7 +5,7 @@
     define("PASSWORD", "");
     define("DB", "biblioteca");
 
-    function conectdb()
+    function connectdb()
     {
         $c = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
         if (!$c) {

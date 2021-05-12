@@ -1,6 +1,7 @@
 <?php
-    require "./config.php";
-    require "./util.php";
+    require_once("./util.php");
+    require_once("./config.php");
+    
     redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
@@ -15,7 +16,7 @@
 <body>
 <?php
     encabezados($_SESSION["tipo_usuario"]);
-    $c = conectdb();
+    $c = connectdb();
     $consulta="SELECT * FROM formulario;";
     $r = mysqli_query($c, $consulta);
     $row=mysqli_fetch_array($r);

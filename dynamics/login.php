@@ -1,6 +1,6 @@
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
 session_start();
 
 //si ya hay sesion iniciada redirigir
@@ -17,7 +17,7 @@ else {
 	header("location: ../templates/login.html");
 }
 //conexión con base de datos
-$c = conectdb();
+$c = connectdb();
 //comprueba que el email y la contraseña correspondan
 $consulta = "SELECT num_cuenta_rfc, nombre, id_tipo_usuario FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 
@@ -39,6 +39,7 @@ $row=mysqli_fetch_array($r);
 $tipo = isset($row["tipo"]) ? $row["tipo"] : 1;
 
 mysqli_close($c);
+
 //Datos correctos redirigir a la pagina de inicio
 if($contadorCoincidencias === 1) {
 	session_start();
@@ -49,9 +50,7 @@ if($contadorCoincidencias === 1) {
 	header("location: ./index.php");
 } 
 //redirigir a la pagina de inicio de sesión
-else {
+else {	
 	header("location: ../templates/login.html");
 }
-//cerrar conexión con base de datos
-mysqli_close($c);
 ?>

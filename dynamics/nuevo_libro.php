@@ -10,8 +10,10 @@
 
 <body>
     <?php
-	require "./config.php";
-	require "./util.php";
+	require_once("./util.php");
+	require_once("./config.php");
+
+	
 	redireccionarSiSesionInvalida();
 	encabezados($_SESSION["tipo_usuario"]);
 
@@ -19,7 +21,7 @@
 
 
 		//Conexión con base de datos
-		$c = conectdb();
+		$c = connectdb();
 
 		if ($_POST["nuevo_autor_apellido"]) {
 
@@ -165,7 +167,7 @@
 
     else {
 
-		$c = conectdb();
+		$c = connectdb();
 		$consulta = "SELECT id_genero, genero FROM genero";
 
 		$r = mysqli_query($c, $consulta);

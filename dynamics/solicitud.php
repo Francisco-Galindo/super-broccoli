@@ -1,7 +1,12 @@
 <?php
+<<<<<<< HEAD
 require "./config.php";
 require "./util.php";
 redireccionarSiSesionInvalida();
+=======
+require_once("./util.php");
+require_once("./config.php");
+>>>>>>> 9c643d4ecf158dc401528fa4eb1b68aad4b5d723
 ?>
 
 <?php
@@ -15,7 +20,7 @@ $editorial = $_POST["editorial"];
 $edición = $_POST["edicion"];
 $razon = $_POST["razon"];
 //Conectar con la base de datos
-$c = conectdb();
+$c = connectdb();
 //Insertar valores en base de datos
 $consulta = "INSERT INTO formulario (id_usuario, obra, autor, publicacion, editorial, edicion, razon) VALUES ('$usuario','$obra','$autor', '$año', '$editorial', '$edición', '$razon');";
 //resultado de la busqueda

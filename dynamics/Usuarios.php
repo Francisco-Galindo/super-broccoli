@@ -28,6 +28,7 @@ redireccionarSiSesionInvalida();
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
         echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
+	echo"<th><a href=\"register.php\"><button>Agregar nuevo usuario</button></a></th>";
 
 
 ?>
