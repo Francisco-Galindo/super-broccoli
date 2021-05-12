@@ -34,7 +34,7 @@ else {
 }
 
 //Abrir conexión con base de datos
-$c = mysqli_connect("localhost", "root", "", "biblioteca");
+$c = conectdb();
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);
@@ -67,7 +67,6 @@ if (! (isset($error) && $error != "")) {
 	//Guardado de los datos del usuario en variables de sesión.
 	$_SESSION["id_usuario"] = $id;
 	$_SESSION["nombre"] = $nombre;
-	$_SESSION["password"] = $contra;
 	$_SESSION["tipo_usuario"] = $tipo;
 
 	header("location: ./index.php");
