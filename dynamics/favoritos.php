@@ -1,9 +1,7 @@
 <?php
 require "./config.php";
-session_start();
-if (!isset($_SESSION["nombre"])) {
-    header("location: login.php");
-}
+require "./util.php";
+redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
 <html lang="en">

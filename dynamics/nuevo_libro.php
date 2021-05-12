@@ -11,13 +11,8 @@
 <body>
     <?php
 	require "./config.php";
-
-	session_start();
-	if (!isset($_SESSION["nombre"])) {
-		header("location: login.php");
-	}
-
-
+	require "./util.php";
+	redireccionarSiSesionInvalida();
 
     if (isset($_POST["formulario"])) {
 

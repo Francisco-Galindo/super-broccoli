@@ -1,9 +1,7 @@
 <?php
 require "./config.php";
-session_start();
-if (!isset($_SESSION["id_usuario"])) {
-	header("location: login.php");
-}
+require "./util.php";
+redireccionarSiSesionInvalida();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,9 @@ if (!isset($_SESSION["id_usuario"])) {
 	<h1>La biblioteca de Super-broccoli</h1>
 
 	<?php
+		encabezadol("xd");
 		echo "Bienvenido, <strong>" . $_SESSION["nombre"] . "</strong>";
+		echo "Bienvenido, <strong>" . $_SESSION["tipo_usuario"] . "</strong>";
 	?>
 	<br>
 	<a href="cerrar.php"><button>Cerrar sesión</button></a>

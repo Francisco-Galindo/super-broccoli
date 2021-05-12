@@ -1,6 +1,7 @@
 <?php
 require "./config.php";
 require "./util.php";
+redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +14,6 @@ require "./util.php";
 </head>
 <body>
 <?php
-
-
-session_start();
-if (!isset($_SESSION["nombre"])) {
-    header("location: login.php");
-}
 
 if (isset($_POST[$usuarios])) {
     $c = conectdb($id_usuario, $password);

@@ -1,5 +1,7 @@
 <?php
 require "./config.php";
+require "./util.php";
+redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -12,11 +14,6 @@ require "./config.php";
 </head>
 <body>
 <?php
-
-session_start();
-	if (!isset($_SESSION["nombre"])) {
-		header("location: login.php");
-	}
 
  if (isset($_POST["reportar"])) {
      echo'

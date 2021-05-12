@@ -1,5 +1,7 @@
 <?php
     require "./config.php";
+	require "./util.php";
+	redireccionarSiSesionInvalida();
     ?>
     <!DOCTYPE html>
 <html lang="en">

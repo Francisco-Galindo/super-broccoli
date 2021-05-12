@@ -1,8 +1,7 @@
 <?php
-	session_start();
-	if (!isset($_SESSION["nombre"])) {
-		header("location: login.php");
-	}
+	require "./config.php";
+	require "./util.php";
+	redireccionarSiSesionInvalida();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,6 @@
 <body>
 	<table>
 		<?php
-		require "./config.php";
 
 		//Conexión con base de datos
 		$c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);

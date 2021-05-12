@@ -12,9 +12,9 @@
 <a href="cerrar.php"><button>Cerrar sesión</button></a>
 
 <?php
-session_start();
 require "./config.php";
-
+require "./util.php";
+redireccionarSiSesionInvalida();
 
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos

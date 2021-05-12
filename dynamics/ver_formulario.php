@@ -1,6 +1,7 @@
 <?php
     require "./config.php";
-    conectdb($id_usuario, $password);
+    require "./util.php";
+    redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
 <html lang="en">

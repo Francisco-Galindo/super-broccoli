@@ -9,11 +9,10 @@
 <body>
 
 <?php
+require "./util.php";
 require "./config.php";
-session_start();
-if (!isset($_SESSION["nombre"])) {
-    header("location: login.php");
-}
+redireccionarSiSesionInvalida();
+
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
@@ -106,7 +105,7 @@ elseif (isset($_POST["id_libro"])) {
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
-    
+
     $c = conectdb($id_usuario, $_SESSION["password"]);
     $db = mysqli_select_db($c, "biblioteca");
     $consulta3 = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";

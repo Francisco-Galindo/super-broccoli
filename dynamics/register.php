@@ -83,14 +83,26 @@ if (!(isset($error) && $error != "")) {
 		}
 	}
 
-	elseif ($tipo=="Bibliotecario") {
-		$tablas = ["autor", "editorial", "favorito", "formulario", "genero", "historial_descargas", "libro", "libro_has_genero", "reporte"];
+	elseif ($tipo=="Bibliotecario" || $tipo=="Administrador") {
+		$tablas = ["autor", "editorial", "genero"];
+		foreach ($tablas as $tabla) {
+			$consulta6 = "GRANT SELECT, INSERT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta6);
+		}
+
+		$tablas = ["formulario", "historial_descargas", "reporte", "libro_has_genero"];
+		foreach ($tablas as $tabla) {
+			$consulta6 = "GRANT SELECT, INSERT, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta6);
+		}
+
+		$tablas = ["libro"];
 		foreach ($tablas as $tabla) {
 			$consulta6 = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
 			$r = mysqli_query($c, $consulta6);
 		}
 
-		$tablas = ["usuario", "tipo_usuario", "categoria"];
+		$tablas = ["usuario", "tipo_usuario", "categoria", "historial_descargas"];
 		foreach ($tablas as $tabla) {
 			$consulta7 = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
 			$r = mysqli_query($c, $consulta7);
@@ -98,7 +110,7 @@ if (!(isset($error) && $error != "")) {
 	}
 
 	elseif ($tipo=="Administrador") {
-		$consulta8 = "GRANT ALL PRIVILEGES ON biblioteca.* TO  '$id'@'localhost'";
+		$consulta8 = "GRANT SELECT, INSERT, DELETE ON biblioteca.usuario TO  '$id'@'localhost'";
 		$r = mysqli_query($c, $consulta8);
 	}
 }

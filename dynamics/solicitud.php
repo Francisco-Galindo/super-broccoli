@@ -1,5 +1,6 @@
 <?php
 require "./config.php";
+require "./util.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
