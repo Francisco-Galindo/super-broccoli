@@ -1,6 +1,7 @@
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
@@ -43,7 +44,7 @@ redireccionarSiSesionInvalida();
     
    
     
-    $c = conectdb();
+    $c = connectdb();
 
     $consulta = "SELECT id_libro FROM libro WHERE id_libro='$libro';";
     $r = mysqli_query($c, $consulta);

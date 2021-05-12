@@ -1,6 +1,7 @@
 <?php
-	require "./config.php";
-	require "./util.php";
+	require_once("./util.php");
+	require_once("./config.php");
+	
 	redireccionarSiSesionInvalida();
 ?>
 
@@ -17,7 +18,7 @@
 		<?php
 		encabezados($_SESSION["tipo_usuario"]);
 		//Conexión con base de datos
-		$c = conectdb();
+		$c = connectdb();
 
 		$id = $_SESSION["id_usuario"];
 		$consulta = "SELECT tipo, num_cuenta_rfc, correo, nombre, primer_apellido, segundo_apellido 

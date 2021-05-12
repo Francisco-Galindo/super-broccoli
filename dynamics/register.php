@@ -2,8 +2,8 @@
 session_start();
 session_unset();
 session_destroy();
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +80,7 @@ if (isset($_POST["num_cuenta"])) {
 
 
 //Abrir conexión con base de datos
-$c = conectdb();
+$c = connectdb();
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);

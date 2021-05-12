@@ -1,6 +1,7 @@
 <?php
-    require "./config.php";
-	require "./util.php";
+    require_once("./util.php");
+	require_once("./config.php");
+	
 	redireccionarSiSesionInvalida();
     ?>
     <!DOCTYPE html>
@@ -15,7 +16,7 @@
 <body>
 <?php
 //Conexión con base de datos
-$c = conectdb();
+$c = connectdb();
 encabezados($_SESSION["tipo_usuario"]);
 
 //Join tables para mostrar los datos de el historial de descargas
