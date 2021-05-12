@@ -68,9 +68,9 @@ redireccionarSiSesionInvalida();
 					<td>
 						<?php
 
-						$consulta1 = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
+						$consulta = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
 
-						$r = mysqli_query($c, $consulta1);
+						$r = mysqli_query($c, $consulta);
 
 						$autores = [];
 						while($row=mysqli_fetch_array($r)) {
@@ -85,9 +85,9 @@ redireccionarSiSesionInvalida();
 					</td>
 					<td>
 						<?php
-						$consulta2 = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
+						$consulta = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
 
-						$r = mysqli_query($c, $consulta2);
+						$r = mysqli_query($c, $consulta);
 						
 						$editoriales = [];
 						while($row=mysqli_fetch_array($r)) {
@@ -109,9 +109,9 @@ redireccionarSiSesionInvalida();
 					</td>
 					<td>
 					<?php
-						$consulta3 = "SELECT id_categoria, categoria FROM categoria";
+						$consulta = "SELECT id_categoria, categoria FROM categoria";
 
-						$r = mysqli_query($c, $consulta3);
+						$r = mysqli_query($c, $consulta);
 						
 						$categorias = [];
 						while($row=mysqli_fetch_array($r)) {
