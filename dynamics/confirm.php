@@ -1,6 +1,5 @@
 <?php
     require "./util.php";
-    encabezados($_SESSION["tipo_usuario"]);
     redireccionarSiSesionInvalida();
 ?>
 <!DOCTYPE html>
@@ -19,11 +18,11 @@
         <label>Para confirmar, por favor introduce tu contraseña:
             <br><br>
             <input type="password" name="passwrd" required>
-            <br>
+            <br><br>
             <input type="submit" name="boton" value="Confirmar">
         </label>
     </form>
-
+    <br>
     <a href="./perfil.php"><button>Regresar</button></a>
 </body>
 </html>
