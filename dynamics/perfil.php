@@ -28,9 +28,8 @@
 		//consulta de usuarios
 		$r = mysqli_query($c, $consulta);
 		$row = mysqli_fetch_array($r);
-		var_dump($r);
 
-		echo '
+		echo '<table>
 		<thead>
 			<tr>
 				<th colspan="2">Tipo de usuario: '. $row["tipo"] .'</th>
@@ -54,14 +53,13 @@
 				<td>'. $row["primer_apellido"] .' '. $row["segundo_apellido"] .'</td>
 			</tr>
 		</tbody>
-		';
+		</table>';
 		mysqli_close($c);
 		?>
 	</table>
 	<br><br>
-	<form action="./confirm.php" method="POST">
-		<input type="submit" value="Eliminar cuenta">
-	</form>
+	<a href="confirm.php"><button>Eliminar cuenta</button></a></th>
+	<a href="index.php"><button>Regresar</button></a></th>
 </body>
 </html>
 <?php
