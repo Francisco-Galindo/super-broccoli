@@ -12,13 +12,14 @@
 <a href="cerrar.php"><button>Cerrar sesión</button></a>
 
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 encabezados($_SESSION["tipo_usuario"]);
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
-	$c = conectdb();
+	$c = connectdb();
 	$filtros = "";
 	$filtrosGenero = "";
 	

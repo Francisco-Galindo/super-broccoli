@@ -1,6 +1,7 @@
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 ?>
 <!DOCTYPE html>
@@ -40,7 +41,7 @@ redireccionarSiSesionInvalida();
 				<tr>
 					<td>
 						<?php
-						$c = conectdb();
+						$c = connectdb();
 
 						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";
 

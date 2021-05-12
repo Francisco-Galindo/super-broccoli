@@ -1,6 +1,7 @@
 <?php
-require "./config.php";
-require "./util.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ redireccionarSiSesionInvalida();
 <body>
 <?php
     encabezados($_SESSION["tipo_usuario"]);
-    $c = conectdb();
+    $c = connectdb();
     $consulta="SELECT titulo, razon FROM reporte t1
     INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
     $r = mysqli_query($c, $consulta);

@@ -9,15 +9,16 @@
 <body>
 
 <?php
-require "./util.php";
-require "./config.php";
+require_once("./util.php");
+require_once("./config.php");
+
 redireccionarSiSesionInvalida();
 encabezados($_SESSION["tipo_usuario"]);
 
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
-    $c = conectdb();
+    $c = connectdb();
     $id_libro = $_POST["id_libro"];
     $id_usuario = $_POST["id_usuario"];
 
@@ -43,7 +44,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
 }
 elseif (isset($_POST["id_libro"])) {
 
-    $c = conectdb();
+    $c = connectdb();
     
     $id_libro = $_POST["id_libro"];
 
@@ -97,7 +98,7 @@ elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
 
-    $c = conectdb();
+    $c = connectdb();
     $db = mysqli_select_db($c, "biblioteca");
     $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
     $r = mysqli_query($c, $consulta);
