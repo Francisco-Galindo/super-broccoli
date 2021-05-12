@@ -13,7 +13,7 @@
 	require_once("./util.php");
 	require_once("./config.php");
 
-	
+
 	redireccionarSiSesionInvalida();
 	encabezados($_SESSION["tipo_usuario"]);
 
@@ -34,57 +34,46 @@
 			//Consulta de base
 			$r = mysqli_query($c, $consulta);
 
-			//Datos ingresados erroneamente
-			$contadorCoincidencias = 0;
-			while($row=mysqli_fetch_array($r))
-			{
-				$id_autor = $row["id_autor"];
-				$contadorCoincidencias ++;
-			}
 
-			if ($contadorCoincidencias == 0) {
+			if (!$r || mysqli_num_rows($r) == 0) {
 				//Join tables para mostrar los datos de el historial de descargas
 				$consulta = "INSERT INTO autor (nombre) VALUES ('$autorNombre');";
 				//Consulta de base
 				$r = mysqli_query($c, $consulta);
-
-				//Join tables para mostrar los datos de el historial de descargas
-				$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
-				//Consulta de base
-				$r = mysqli_query($c, $consulta);
-
-				while($row=mysqli_fetch_array($r))
-				{
-					$id_autor = $row["id_autor"];
-				}
 			}
+
+			// Obteniendo la id del autor recién creado
+			$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
+			//Consulta de base
+			$r = mysqli_query($c, $consulta);
+
+			$row = mysqli_fetch_array($r);
+			$id_autor = $row["id_autor"];
 		}
 		elseif (isset($_POST["autor"])) {
-
 			$id_autor = $_POST["autor"];
 		}
 
 
 		if (isset($_POST["nueva_editorial"]) && $_POST["nueva_editorial"] != "") {
 			$nuevaEditorialNombre = $_POST["nueva_editorial"];
-
-			//Join tables para mostrar los datos de el historial de descargas
-			$consulta = "INSERT INTO editorial (editorial) VALUES ('$nuevaEditorialNombre');";
-			//Consulta de base
-			$r = mysqli_query($c, $consulta);
-
-			//Join tables para mostrar los datos de el historial de descargas
 			$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
 			//Consulta de base
 			$r = mysqli_query($c, $consulta);
 
-			//Datos ingresados erroneamente
-			$contadorCoincidencias = 0;
-			while($row=mysqli_fetch_array($r))
-			{
-				$id_editorial = $row["id_editorial"];
-				$contadorCoincidencias ++;
+
+			if (!$r || mysqli_num_rows($r) == 0) {
+				$consulta = "INSERT INTO editorial (editorial) VALUES ('$nuevaEditorialNombre');";
+				//Consulta de base
+				$r = mysqli_query($c, $consulta);
 			}
+
+			
+			$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
+			$r = mysqli_query($c, $consulta);
+
+			$row = mysqli_fetch_array($r);
+			$id_editorial = $row["id_editorial"];
 		}
 		elseif (isset($_POST["editorial"])) {
 			$id_editorial = $_POST["editorial"];
@@ -159,9 +148,9 @@
 			}
 		}
 
-		//header("location: nuevo_libro.php");
 		mysqli_close($c);
 
+		header("location: ./formulario_libro.php");
     }
 
 
@@ -210,7 +199,7 @@
 
 		echo '<fieldset>
 						<legend><h2>Registro de nuevo libro</h2></legend>
-							<form action="nuevo_libro.php" method="POST" enctype="multipart/form-data">
+							<form action="formulario_libro.php" method="POST" enctype="multipart/form-data">
 								<label>
 									Título:
 									<input type="text" name="titulo" required>

@@ -8,15 +8,15 @@
     <title>Resultados de búsqueda</title>
 </head>
 <body>
-
-<a href="cerrar.php"><button>Cerrar sesión</button></a>
-
 <?php
 require_once("./util.php");
 require_once("./config.php");
 
 redireccionarSiSesionInvalida();
+
 encabezados($_SESSION["tipo_usuario"]);
+echo "<br>";
+
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
 	$c = connectdb();
@@ -119,8 +119,8 @@ if (isset($_POST["busqueda"])) {
 	" AND id_libro 
 	IN(SELECT id_libro FROM libro_has_genero WHERE " . $filtrosGenero . ") 
 	ORDER BY titulo;";
+
 	//Consulta de base
-	echo "<br>" . $consulta . "<br>";
 	$r = mysqli_query($c, $consulta);
 
 	echo "<table border='1'><tbody>";
