@@ -1,49 +1,50 @@
 <?php
-    define("DBUSER", "root");
+    define("ROOTUSER", "root");
+    define("DBUSER", "BibliotecaSuperBroccoli");
     define("DBHOST", "localhost");
     define("PASSWORD", "");
     define("DB", "biblioteca");
 
-    function conectdb($id_usuario, $password)
+    function conectdb()
     {
-        $c=mysqli_connect(DBHOST, DBUSER, PASSWORD, 'mysql');
-        $consulta="SELECT user FROM user WHERE user =".$id_usuario." AND password = ".$password."";
-        $r = mysqli_query($c, $consulta);
-        //$cont=mysqli_num_rows($r);
-        
-        if($r!=FALSE)
-        {
-            echo"Si existe el usuario, iniciando sesion.";
-            mysqli_close($c);
-            
-            $c=mysqli_connect(DBHOST, $id_usuario, $password, DB);
-            if(!$c)
-            {
-                /*mysqli_connect_error();
-                mysqli_connect_errno();*/
-                echo"No se pudo acceder a la base de datos";
+        $c = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
+        if (! $c) {
+            $usuario = DBUSER;
+            $c = mysqli_connect(DBHOST, ROOTUSER, PASSWORD, DB);
+            $consulta = "CREATE USER '$usuario'@'localhost' IDENTIFIED BY ''";
+	        $r = mysqli_query($c, $consulta);
+
+            $tablas = ["autor", "editorial", "genero"];
+            foreach ($tablas as $tabla) {
+                $consulta = "GRANT SELECT, INSERT ON biblioteca." . $tabla . " TO  '$usuario'@'localhost'";
+                $r = mysqli_query($c, $consulta);
             }
-            //echo "Si existe la cuenta en la DB mysql";
-            
-        }
-        elseif($r === FALSE)
-        {
-            echo "No existe la cuenta, se tiene que crear";
-            $consulta2 = "CREATE USER '$id_usuario'@'localhost' IDENTIFIED BY '$password'";
-	        $r = mysqli_query($c, $consulta2);
+
+            $tablas = ["formulario", "historial_descargas", "reporte", "libro_has_genero"];
+            foreach ($tablas as $tabla) {
+                $consulta = "GRANT SELECT, INSERT, DELETE ON biblioteca." . $tabla . " TO  '$usuario'@'localhost'";
+                $r = mysqli_query($c, $consulta);
+            }
+
+            $tablas = ["libro"];
+            foreach ($tablas as $tabla) {
+                $consulta = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$usuario'@'localhost'";
+                $r = mysqli_query($c, $consulta);
+            }
+
+            $tablas = ["usuario", "tipo_usuario", "categoria", "historial_descargas"];
+            foreach ($tablas as $tabla) {
+                $consulta = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$usuario'@'localhost'";
+                $r = mysqli_query($c, $consulta);
+            }
+
+            $consulta = "GRANT SELECT, INSERT, DELETE ON biblioteca.usuario TO  '$usuario'@'localhost'";
+            $r = mysqli_query($c, $consulta);
             mysqli_close($c);
 
-            $c=mysqli_connect(DBHOST, $id_usuario, $password, DB);
-            if(!$c)
-            {
-                /*mysqli_connect_error();
-                mysqli_connect_errno();*/
-                echo"No se pudo acceder a la base de datos";
-            }
-        }
 
-        
-        
+            $c = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
+        }
         return $c;
     }
 ?>

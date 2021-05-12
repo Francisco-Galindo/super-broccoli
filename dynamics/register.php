@@ -3,6 +3,7 @@ session_start();
 session_unset();
 session_destroy();
 require "./config.php";
+require "./util.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,67 +60,6 @@ else {
 	$error = "Ya existe una cuenta relacionada con esta persona.";
 }
 
-//Crear cuenta en la base de datos
-if (!(isset($error) && $error != "")) {
-	$consulta2 = "CREATE USER '$id'@'localhost' IDENTIFIED BY '$contra'";
-	$r = mysqli_query($c, $consulta2);	
-
-	//Otorgar permisos
-	if ($tipo=="Lector") {
-
-		$tablas = ["libro", "autor", "editorial", "categoria", "genero", "biblioteca.libro_has_genero", "usuario"];
-		foreach ($tablas as $tabla) {
-			$consulta3 = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta3);
-		}
-
-		$consulta4 = "GRANT SELECT, INSERT, DELETE ON biblioteca.favorito TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta4);
-
-		$tablas = ["historial_descargas", "reporte", "formulario"];
-		foreach ($tablas as $tabla) {
-			$consulta5 = "GRANT SELECT, INSERT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta5);
-		}
-	}
-
-	elseif ($tipo=="Bibliotecario" || $tipo=="Administrador") {
-		$tablas = ["autor", "editorial", "genero"];
-		foreach ($tablas as $tabla) {
-			$consulta6 = "GRANT SELECT, INSERT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta6);
-		}
-
-		$tablas = ["formulario", "historial_descargas", "reporte", "libro_has_genero"];
-		foreach ($tablas as $tabla) {
-			$consulta6 = "GRANT SELECT, INSERT, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta6);
-		}
-
-		$tablas = ["libro"];
-		foreach ($tablas as $tabla) {
-			$consulta6 = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta6);
-		}
-
-		$tablas = ["usuario", "tipo_usuario", "categoria", "historial_descargas"];
-		foreach ($tablas as $tabla) {
-			$consulta7 = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
-			$r = mysqli_query($c, $consulta7);
-		}
-	}
-
-	elseif ($tipo=="Administrador") {
-		$consulta8 = "GRANT SELECT, INSERT, DELETE ON biblioteca.usuario TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta8);
-	}
-}
-
-
-
-
-//Cerrar conexión con base de datos
-mysqli_close($c);
 //Redirigir a la página de inicio
 if (! (isset($error) && $error != "")) {
 	session_start();
