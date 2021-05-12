@@ -14,6 +14,7 @@
 </head>
 <body>
 <?php
+    encabezados($_SESSION["tipo_usuario"]);
     $c = conectdb();
     $consulta="SELECT * FROM formulario;";
     $r = mysqli_query($c, $consulta);

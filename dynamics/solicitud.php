@@ -13,6 +13,7 @@ require "./util.php";
 </head>
 <body>
 <?php
+encabezados($_SESSION["tipo_usuario"]);
 //Declarar lo ingresado en el formulario
 $obra = $_POST["Obra"];
 $autor = $_POST["Autor"];

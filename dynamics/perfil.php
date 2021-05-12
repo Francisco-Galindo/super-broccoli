@@ -15,7 +15,7 @@
 <body>
 	<table>
 		<?php
-
+		encabezados($_SESSION["tipo_usuario"]);
 		//Conexión con base de datos
 		$c = conectdb();
 

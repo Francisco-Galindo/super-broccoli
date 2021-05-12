@@ -14,7 +14,7 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
-
+    encabezados($_SESSION["tipo_usuario"]);
  if (isset($_POST["reportar"])) {
      echo'
     <fieldset>

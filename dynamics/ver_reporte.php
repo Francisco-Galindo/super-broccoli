@@ -14,6 +14,7 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
+    encabezados($_SESSION["tipo_usuario"]);
     $c = conectdb();
     $consulta="SELECT titulo, razon FROM reporte t1
     INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";

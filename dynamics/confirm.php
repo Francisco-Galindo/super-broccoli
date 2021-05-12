@@ -1,5 +1,6 @@
 <?php
     require "./util.php";
+    encabezados($_SESSION["tipo_usuario"]);
     redireccionarSiSesionInvalida();
 ?>
 <!DOCTYPE html>

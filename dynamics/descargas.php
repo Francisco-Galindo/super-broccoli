@@ -16,6 +16,7 @@
 <?php
 //Conexión con base de datos
 $c = conectdb();
+encabezados($_SESSION["tipo_usuario"]);
 
 //Join tables para mostrar los datos de el historial de descargas
 $consulta = "SELECT fecha, titulo, autor, nombre

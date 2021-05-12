@@ -14,6 +14,7 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
+	encabezados($_SESSION["tipo_usuario"]);
 
     $c = conectdb();
     $consulta = "SELECT * FROM usuario";

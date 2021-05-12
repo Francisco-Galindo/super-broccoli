@@ -12,6 +12,7 @@
 require "./util.php";
 require "./config.php";
 redireccionarSiSesionInvalida();
+encabezados($_SESSION["tipo_usuario"]);
 
 
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {

@@ -15,7 +15,7 @@
 require "./config.php";
 require "./util.php";
 redireccionarSiSesionInvalida();
-
+encabezados($_SESSION["tipo_usuario"]);
 if (isset($_POST["busqueda"])) {
 	//Conexión con base de datos
 	$c = conectdb();
