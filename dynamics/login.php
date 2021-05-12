@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
-	<title>Log in</title>
-</head>
-<body>
 <?php
 require "./config.php";
 require "./util.php";
@@ -17,12 +7,11 @@ session_start();
 if(isset($_SESSION["id_usuario"])){
     header("location: ./index.php");
 }
-//Declarar los valores ingresados en el inicio de sesión
-
-if (isset($_POST["email"])) {
+elseif (isset($_POST["email"])) {
 	$contra = $_POST["contra"];
 	$email = $_POST["email"];
 }
+//Declarar los valores ingresados en el inicio de sesión
 //redirigir a la página de inicio de sesión
 else {
 	header("location: ../templates/login.html");
@@ -66,4 +55,3 @@ else {
 //cerrar conexión con base de datos
 mysqli_close($c);
 ?>
-

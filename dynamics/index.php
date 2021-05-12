@@ -16,13 +16,10 @@ redireccionarSiSesionInvalida();
 	<h1>La biblioteca de Super-broccoli</h1>
 
 	<?php
-		encabezadol("xd");
 		echo "Bienvenido, <strong>" . $_SESSION["nombre"] . "</strong>";
+		encabezados($_SESSION["tipo_usuario"]);
+		
 	?>
-	<br>
-	<a href="cerrar.php"><button>Cerrar sesión</button></a>
- 	<a href="perfil.php"><button>Ver Perfil</button></a> <!--No estoy seguro de como se vea pero se me ocurre que puede ir aqui.-->
-	<br>
 
 	<br><br>
 	<fieldset>

@@ -3,7 +3,7 @@
 	require './util.php';
 	redireccionarSiSesionInvalida();
 
-	if(isset($_POST["passwrd"])){
+	if(isset($_POST["passwrd"]) || (!isset($_POST["passwrd"])  && $_SESSION["tipo_usuario"]) == "Administrador"){
 
 		session_start();
 

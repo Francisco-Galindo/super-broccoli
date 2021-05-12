@@ -20,13 +20,15 @@
 		$c = conectdb();
 
 		$id = $_SESSION["id_usuario"];
-		$consulta = "SELECT * FROM usuario t1
+		$consulta = "SELECT tipo, num_cuenta_rfc, correo, nombre, primer_apellido, segundo_apellido 
+		FROM usuario t1
 		INNER JOIN tipo_usuario t2 ON t1.id_tipo_usuario = t2.id_tipo 
 		WHERE num_cuenta_rfc='$id';";
 
 		//consulta de usuarios
 		$r = mysqli_query($c, $consulta);
 		$row = mysqli_fetch_array($r);
+		var_dump($r);
 
 		echo '
 		<thead>

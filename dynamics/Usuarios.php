@@ -15,7 +15,6 @@ redireccionarSiSesionInvalida();
 <body>
 <?php
 
-
     $c = conectdb();
     $consulta = "SELECT * FROM usuario";
     $r = mysqli_query($c, $consulta);
@@ -26,7 +25,7 @@ redireccionarSiSesionInvalida();
 		echo "<td>";
 		echo "<br>Usuario" . $row["nombre"] .$row["primer_apellido"].$row["segundo_apellido"]. "'>";
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
-        usuarioEliminar($row["num_cuenta_rfc"]);
+        echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
 
 
