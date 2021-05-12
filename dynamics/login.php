@@ -9,9 +9,11 @@
 </head>
 <body>
 <?php
+require "./config.php";
+require "./util.php";
 session_start();
 //si ya hay sesion iniciada redirigir
-if(isset($_SESSION["nobre"])){
+if(isset($_SESSION["nombre"])){
     header("location: ./index.php");
 }
 //Declarar los valores ingresados en el inicio de sesión
@@ -25,7 +27,7 @@ else {
 	header("location: ../templates/login.html");
 }
 //conexión con base de datos
-$c = mysqli_connect("localhost", "root", "", "biblioteca");
+$c = conectdb();
 //comprueba que el email y la contraseña correspondan
 $consulta = "SELECT num_cuenta_rfc, nombre, id_tipo_usuario FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 

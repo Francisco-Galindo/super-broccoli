@@ -34,7 +34,7 @@ else {
 }
 
 //Abrir conexión con base de datos
-$c = mysqli_connect("localhost", "root", "", "biblioteca");
+$c = conectdb();
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
 $r = mysqli_query($c, $consulta);
