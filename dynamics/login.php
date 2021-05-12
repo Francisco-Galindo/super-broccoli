@@ -9,7 +9,13 @@
 </head>
 <body>
 <?php
+session_start();
+//si ya hay sesion iniciada redirigir
+if(isset($_SESSION["nobre"])){
+    header("location: ./index.php");
+}
 //Declarar los valores ingresados en el inicio de sesión
+
 if (isset($_POST["email"])) {
 	$contra = $_POST["contra"];
 	$email = $_POST["email"];
