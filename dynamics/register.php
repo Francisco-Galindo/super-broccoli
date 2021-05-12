@@ -67,7 +67,6 @@ if (! (isset($error) && $error != "")) {
 	//Guardado de los datos del usuario en variables de sesión.
 	$_SESSION["id_usuario"] = $id;
 	$_SESSION["nombre"] = $nombre;
-	$_SESSION["password"] = $contra;
 	$_SESSION["tipo_usuario"] = $tipo;
 
 	header("location: ./index.php");
