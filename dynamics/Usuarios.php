@@ -15,7 +15,7 @@ redireccionarSiSesionInvalida();
 <body>
 <?php
 
-if (isset($_POST[$usuarios])) {
+
     $c = conectdb();
     $consulta = "SELECT * FROM usuario";
     $r = mysqli_query($c, $consulta);
@@ -28,6 +28,6 @@ if (isset($_POST[$usuarios])) {
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
         usuarioEliminar($row["num_cuenta_rfc"]);
 	}
-	
-}
+
+
 ?>
