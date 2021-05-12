@@ -23,11 +23,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
     if (isset($_POST["Agregar_a_favoritos"])) {
         $consulta = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
         $r = mysqli_query($c, $consulta);
-        $contadorCoincidencias = 00;
-        while($row = mysqli_fetch_array($r)) {
-            $contadorCoincidencias++;
-        }
-        if ($contadorCoincidencias == 0) {
+        if (!$r || mysqli_num_rows($r) == 0) {
             $consulta = "INSERT INTO favorito (id_libro, id_usuario) VALUES ('$id_libro', '$id_usuario');";
         }
     }
@@ -88,11 +84,8 @@ elseif (isset($_POST["id_libro"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $consulta = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
     $r = mysqli_query($c, $consulta);
-    $contadorCoincidencias = 00;
-    while($row = mysqli_fetch_array($r)) {
-        $contadorCoincidencias++;
-    }
-    $mensajeBoton = $contadorCoincidencias == 0 ? "Agregar a favoritos" : "Quitar de favoritos";
+
+    $mensajeBoton = !$r || mysqli_num_rows($r) == 0 ? "Agregar a favoritos" : "Quitar de favoritos";
     echo '<form action="./mas_informacion.php" method="POST">
         <input type="hidden" value="' . $id_usuario . '" name="id_usuario">
         <input type="hidden" value="' . $id_libro . '" name="id_libro">

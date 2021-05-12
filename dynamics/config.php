@@ -8,7 +8,7 @@
     function conectdb()
     {
         $c = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
-        if (! $c) {
+        if (!$c) {
             $usuario = DBUSER;
             $c = mysqli_connect(DBHOST, ROOTUSER, PASSWORD, DB);
             $consulta = "CREATE USER '$usuario'@'localhost' IDENTIFIED BY ''";
@@ -39,6 +39,8 @@
             }
 
             $consulta = "GRANT SELECT, INSERT, DELETE ON biblioteca.usuario TO  '$usuario'@'localhost'";
+            $r = mysqli_query($c, $consulta);
+            $consulta = "GRANT SELECT, INSERT, DELETE ON biblioteca.favorito TO  '$usuario'@'localhost'";
             $r = mysqli_query($c, $consulta);
             mysqli_close($c);
 
