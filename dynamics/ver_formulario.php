@@ -23,13 +23,14 @@
     while($row=mysqli_fetch_array($r)) {
             echo "<tr>";
             echo "<td>";
-            echo "<br>Id usuario::" . $row["id_usuario"];
+            echo "<br>Id usuario: " . $row["id_usuario"];
             echo "<br>Obra:" . $row["obra"];
             echo "<br>Autor:" . $row["autor"];
-            echo "<br>Año de publicación:" . $row["year"];
+            echo "<br>Año de publicación:" . $row["publicacion"];
             echo "<br>Editorial:" . $row["editorial"];
             echo "<br>Edición:" . $row["edicion"];
             echo "<br>razon:" . $row["razon"];
+            echo"<br><br>";
         }
     mysqli_close($c);
 ?>

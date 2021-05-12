@@ -58,8 +58,9 @@
 		?>
 	</table>
 	<br><br>
-	<a href="confirm.php"><button>Eliminar cuenta</button></a></th>
 	<a href="index.php"><button>Regresar</button></a></th>
+	<a href="confirm.php"><button>Eliminar cuenta</button></a></th>
+		
 </body>
 </html>
 <?php
