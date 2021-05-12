@@ -50,7 +50,7 @@ if(isset($_POST["favoritos"]));{
 			<input type="submit" value="Eliminar de favoritos" name="eliminar">
 			</form>';
 			if (isset($_POST["eliminar"])) {
-			$consulta="DELETE FROM favoritos WHERE id_libro=$id_libro;";
+			$consulta="DELETE FROM favoritos WHERE id_libro=$id_libro";
 			}
 		} 
 	}

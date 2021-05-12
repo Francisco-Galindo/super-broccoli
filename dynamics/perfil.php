@@ -38,19 +38,19 @@
 		<thead>
 		<tbody>
 			<tr>
-				<td>Número de cuenta o RFC: </td>
+				<td><strong>Número de cuenta o RFC: </strong></td>
 				<td>'. $row["num_cuenta_rfc"] .'</td>
 			</tr>
 			<tr>
-				<td>Correo electrónico: </td>
+				<td><strong>Correo electrónico: </strong></td>
 				<td>'. $row["correo"].'</td>
 			</tr>
 			<tr>
-				<td>StronNombre de usuario: </td>
+				<td><strong>Nombre de usuario: </strong></td>
 				<td>'.$row["nombre"].'</td>
 			</tr>
 			<tr>
-				<td>Apellidos</td>
+				<td><strong>Apellidos</strong></td>
 				<td>'. $row["primer_apellido"] .' '. $row["segundo_apellido"] .'</td>
 			</tr>
 		</tbody>
