@@ -16,7 +16,7 @@ redireccionarSiSesionInvalida();
 <?php
 
 if(isset($_POST["favoritos"]));{
-    $c = conectdb($id_usuario, $password);
+    $c = conectdb($_SESSION["id_usuario"], $_SESSION["password"]);
 
     $consulta = "SELECT * FROM libro t1
 	INNER JOIN favoritos t2 ON t1.id_libro = t2.id_libro 
