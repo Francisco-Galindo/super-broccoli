@@ -12,8 +12,9 @@
 require "./config.php";
 require "./util.php";
 session_start();
+
 //si ya hay sesion iniciada redirigir
-if(isset($_SESSION["nombre"])){
+if(isset($_SESSION["id_usuario"])){
     header("location: ./index.php");
 }
 //Declarar los valores ingresados en el inicio de sesión
