@@ -1,6 +1,6 @@
 <?php
-require "./util.php";
-require "./config.php";
+require_once("./util.php");
+require_once("./config.php");
 redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
@@ -28,6 +28,7 @@ redireccionarSiSesionInvalida();
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
         echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
+	echo "</tbody></table>";
 	echo"<th><a href=\"register.php\"><button>Agregar nuevo usuario</button></a></th>";
 
 

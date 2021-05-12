@@ -17,7 +17,7 @@ require_once("./config.php");
 <body>
 <?php
 //Declarar valores de crear cuenta
-if($_SESSION["tipo_usuario"]='Administrador'&&isset($_SESSION["nombre"]){
+if($_SESSION["tipo_usuario"]='Administrador'&&isset($_SESSION["nombre"])){
 	echo"Llene el formulario para crear la cuenta de otro usuario";
 	echo'
 	<fieldset>
@@ -63,7 +63,7 @@ if($_SESSION["tipo_usuario"]='Administrador'&&isset($_SESSION["nombre"]){
 		</form>
 		<br><br>
 		<a href="./index.php"><button>regresar</button></a>
-	</fieldset>'
+	</fieldset>';
 }
 if (isset($_POST["num_cuenta"])) {
 	$id = strtoupper($_POST["num_cuenta"]);
