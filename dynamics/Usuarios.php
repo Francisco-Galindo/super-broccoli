@@ -24,7 +24,7 @@ redireccionarSiSesionInvalida();
 	while($row=mysqli_fetch_array($r)) {
         echo "<tr>";
 		echo "<td>";
-		echo "<br>Usuario" . $row["nombre"] .$row[" primer_apellido"].$row[" segundo_apellido"]. "'>";
+		echo "<br>Usuario" . $row["nombre"] .$row["primer_apellido"].$row["segundo_apellido"]. "'>";
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
         usuarioEliminar($row["num_cuenta_rfc"]);
 	}
