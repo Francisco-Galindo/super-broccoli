@@ -72,13 +72,10 @@ elseif (isset($_POST["id_libro"])) {
     echo'<br><a href="' . $row["libro"] . '" target="_blank"><button>Abrir en otra pestaña</button></a> 
 
     <br>
-
-    <a title="Descargar Archivo" href="' . $row["libro"] . '" download="' . $row["titulo"] . '" style="color: blue; font-size:18px;"><button>Descargar</button></a>
-
     <form action="mas_informacion.php" method="POST">
         <input type="hidden" value="'. $id_libro .'" name="id_descarga">
         <input type="hidden" value="'. $row["libro"] .'" name="contenido">
-        <input type="submit" value="WAPO" name="descarga">
+        <input type="submit" value="Descargar libro" name="descarga">
     </form>';
 
     $id_usuario = $_SESSION["id_usuario"];
