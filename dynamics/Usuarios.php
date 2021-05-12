@@ -1,6 +1,6 @@
 <?php
-require "./config.php";
 require "./util.php";
+require "./config.php";
 redireccionarSiSesionInvalida();
 ?>
     <!DOCTYPE html>
@@ -16,7 +16,7 @@ redireccionarSiSesionInvalida();
 <?php
 	encabezados($_SESSION["tipo_usuario"]);
 
-    $c = conectdb();
+    $c = connectdb();
     $consulta = "SELECT * FROM usuario";
     $r = mysqli_query($c, $consulta);
 
