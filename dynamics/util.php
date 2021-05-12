@@ -2,6 +2,7 @@
 function encabezadol($hola){
     echo"<table>";
          echo"<thead>"; 
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
             echo "<th><a href=\"./favoritos.php\"><button>Favoritos</button></a><th>";
             echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
@@ -11,25 +12,27 @@ function encabezadol($hola){
 function encabezadob($hola){
     echo"<table>";
         echo"<thead>";
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
             echo"<th><a href=\"./favoritos.php\"><button>Favoritos</button></a></th>";
-            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
             echo"<th><a href=\"./descargas.php\"><button>Historial descargas</button></a></th>";
             echo"<th><a href=\"./nuevo_libro.php\"><button>Subir libro</button></a></th>";
+            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
     echo"</table>";
-return;
+    return;
 }
 function encabezadoa($hola){ 
     echo"<table>";
         echo"<thead>";
+            echo"<th><a href=\"./index.php\"><button>Inicio</button></a></th>";
             echo"<th><a href=\"./favoritos.php\"><button>Favoritos</button></a></th>";
-            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
             echo"<th><a href=\"./descargas.php\"><button>Historial descargas</button></a></th>";
             echo"<th><a href=\"./nuevo_libro.php\"><button>Subir libro</button></a></th>";
             echo"<th><a href=\"./Usuarios.php\"><button>Usuarios</button></a></th>";
+            echo"<th><a href=\"./perfil.php\"><button>Ver Perfil</button></a></th>";
         echo"</thead>";
     echo"</table>";
-return;
+    return;
 }
 
 function usuarioEliminar($id_usuario) {
