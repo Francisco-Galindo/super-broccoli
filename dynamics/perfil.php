@@ -37,7 +37,7 @@
 		<thead>
 		<tbody>
 			<tr>
-				<td<strong>>Número de cuenta o RFC: </strong></td>
+				<td><strong>Número de cuenta o RFC: </strong></td>
 				<td>'. $row["num_cuenta_rfc"] .'</td>
 			</tr>
 			<tr>
