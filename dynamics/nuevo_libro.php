@@ -42,14 +42,14 @@
 
 				if ($contadorCoincidencias == 0) {
 					//Join tables para mostrar los datos de el historial de descargas
-					$consulta1 = "INSERT INTO autor (nombre) VALUES ('$autorNombre');";
+					$consulta = "INSERT INTO autor (nombre) VALUES ('$autorNombre');";
 					//Consulta de base
-					$r = mysqli_query($c, $consulta1);
+					$r = mysqli_query($c, $consulta);
 
 					//Join tables para mostrar los datos de el historial de descargas
-					$consulta2 = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
+					$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
 					//Consulta de base
-					$r = mysqli_query($c, $consulta2);
+					$r = mysqli_query($c, $consulta);
 
 					while($row=mysqli_fetch_array($r))
 					{
@@ -67,14 +67,14 @@
 				$nuevaEditorialNombre = $_POST["nueva_editorial"];
 
 				//Join tables para mostrar los datos de el historial de descargas
-				$consulta3 = "INSERT INTO editorial (editorial) VALUES ('$nuevaEditorialNombre');";
+				$consulta = "INSERT INTO editorial (editorial) VALUES ('$nuevaEditorialNombre');";
 				//Consulta de base
-				$r = mysqli_query($c, $consulta3);
+				$r = mysqli_query($c, $consulta);
 
 				//Join tables para mostrar los datos de el historial de descargas
-				$consulta4 = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
+				$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
 				//Consulta de base
-				$r = mysqli_query($c, $consulta4);
+				$r = mysqli_query($c, $consulta);
 
 				//Datos ingresados erroneamente
 				$contadorCoincidencias = 0;
@@ -135,14 +135,14 @@
 			$desc = $_POST["desc"];
 
 
-			$consulta5 = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
+			$consulta = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
 
-			$r = mysqli_query($c, $consulta5);
+			$r = mysqli_query($c, $consulta);
 
 
-			$consulta6 = "SELECT id_libro FROM libro WHERE titulo='$titulo' AND autor=$id_autor;";
+			$consulta = "SELECT id_libro FROM libro WHERE titulo='$titulo' AND autor=$id_autor;";
 
-			$r = mysqli_query($c, $consulta6);
+			$r = mysqli_query($c, $consulta);
 			while($row=mysqli_fetch_array($r)) {
 				$id_libro = $row["id_libro"];
 			}
@@ -151,9 +151,9 @@
 			if (isset($_POST["generos"])) {
 				foreach ($_POST["generos"] as $id_genero) {
 
-					$consulta7 = "INSERT INTO libro_has_genero (id_libro, id_genero) VALUES ($id_libro, $id_genero);";
+					$consulta = "INSERT INTO libro_has_genero (id_libro, id_genero) VALUES ($id_libro, $id_genero);";
 
-					$r = mysqli_query($c, $consulta7);
+					$r = mysqli_query($c, $consulta);
 				}
 			}
 
@@ -168,27 +168,27 @@
     else {
 
 			$c = mysqli_connect("localhost", "root", "");
-			$consulta8 = "SELECT id_genero, genero FROM genero";
+			$consulta = "SELECT id_genero, genero FROM genero";
 
-			$r = mysqli_query($c, $consulta8);
+			$r = mysqli_query($c, $consulta);
 
 			$generos = [];
 			while($row=mysqli_fetch_array($r)) {
 				$generos += [$row["id_genero"]=>$row["genero"]];
 			}
 
-			$consulta9 = "SELECT id_editorial, editorial FROM editorial";
+			$consulta = "SELECT id_editorial, editorial FROM editorial";
 
-			$r = mysqli_query($c, $consulta9);
+			$r = mysqli_query($c, $consulta);
 
 			$editoriales = [];
 			while($row=mysqli_fetch_array($r)) {
 				$editoriales += [$row["id_editorial"]=>$row["editorial"]];
 			}
 
-			$consulta10 = "SELECT id_autor, nombre FROM autor";
+			$consulta = "SELECT id_autor, nombre FROM autor";
 
-			$r = mysqli_query($c, $consulta10);
+			$r = mysqli_query($c, $consulta);
 
 			$autores = [];
 			while($row=mysqli_fetch_array($r)) {
@@ -196,9 +196,9 @@
 			}
 
 
-			$consulta11 = "SELECT id_categoria, categoria FROM categoria";
+			$consulta = "SELECT id_categoria, categoria FROM categoria";
 
-			$r = mysqli_query($c, $consulta11);
+			$r = mysqli_query($c, $consulta);
 
 			$categorias = [];
 			while($row=mysqli_fetch_array($r)) {
