@@ -50,14 +50,14 @@ elseif (isset($_POST["id_libro"])) {
     
     $id_libro = $_POST["id_libro"];
 
-    $consulta1 = "SELECT *
+    $consulta = "SELECT *
     FROM libro t1
     INNER JOIN autor t2 ON t1.autor = t2.id_autor
     INNER JOIN editorial t3 ON t1.editorial = t3.id_editorial
     WHERE id_libro=$id_libro
     ;";
 
-	$r = mysqli_query($c, $consulta1);
+	$r = mysqli_query($c, $consulta);
     $row = mysqli_fetch_array($r);
     echo "<br>";
 
@@ -86,8 +86,8 @@ elseif (isset($_POST["id_libro"])) {
     </form>';
 
     $id_usuario = $_SESSION["id_usuario"];
-    $consulta2 = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
-    $r = mysqli_query($c, $consulta2);
+    $consulta = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
+    $r = mysqli_query($c, $consulta);
     $contadorCoincidencias = 00;
     while($row = mysqli_fetch_array($r)) {
         $contadorCoincidencias++;
@@ -108,8 +108,8 @@ elseif (isset($_POST["id_descarga"])) {
 
     $c = conectdb($id_usuario, $_SESSION["password"]);
     $db = mysqli_select_db($c, "biblioteca");
-    $consulta3 = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
-    $r = mysqli_query($c, $consulta3);
+    $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
+    $r = mysqli_query($c, $consulta);
 
 
     header("Content-type: application/pdf");

@@ -58,8 +58,8 @@ redireccionarSiSesionInvalida();
     }
 
     if ($contadorCoincidencias===1) {
-			$consulta1 = "INSERT INTO reporte (id_libro, razon) VALUES ('$libro', '$razon');";
-    $r = mysqli_query($c, $consulta1);
+			$consulta = "INSERT INTO reporte (id_libro, razon) VALUES ('$libro', '$razon');";
+    $r = mysqli_query($c, $consulta);
     header("location: index.php");
     mysqli_close($c);
     }

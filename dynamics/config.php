@@ -29,8 +29,8 @@
         elseif($r === FALSE)
         {
             echo "No existe la cuenta, se tiene que crear";
-            $consulta2 = "CREATE USER '$id_usuario'@'localhost' IDENTIFIED BY '$password'";
-	        $r = mysqli_query($c, $consulta2);
+            $consulta = "CREATE USER '$id_usuario'@'localhost' IDENTIFIED BY '$password'";
+	        $r = mysqli_query($c, $consulta);
             mysqli_close($c);
 
             $c=mysqli_connect(DBHOST, $id_usuario, $password, DB);
