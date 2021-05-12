@@ -2,7 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-require "./config.php"
+require "./config.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,12 +84,15 @@ if (!(isset($error) && $error != "")) {
 	}
 
 	elseif ($tipo=="Bibliotecario") {
-		$consulta6 = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca.* TO  '$id'@'localhost'";
-		$r = mysqli_query($c, $consulta6);
+		$tablas = ["autor", "editorial", "favorito", "formulario", "genero", "historial_descargas", "libro", "libro_has_genero", "reporte"];
+		foreach ($tablas as $tabla) {
+			$consulta6 = "GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$r = mysqli_query($c, $consulta6);
+		}
 
 		$tablas = ["usuario", "tipo_usuario", "categoria"];
 		foreach ($tablas as $tabla) {
-			$consulta7 = "REVOKE INSERT, UPDATE, DELETE ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
+			$consulta7 = "GRANT SELECT ON biblioteca." . $tabla . " TO  '$id'@'localhost'";
 			$r = mysqli_query($c, $consulta7);
 		}
 	}

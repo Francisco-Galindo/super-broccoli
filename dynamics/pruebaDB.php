@@ -1,5 +1,5 @@
 <?php
-require "./config.php"
+require "./config.php";
 //Declarar valores de crear cuenta
 $id = $_POST["num_cuenta"];
 $nombre = $_POST["nombre"];

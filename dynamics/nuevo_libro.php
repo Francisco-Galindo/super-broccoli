@@ -10,12 +10,12 @@
 
 <body>
     <?php
-	require "./config.php"
+	require "./config.php";
 
-		session_start();
-		if (!isset($_SESSION["nombre"])) {
-			header("location: login.php");
-		}
+	session_start();
+	if (!isset($_SESSION["nombre"])) {
+		header("location: login.php");
+	}
 
 
 

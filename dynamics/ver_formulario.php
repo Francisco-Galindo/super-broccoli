@@ -1,5 +1,5 @@
 <?php
-    require "./config.php"
+    require "./config.php";
     conectdb($id_usuario, $password);
 ?>
     <!DOCTYPE html>
@@ -17,7 +17,7 @@
     $consulta="SELECT * FROM formulario;";
     $r = mysqli_query($c, $consulta);
     $row=mysqli_fetch_array($r);
-    
+
     while($row=mysqli_fetch_array($r)) {
             echo "<tr>";
             echo "<td>";

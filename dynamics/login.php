@@ -34,6 +34,7 @@ while($row=mysqli_fetch_array($r))
 {
 	$nombre = $row["nombre"];
 	$id_usuario = $row["num_cuenta_rfc"];
+	$tipo = $row["id_tipo_usuario"];
 	$contadorCoincidencias ++;
 }
 
