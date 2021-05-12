@@ -1,12 +1,7 @@
 <?php
-<<<<<<< HEAD
-require "./config.php";
-require "./util.php";
-redireccionarSiSesionInvalida();
-=======
 require_once("./util.php");
 require_once("./config.php");
->>>>>>> 9c643d4ecf158dc401528fa4eb1b68aad4b5d723
+redireccionarSiSesionInvalida();
 ?>
 
 <?php
