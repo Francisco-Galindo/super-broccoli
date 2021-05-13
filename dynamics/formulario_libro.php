@@ -17,28 +17,35 @@
 	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
 	encabezados($_SESSION["tipo_usuario"]);
 
+	
+	// Algunos valores para prellenar el formulario
 	$valorTitulo =  "";
 	$valorAnno = date("Y");
 	$valorDescripcion = "";
 
-    if (isset($_POST["formulario"]) || isset($_POST["editar"])) {
+    
+	// Acciones a realizar si se añade un nuevo libro o se edita
+	if (isset($_POST["crear"]) || isset($_POST["editar"])) {
 
 
 		//Conexión con base de datos
 		$c = connectdb();
 
+		
+		// Autor
 		if ($_POST["nuevo_autor_apellido"]) {
 
+			// Si se está añadiendo un nuevo autor, concatenar su nombre y apellidos
 			$autorNombre = "";
 			$autorNombre .= $_POST["nuevo_autor_apellido"];
 			$autorNombre .= isset($_POST["nuevo_autor_nombre"]) ? ", " .  $_POST["nuevo_autor_nombre"]: "";
 
-			//Join tables para mostrar los datos de el historial de descargas
+			// Buscando un autor con ese nombre
 			$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
-			//Consulta de base
 			$r = mysqli_query($c, $consulta);
 
 
+			// Creando al nuevo autor si no se encontró ninguno
 			if (!$r || mysqli_num_rows($r) == 0) {
 				//Join tables para mostrar los datos de el historial de descargas
 				$consulta = "INSERT INTO autor (nombre) VALUES ('$autorNombre');";
@@ -46,19 +53,21 @@
 				$r = mysqli_query($c, $consulta);
 			}
 
-			// Obteniendo la id del autor recién creado
+			
+			// Obteniendo la id del autor recién creado (o en caso de que ya existiera, también será encontrado aquí)
 			$consulta = "SELECT id_autor FROM autor WHERE nombre='$autorNombre';";
 			//Consulta de base
 			$r = mysqli_query($c, $consulta);
-
 			$row = mysqli_fetch_array($r);
 			$id_autor = $row["id_autor"];
+
 		}
 		elseif (isset($_POST["autor"])) {
 			$id_autor = $_POST["autor"];
 		}
 
 
+		// Proceso similar al del autor en la editorial
 		if (isset($_POST["nueva_editorial"]) && $_POST["nueva_editorial"] != "") {
 			$nuevaEditorialNombre = $_POST["nueva_editorial"];
 			$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
@@ -84,7 +93,6 @@
 		}
 
 
-
 		if (isset($_POST["anno"])) {
 			$year = $_POST["anno"];
 		} 
@@ -99,6 +107,8 @@
 			$categoria = NULL;
 		}
 
+		
+		// Guardando el archivo del libro, guardando la ruta en la que se guardó
 		if (isset($_FILES['archivo'])) {
 			$arch = $_FILES['archivo']['tmp_name'];
 			$name = $_FILES['archivo']['name'];
@@ -111,6 +121,7 @@
 			}
 		}
 
+		// Mismo proceso con la imagen de referencia
 		$rutaImagen = '../statics/img_referencia/imagen_default.png';
 		if (isset($_FILES['imagen'])) {
 			$arch = $_FILES['imagen']['tmp_name'];
@@ -129,16 +140,17 @@
 		$titulo = $_POST["titulo"];
 		$desc = $_POST["desc"];
 
-
 		if (isset($_POST["editar"])) {
 			$id_libro = $_POST["id_libro"];
 
+			// Si no se recibió un nuevo archivo, utilizar la ruta ya existente
 			if (!isset($_FILES['archivo']) || $_FILES['archivo']['size'] == 0) {
 				$consulta = "SELECT libro FROM libro WHERE id_libro=$id_libro;";
 				$r = mysqli_query($c, $consulta);
 				$rutaLibro = mysqli_fetch_array($r)["libro"];
 
 			}
+			// Mismo proceso con imagen de referencia
 			if (!isset($_FILES['imagen']) || $_FILES['imagen']['size'] == 0) {
 				$consulta = "SELECT imagen_referencia FROM libro WHERE id_libro=$id_libro;";
 				$r = mysqli_query($c, $consulta);
@@ -146,12 +158,19 @@
 
 			}
 
+			
+			// Actualizando el libro
 			$consulta = "UPDATE libro 
 			SET year=$year, imagen_referencia='$rutaImagen', editorial=$id_editorial, autor=$id_autor, descripcion='$desc', titulo='$titulo', libro='$rutaLibro', categoria=$categoria 
 			WHERE id_libro=$id_libro;";
+			$r = mysqli_query($c, $consulta);
 
+			// Borrando todos los registros en libro_has_genero relacionados con el libro
+			$consulta = "DELETE FROM libro_has_genero WHERE id_libro=$id_libro;";
 			$r = mysqli_query($c, $consulta);
 		}
+
+		// Creando un nuevo libro
 		else {
 			$consulta = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
 
@@ -159,13 +178,14 @@
 		}
 
 
+
 		$consulta = "SELECT id_libro FROM libro WHERE titulo='$titulo' AND autor=$id_autor;";
 
 		$r = mysqli_query($c, $consulta);
-		while($row=mysqli_fetch_array($r)) {
-			$id_libro = $row["id_libro"];
-		}
+		$row=mysqli_fetch_array($r);
+		$id_libro = $row["id_libro"];
 
+		// Añadiendo los géneros correspondientes a la base de datos
 		if (isset($_POST["generos"])) {
 			foreach ($_POST["generos"] as $id_genero) {
 
@@ -177,6 +197,7 @@
 
 		mysqli_close($c);
 
+
 		if ($r) {
 			if (isset($_POST["editar"])) {
 				echo "<h2>Libro editado correctamente</h2>";
@@ -186,13 +207,14 @@
 			}
 			echo '<a href="./index.php"><button>Regresar a página principal</button></a>';
 		}
-		//header("location: ./formulario_libro.php");
     }
 
 
     else {
 
 		$c = connectdb();
+
+		// Obteniendo todos los autores, editoriales y categorías de la base de datos, añadiendolos en un arrego a cada uno
 		$consulta = "SELECT id_genero, genero FROM genero";
 
 		$r = mysqli_query($c, $consulta);
@@ -230,7 +252,13 @@
 			$categorias += [$row["id_categoria"] => $row["categoria"]];
 		}
 
+
+		// Si se edita un libro, prellenar formulario
 		if (isset($_POST["prellenar"])) {
+
+			// Se obtiene toda la información del libro, se añade a los arreglos anteriores, 
+			// se utiliza array_unique() para que aparezca cada elemento una sola vez, 
+			// y que aparezca el valor actual del libro en la primera posición
 			$id_libro = $_POST["id_libro"];
 
 			$consulta = "SELECT * FROM libro WHERE id_libro=$id_libro";
@@ -285,6 +313,8 @@
 								<label>
 									Autor (solo autor principal):'; 
 									
+									// Mostrando cada uno de los elementos del arreglo en los select, 
+									// se hace lo mismo con el resto de campos
 									if (count($autores) > 0) {
 										echo '<br><select name="autor">';
 										foreach ($autores as $id => $autor) {
@@ -368,7 +398,7 @@
 									echo '<input type="submit" name="editar" value="Editar libro">';
 								}
 								else {
-									echo '<input type="submit" name="formulario" value="Subir libro">';
+									echo '<input type="submit" name="crear" value="Subir libro">';
 								}
 							echo '</form>
 					</fieldset>';
