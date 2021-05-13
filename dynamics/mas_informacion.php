@@ -100,7 +100,7 @@ elseif (isset($_POST["id_descarga"])) {
 
     $c = connectdb();
     $db = mysqli_select_db($c, "biblioteca");
-    $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro)";
+    $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro);";
     $r = mysqli_query($c, $consulta);
 
 

@@ -25,8 +25,9 @@ function encabezados($tipo) {
             echo "<a href=\"./index.php\"><button>Inicio</button></a>";
             echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
             echo "<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
-            echo "<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
+            echo "<a href=\"./formulario_libro.php\"><button>Subir libro</button></a>";
             echo "<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
+            echo "<a href=\"./ver_reporte.php\"><button>Ver reportes</button></a>";
             echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
             echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;
@@ -35,8 +36,9 @@ function encabezados($tipo) {
             echo "<a href=\"./index.php\"><button>Inicio</button></a>";
             echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
             echo "<a href=\"./descargas.php\"><button>Historial descargas</button></a>";
-            echo "<a href=\"./nuevo_libro.php\"><button>Subir libro</button></a>";
+            echo "<a href=\"./formulario_libro.php\"><button>Subir libro</button></a>";
             echo "<a href=\"./ver_formulario.php\"><button>Solicitudes de libros</button></a>";
+            echo "<a href=\"./ver_reporte.php\"><button>Ver reportes</button></a>";
             echo "<a href=\"./Usuarios.php\"><button>Usuarios</button></a>";
             echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
             echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
