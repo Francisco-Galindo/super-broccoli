@@ -11,11 +11,24 @@
 
 ## Guía de instalación del proyecto:
 1. Clonar el repositorio en la carpeta htdocs dentro de una carpeta vacía
-2. Crear una base de datos en la cual se va clonar el respaldo que venga en el repositorio
+3. Crear una base de datos en mysql en la cual se va clonar el respaldo que venga en el repositorio
+![imagen](https://user-images.githubusercontent.com/69480179/118084247-0113da80-b386-11eb-8713-df07b230b221.png)
+El nombre de la base de datos será "biblioteca"
+
+```
+source <path de la base de datos que se encuentra en el repositorio>
+```
+
+5. Entrar en localhost e ingresar con una cuenta que se puede consultar correo y password en la base de datos
 
 
 ## Guía de configuración del proyecto:
-
+Es necesario asegurarse de encender el servidor en XAAMP
+De ser necesario, checar las contraseñas de los usuarios 
+```
+USE biblioteca
+SELECT * FROM biblioteca;
+```
 
 ## Características del proyecto:
 Super-Brocolí es una biblioteca digital que cuenta con más de 20 libros de dominio público, en ella se pueden crear cuentas para los lectores que deseen acceder a nuestro 

@@ -67,6 +67,7 @@ if (! (isset($error) && $error != "" )) {
 		$_SESSION["id_usuario"] = $id;
 		$_SESSION["nombre"] = $nombre;
 		$_SESSION["tipo_usuario"] = $tipo;
+		$_SESSION["feccha_nacimiento"] = $fecha;
 
 		header("location: ./index.php");
 	} 
