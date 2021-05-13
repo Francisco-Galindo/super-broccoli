@@ -128,34 +128,36 @@ if (isset($_POST["busqueda"])) {
 
 	if ($r !== false) {
 		while($row=mysqli_fetch_array($r)) {
-			$id_libro = $row["id_libro"];
+			if ((time() - strtotime($_SESSION["fecha_nacimiento"])) > 567648000 || $row["restriccion_edad"] == 0) /*  Cantidad de segundos en 18 años */{
+				$id_libro = $row["id_libro"];
 	
-			echo "<tr>";
-			echo "<td>";
-			echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
-			echo "<br><strong>Titulo: </strong>" . $row["titulo"];
-			echo "<br><strong>ID: </strong>" . $row["id_libro"];
-			echo "<br><strong>Año de publicación: </strong>" . $row["year"];
+				echo "<tr>";
+				echo "<td>";
+				echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
+				echo "<br><strong>Titulo: </strong>" . $row["titulo"];
+				echo "<br><strong>ID: </strong>" . $row["id_libro"];
+				echo "<br><strong>Año de publicación: </strong>" . $row["year"];
+		
+				echo "<br><strong>Editorial: </strong>" . $row["editorial"];
+		
+				echo "<br><strong>Autor: </strong>" . $row["nombre"];
+				echo '<br>';
+		
+		
+				echo'<form action="./mas_informacion.php" method= "POST">
+				<input type="hidden" name="id_libro" value="' . $id_libro . '">
+				<input type="submit" value="Mas información" name="mas información">
+				</form>';
 	
-			echo "<br><strong>Editorial: </strong>" . $row["editorial"];
+				echo'<form action="./reporte.php" method= "POST">
+				<input type="hidden" name="id_libro" value="' . $id_libro . '">
+				<input type="submit" value="Reportar libro" name="reporte">
+				</form>';
 	
-			echo "<br><strong>Autor: </strong>" . $row["nombre"];
-			echo '<br>';
-	
-	
-			echo'<form action="./mas_informacion.php" method= "POST">
-			<input type="hidden" name="id_libro" value="' . $id_libro . '">
-			<input type="submit" value="Mas información" name="mas información">
-			</form>';
-
-			echo'<form action="./reporte.php" method= "POST">
-			<input type="hidden" name="id_libro" value="' . $id_libro . '">
-			<input type="submit" value="Reportar libro" name="reporte">
-			</form>';
-
-			echo "</td>";
-			
-			echo "</tr>";
+				echo "</td>";
+				
+				echo "</tr>";
+			} 
 			
 		}
 	}

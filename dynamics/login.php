@@ -19,7 +19,7 @@ else {
 //conexión con base de datos
 $c = connectdb();
 //comprueba que el email y la contraseña correspondan
-$consulta = "SELECT num_cuenta_rfc, nombre, id_tipo_usuario FROM usuario WHERE correo='$email' AND contraseña='$contra';";
+$consulta = "SELECT num_cuenta_rfc, nombre, id_tipo_usuario, fecha_nacimiento FROM usuario WHERE correo='$email' AND contraseña='$contra';";
 
 
 $r = mysqli_query($c, $consulta);
@@ -30,6 +30,7 @@ while($row=mysqli_fetch_array($r))
 	$nombre = $row["nombre"];
 	$id_usuario = $row["num_cuenta_rfc"];
 	$tipo = $row["id_tipo_usuario"];
+	$fecha = $row["fecha_nacimiento"];
 	$contadorCoincidencias ++;
 }
 
@@ -46,6 +47,7 @@ if($contadorCoincidencias === 1) {
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["id_usuario"] = $id_usuario;
 	$_SESSION["tipo_usuario"] = $tipo;
+	$_SESSION["fecha_nacimiento"] = $fecha;
 
 	header("location: ./index.php");
 } 
