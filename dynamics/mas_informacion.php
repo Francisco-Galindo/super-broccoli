@@ -11,8 +11,9 @@
 <?php
 require_once("./util.php");
 require_once("./config.php");
-//Iniciar sesion
-redireccionarSiSesionInvalida();
+
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 encabezados($_SESSION["tipo_usuario"]);
 
 //Si se quiere agregar a favoritos o quitar de favoritos
@@ -95,10 +96,18 @@ elseif (isset($_POST["id_libro"])) {
         <input type="submit" value="' . $mensajeBoton . '" name="' . $mensajeBoton . '">
     </form>';
 
-
+    if ($_SESSION["tipo_usuario"] == "Bibliotecario" || $_SESSION["tipo_usuario"] == "Administrador")
+    echo '<form action="formulario_libro.php" method="POST">
+            <input type="hidden" name="id_libro" value="'. $id_libro .'">
+            <input type="submit" value="Editar libro" name="prellenar">
+        </form>';
     mysqli_close($c);
 }
+<<<<<<< HEAD
 //Descargar libro
+=======
+
+>>>>>>> 7764891e56d122b515fcddb52fe3081b043b36e6
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];

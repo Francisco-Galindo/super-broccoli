@@ -13,11 +13,15 @@
 	require_once("./util.php");
 	require_once("./config.php");
 
-
-	redireccionarSiSesionInvalida();
+	session_start();
+	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
 	encabezados($_SESSION["tipo_usuario"]);
 
-    if (isset($_POST["formulario"])) {
+	$valorTitulo =  "";
+	$valorAnno = date("Y");
+	$valorDescripcion = "";
+
+    if (isset($_POST["formulario"]) || isset($_POST["editar"])) {
 
 
 		//Conexión con base de datos
@@ -68,7 +72,7 @@
 				$r = mysqli_query($c, $consulta);
 			}
 
-			
+
 			$consulta = "SELECT id_editorial FROM editorial WHERE editorial='$nuevaEditorialNombre';";
 			$r = mysqli_query($c, $consulta);
 
@@ -126,9 +130,33 @@
 		$desc = $_POST["desc"];
 
 
-		$consulta = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
+		if (isset($_POST["editar"])) {
+			$id_libro = $_POST["id_libro"];
 
-		$r = mysqli_query($c, $consulta);
+			if (!isset($_FILES['archivo']) || $_FILES['archivo']['size'] == 0) {
+				$consulta = "SELECT libro FROM libro WHERE id_libro=$id_libro;";
+				$r = mysqli_query($c, $consulta);
+				$rutaLibro = mysqli_fetch_array($r)["libro"];
+
+			}
+			if (!isset($_FILES['imagen']) || $_FILES['imagen']['size'] == 0) {
+				$consulta = "SELECT imagen_referencia FROM libro WHERE id_libro=$id_libro;";
+				$r = mysqli_query($c, $consulta);
+				$rutaLibro = mysqli_fetch_array($r)["imagen_referencia"];
+
+			}
+
+			$consulta = "UPDATE libro 
+			SET year=$year, imagen_referencia='$rutaImagen', editorial=$id_editorial, autor=$id_autor, descripcion='$desc', titulo='$titulo', libro='$rutaLibro', categoria=$categoria 
+			WHERE id_libro=$id_libro;";
+
+			$r = mysqli_query($c, $consulta);
+		}
+		else {
+			$consulta = "INSERT INTO libro (year, imagen_referencia, editorial, autor, descripcion, titulo, libro, categoria) VALUES ($year, '$rutaImagen', $id_editorial, $id_autor, '$desc', '$titulo', '$rutaLibro', $categoria);";
+
+			$r = mysqli_query($c, $consulta);
+		}
 
 
 		$consulta = "SELECT id_libro FROM libro WHERE titulo='$titulo' AND autor=$id_autor;";
@@ -138,7 +166,6 @@
 			$id_libro = $row["id_libro"];
 		}
 
-		var_dump($_POST["generos"]);
 		if (isset($_POST["generos"])) {
 			foreach ($_POST["generos"] as $id_genero) {
 
@@ -150,7 +177,16 @@
 
 		mysqli_close($c);
 
-		header("location: ./formulario_libro.php");
+		if ($r) {
+			if (isset($_POST["editar"])) {
+				echo "<h2>Libro editado correctamente</h2>";
+			}
+			else {
+				echo "<h2>Libro creado correctamente</h2>";
+			}
+			echo '<a href="./index.php"><button>Regresar a página principal</button></a>';
+		}
+		//header("location: ./formulario_libro.php");
     }
 
 
@@ -162,8 +198,8 @@
 		$r = mysqli_query($c, $consulta);
 
 		$generos = [];
-		while($row=mysqli_fetch_array($r)) {
-			$generos += [$row["id_genero"]=>$row["genero"]];
+		while($row = mysqli_fetch_array($r)) {
+			$generos += [$row["id_genero"] => $row["genero"]];
 		}
 
 		$consulta = "SELECT id_editorial, editorial FROM editorial";
@@ -171,8 +207,8 @@
 		$r = mysqli_query($c, $consulta);
 
 		$editoriales = [];
-		while($row=mysqli_fetch_array($r)) {
-			$editoriales += [$row["id_editorial"]=>$row["editorial"]];
+		while($row = mysqli_fetch_array($r)) {
+			$editoriales += [$row["id_editorial"] => $row["editorial"]];
 		}
 
 		$consulta = "SELECT id_autor, nombre FROM autor";
@@ -180,8 +216,8 @@
 		$r = mysqli_query($c, $consulta);
 
 		$autores = [];
-		while($row=mysqli_fetch_array($r)) {
-			$autores += [$row["id_autor"]=>$row["nombre"]];
+		while($row = mysqli_fetch_array($r)) {
+			$autores += [$row["id_autor"] => $row["nombre"]];
 		}
 
 
@@ -191,7 +227,48 @@
 
 		$categorias = [];
 		while($row=mysqli_fetch_array($r)) {
-			$categorias += [$row["id_categoria"]=>$row["categoria"]];
+			$categorias += [$row["id_categoria"] => $row["categoria"]];
+		}
+
+		if (isset($_POST["prellenar"])) {
+			$id_libro = $_POST["id_libro"];
+
+			$consulta = "SELECT * FROM libro WHERE id_libro=$id_libro";
+			$r = mysqli_query($c, $consulta);
+			$row = mysqli_fetch_array($r);
+
+			$valorAutor = $row["autor"];
+			$valorEditorial = $row["editorial"];
+			$valorCategoria = $row["categoria"];
+
+			$valorTitulo =  $row["titulo"];
+			$valorAnno = $row["year"];
+			$valorDescripcion = $row["descripcion"];
+
+
+			$consulta = "SELECT id_autor, nombre FROM autor WHERE id_autor=$valorAutor";
+			$r = mysqli_query($c, $consulta);
+			$row = mysqli_fetch_array($r);
+			$valorAutor = [$valorAutor => $row["nombre"]];
+			$autores = array_unique($valorAutor + $autores);
+
+			
+			$consulta = "SELECT id_editorial, editorial FROM editorial 
+			WHERE id_editorial=$valorEditorial";
+			$r = mysqli_query($c, $consulta);
+			$row = mysqli_fetch_array($r);
+			$valorEditorial = [$valorEditorial => $row["editorial"]];
+			$editoriales = array_unique($valorEditorial + $editoriales);
+
+			$valoresGenero = [];
+
+			$consulta = "SELECT id_categoria, categoria FROM categoria 
+			WHERE id_categoria=$valorCategoria";
+			$r = mysqli_query($c, $consulta);
+			$row = mysqli_fetch_array($r);
+			$valorCategoria = [$valorCategoria => $row["categoria"]];
+			$categorias = array_unique($valorCategoria + $categorias);
+
 		}
 
 
@@ -202,7 +279,7 @@
 							<form action="formulario_libro.php" method="POST" enctype="multipart/form-data">
 								<label>
 									Título:
-									<input type="text" name="titulo" required>
+									<input type="text" name="titulo" value="'.$valorTitulo.'" required>
 								</label>
 								<br><br>
 								<label>
@@ -246,7 +323,7 @@
 								<br><br>
 								<label>
 									Año de publicación:
-									<input type="number" name="anno" max="' . date("Y") .'" required>
+									<input type="number" name="anno" max="' . date("Y") .'" value="'.$valorAnno.'" required>
 								</label>
 								<br><br>
 								Géneros
@@ -266,21 +343,34 @@
 								echo '<br><br>
 								<label>
 									Descripción: <br> 
-									<textarea  rows="4" cols="50" name="desc"></textarea>
+									<textarea  rows="4" cols="50" name="desc">'.$valorDescripcion.'</textarea>
 								</label>
 								<br><br>
 								<label>
-									Sube el archivo del libro:
-									<input type="file" name="archivo" required>
-								</label>
+									';
+									if (isset($_POST["prellenar"])) {
+										echo 'Sube el archivo del libro (opcional): <input type="file" name="archivo" >';
+									}
+									else {
+										echo 'Sube el archivo del libro: <input type="file" name="archivo" required>';
+									}
+									
+								echo '</label>
 								<br><br>
 								<label>
-									Sube una imagen de referencia:
+									Sube una imagen de referencia (opcional):
 									<input type="file" name="imagen">
 								</label>
-								<br><br>
-								<input type="submit" name="formulario" value="Subir libro">
-							</form>
+								<br><br>';
+								if (isset($_POST["prellenar"])) {
+									$id_libro = $_POST["id_libro"];
+									echo '<input type="hidden" value="'.$id_libro.'" name="id_libro">';
+									echo '<input type="submit" name="editar" value="Editar libro">';
+								}
+								else {
+									echo '<input type="submit" name="formulario" value="Subir libro">';
+								}
+							echo '</form>
 					</fieldset>';
     }
     ?>

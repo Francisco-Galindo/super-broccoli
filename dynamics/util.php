@@ -74,10 +74,11 @@ function usuarioEliminar($id_usuario) {
     return ($r);
 }
 
-function redireccionarSiSesionInvalida($tipo_usuario = "Lector", $tipo_requerido = "Lector") {
-    session_start();
-    if (!isset($_SESSION["nombre"])) {
-        header("location: ./login.php");
+function redireccionarSiSesionInvalida($existe_sesion = TRUE, $tipo_usuario = "Lector", $tipo_requerido = "Lector") {
+    
+    if (!$existe_sesion) {
+        //header("location: ./login.php");
+        echo "EJEMPLOOOO";
     }
 
     $c = connectdb();
@@ -86,7 +87,7 @@ function redireccionarSiSesionInvalida($tipo_usuario = "Lector", $tipo_requerido
     $row = mysqli_fetch_array($r);
     $id_tipo_usuario = $row["id_tipo"];
 
-    $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo_usuario'";
+    $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo_requerido'";
     $r = mysqli_query($c, $consulta);
     $row = mysqli_fetch_array($r);
     $id_tipo_requerido = $row["id_tipo"];

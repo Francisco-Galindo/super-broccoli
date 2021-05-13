@@ -2,7 +2,8 @@
 	require_once("./util.php");
 	require_once("./config.php");
 	
-	redireccionarSiSesionInvalida();
+	session_start();
+	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 
 	if(isset($_POST["passwrd"]) || (!isset($_POST["passwrd"])  && $_SESSION["tipo_usuario"]) == "Administrador"){
 

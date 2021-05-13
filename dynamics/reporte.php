@@ -2,7 +2,8 @@
 require_once("./util.php");
 require_once("./config.php");
 
-redireccionarSiSesionInvalida();
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,7 @@ redireccionarSiSesionInvalida();
     $consulta = "INSERT INTO reporte (id_libro, razon) VALUES ($id_libro, '$razon') ;";
     
     $r=mysqli_query($c, $consulta);
+<<<<<<< HEAD
 //En caso de que no se pueda hacer el reporte
     if(!$r)
     {
@@ -57,6 +59,13 @@ redireccionarSiSesionInvalida();
     
     }
     //En caso de reportar el libro
+=======
+
+    if(!$r){
+        echo "No ha sido posible reportar el libro";
+    }
+
+>>>>>>> 7764891e56d122b515fcddb52fe3081b043b36e6
     else{
         echo "El libro ha sido reportado";
         echo "<br>";
