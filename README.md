@@ -12,6 +12,7 @@
 ## Guía de instalación del proyecto:
 1. Clonar el repositorio en la carpeta htdocs dentro de una carpeta vacía
 2. Crear una base de datos en la cual se va clonar el respaldo que venga en el repositorio
+3. Entrar en localhost e ingresar con una cuenta que se puede consultar correo y password en la base de datos
 
 
 ## Guía de configuración del proyecto:
