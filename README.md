@@ -18,7 +18,7 @@ El nombre de la base de datos será "biblioteca"
 ```
 source <path de la base de datos que se encuentra en el repositorio>
 ```
-
+La base de datos es "Respaldobueno1.sql"
 5. Entrar en localhost e ingresar con una cuenta que se puede consultar correo y password en la base de datos
 
 
