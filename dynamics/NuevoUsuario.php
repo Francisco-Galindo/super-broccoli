@@ -1,28 +1,26 @@
 <?php
-session_start();
-session_unset();
-session_destroy();
-require_once("./util.php");
-require_once("./config.php");
+    require_once("./util.php");
+    require_once("./config.php");
+    
+    redireccionarSiSesionInvalida();
 ?>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
-	<title>Log in</title>
+	<title>Formulario</title>
 </head>
 <body>
 <?php
-//Declarar valores de crear cuenta
-if($_SESSION["tipo_usuario"]="Administrador"&&isset($_SESSION["nombre"])){
-	echo"Llene el formulario para crear la cuenta de otro usuario";
+
+echo"Llene el formulario para crear la cuenta de otro usuario";
 	echo'
 	<fieldset>
 		<legend>Inicio de sesión</legend>
-		<form action="./register.php" method="POST">
+		<form action="./NuevoUsuario.php" method="POST">
 			<legend>
 				Nombre <input type="text" name="nombre" required>
 			</legend>
@@ -35,7 +33,7 @@ if($_SESSION["tipo_usuario"]="Administrador"&&isset($_SESSION["nombre"])){
 				Segundo apellido <input type="text" name="segundo_apellido" required>
 			</legend>
 			<br><br>
-			<legend>
+			<legend>5
 				Número de cuenta o RFC: <input type="text" name="num_cuenta" maxlength="12" required>
 			</legend>
 			<br><br>
@@ -59,27 +57,12 @@ if($_SESSION["tipo_usuario"]="Administrador"&&isset($_SESSION["nombre"])){
 				  </select>
 			</label>
 			<br><br>
-			<input type="submit" name="enviar">
+			<input type="submit" name="enviaradmin">
 		</form>
 		<br><br>
-		<a href="./index.php"><button>regresar</button></a>
+		<a href="./usuarios.php"><button>regresar</button></a>
 	</fieldset>';
-}
-if (isset($_POST["num_cuenta"])) {
-	$id = strtoupper($_POST["num_cuenta"]);
-	$nombre = strtoupper($_POST["nombre"]);
-	$prim_ape = strtoupper($_POST["primer_apellido"]);
-	$seg_ape = strtoupper($_POST["segundo_apellido"]);
-	$contra = $_POST["contra"];
-	$fecha = $_POST["fecha"];
-	$email = $_POST["email"];
-	$dominio = explode("@", $email)[1];
-	$tipo = $_POST["tipo"];
-}
-//Redirigir a la pagina de registro
-
-
-//Abrir conexión con base de datos
+if(isset($_POST["enviaradmin"])){
 $c = connectdb();
 
 $consulta = "SELECT id_tipo FROM tipo_usuario WHERE tipo='$tipo';";
@@ -105,26 +88,6 @@ if (mysqli_num_rows($r) == 0 && !(isset($error) && $error != "")) {
 else {
 	$error = "Ya existe una cuenta relacionada con esta persona.";
 }
-
-//Redirigir a la página de inicio
-if (! (isset($error) && $error != "" &&$_SESSION["tipo_usuario"]!='Administrador')) {
-	session_start();
-
-	//Guardado de los datos del usuario en variables de sesión.
-	$_SESSION["id_usuario"] = $id;
-	$_SESSION["nombre"] = $nombre;
-	$_SESSION["tipo_usuario"] = $tipo;
-
-	header("location: ./index.php");
-} 
-elseif(! (isset($error) && $error != "" &&$_SESSION["tipo_usuario"]='Administrador')){
-	header("location: ./index.php");
-} 
-//Redirigir a la pagina de registro
-else {
-	echo "ERROR: " . $error;
-	echo '<br><a href="../templates/register.html"><button>Volver a intentar</button></a>';
+header("location: usuarios.php");
 }
 ?>
-
-
