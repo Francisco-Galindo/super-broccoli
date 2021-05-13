@@ -49,18 +49,19 @@
 	OR correo='$email'";
 	$r = mysqli_query($c, $consulta);
 
-	if (mysqli_num_rows($r) == 0 && !(isset($error) && $error != "")) {
-		//Ingresar los valores del formulario en la tabla usuarios
-		$consulta = "INSERT INTO usuario (num_cuenta_rfc, nombre, primer_apellido, segundo_apellido, contraseña, correo,  id_tipo_usuario, fecha_nacimiento) VALUES ('$id', '$nombre', '$prim_ape', '$seg_ape', '$contra', '$email', $id_tipo_usuario, '$fecha')";
-		$r = mysqli_query($c, $consulta);
-	}
-	else {
-		$error = "Ya existe una cuenta relacionada con esta persona.";
-	}
+//Redirigir a la página de inicio
 
-	//Redirigir a la página de inicio
-	if (! isset($error) && $error != "" &&)) {
-		session_start();
+if (mysqli_num_rows($r) == 0 && !(isset($error) && $error != "")) {
+	//Ingresar los valores del formulario en la tabla usuarios
+	$consulta = "INSERT INTO usuario (num_cuenta_rfc, nombre, primer_apellido, segundo_apellido, contraseña, correo,  id_tipo_usuario, fecha_nacimiento) VALUES ('$id', '$nombre', '$prim_ape', '$seg_ape', '$contra', '$email', $id_tipo_usuario, '$fecha')";
+	$r = mysqli_query($c, $consulta);
+}
+else {
+	$error = "Ya existe una cuenta relacionada con esta persona.";
+}
+
+if (! (isset($error) && $error != "" )) {
+	session_start();
 
 		//Guardado de los datos del usuario en variables de sesión.
 		$_SESSION["id_usuario"] = $id;
