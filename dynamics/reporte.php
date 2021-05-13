@@ -15,10 +15,11 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
+//Función de encabezados
     encabezados($_SESSION["tipo_usuario"]);
     $id_libro=$_POST["id_libro"];
  if (isset($_POST["reporte"])) {
-
+    //Ingresar razon por la cual se desea reportar el libro
     echo'
     <fieldset>
     <legend>Reporte de libro</legend>
@@ -39,25 +40,28 @@ redireccionarSiSesionInvalida();
     </form>
     </fieldset>';
  }
+
  elseif (isset($_POST["enviar"])){
     $razon=$_POST["razon"];
     
     $c = connectdb();
-
+    //Insertar razon de reporte en la tabla de reportes
     $consulta = "INSERT INTO reporte (id_libro, razon) VALUES ($id_libro, '$razon') ;";
     
     $r=mysqli_query($c, $consulta);
-
+//En caso de que no se pueda hacer el reporte
     if(!$r)
     {
         echo "No ha sido posible reportar el libro";
         echo $razon;
-
+    
     }
+    //En caso de reportar el libro
     else{
         echo "El libro ha sido reportado";
         echo "<br>";
     }
+    //Boton para regresar a la pagina de inicio
     echo "<a href=\"./index.php\"><button>Volver</button></a>";
 }
  else{

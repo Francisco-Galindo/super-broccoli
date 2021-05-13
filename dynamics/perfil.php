@@ -16,10 +16,11 @@
 <body>
 	<table>
 		<?php
+		//Función de encabezado
 		encabezados($_SESSION["tipo_usuario"]);
 		//Conexión con base de datos
 		$c = connectdb();
-
+		//Obtener datos de el usuario
 		$id = $_SESSION["id_usuario"];
 		$consulta = "SELECT tipo, num_cuenta_rfc, correo, nombre, primer_apellido, segundo_apellido 
 		FROM usuario t1
@@ -29,7 +30,7 @@
 		//consulta de usuarios
 		$r = mysqli_query($c, $consulta);
 		$row = mysqli_fetch_array($r);
-
+		//Imprimir los adtos del usuario
 		echo '<table>
 		<thead>
 			<tr>
@@ -56,13 +57,15 @@
 		</tbody>
 		</table>';
 		mysqli_close($c);
+		//Botones para regresar al inicio o eliminar la cuenta
 		?>
 	</table>
 	<br><br>
+	
 	<a href="index.php"><button>Regresar</button></a></th>
 	<a href="confirm.php"><button>Eliminar cuenta</button></a></th>
 		
 </body>
 </html>
-<?php
+
    

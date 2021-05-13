@@ -15,12 +15,13 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
+//función de encabezado
 encabezados($_SESSION["tipo_usuario"]);
 echo "<h2>Tus favoritos:</h2>";
-
+//si se encuentran favoritos
 if(isset($_POST["favoritos"]));{
     $c = connectdb();
-
+	//Seleccionar los libros en favoritos unicamente de el usuario
 	$id_usuario = $_SESSION["id_usuario"];
     $consulta = "SELECT * FROM libro t1
 	INNER JOIN favorito t2 ON t1.id_libro = t2.id_libro 
@@ -30,7 +31,7 @@ if(isset($_POST["favoritos"]));{
 
 
 	$r = mysqli_query($c, $consulta);
-    
+    //Tabla con favoritos
     echo "<table border='1'><tbody>";
 	if ($r && mysqli_num_rows($r) > 0) {
 		while($row=mysqli_fetch_array($r)) {
@@ -41,19 +42,22 @@ if(isset($_POST["favoritos"]));{
 			echo "<img height='250' src='" . $row["imagen_referencia"] . "'>";
 			echo "<br><strong>Titulo: </strong>" . $row["titulo"];
 			echo "<br><strong>ID: </strong>" . $row["id_libro"];
-	
+			//Permite regresar a mas información
 			echo'<form action="./mas_informacion.php" method= "POST">
 			<input type="hidden" name="id_libro" value="' . $id_libro . '">
 			<input type="submit" value="Mas información" name="mas información">
 			</form>';
+			//Elimina de favoritos
 			echo'<form>
 			<input type="submit" value="Eliminar de favoritos" name="eliminar">
 			</form>';
+			//En caso de seleccionarse eliminar dicho libro de favoritos
 			if (isset($_POST["eliminar"])) {
 			$consulta="DELETE FROM favoritos WHERE id_libro=$id_libro;";
 			}
 		} 
 	}
+	//Si no se ha agregado nada a favoritos
 	else {
 		echo "No tienes nada en favoritos :(";
 	}

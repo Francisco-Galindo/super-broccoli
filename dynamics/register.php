@@ -17,54 +17,6 @@ require_once("./config.php");
 <body>
 <?php
 //Declarar valores de crear cuenta
-if($_SESSION["tipo_usuario"]="Administrador"&&isset($_SESSION["nombre"])){
-	echo"Llene el formulario para crear la cuenta de otro usuario";
-	echo'
-	<fieldset>
-		<legend>Inicio de sesión</legend>
-		<form action="./register.php" method="POST">
-			<legend>
-				Nombre <input type="text" name="nombre" required>
-			</legend>
-			<br><br>
-			<legend>
-				Primer apellido <input type="text" name="primer_apellido" required>
-			</legend>
-			<br><br>
-			<legend>
-				Segundo apellido <input type="text" name="segundo_apellido" required>
-			</legend>
-			<br><br>
-			<legend>
-				Número de cuenta o RFC: <input type="text" name="num_cuenta" maxlength="12" required>
-			</legend>
-			<br><br>
-			<legend>
-				Fecha de nacimiento: <input type="date" name="fecha" required>
-			</legend>
-			<br><br>
-			<legend>
-				Correo electrónico institucional: <input type="email" name="email" required>
-			</legend>
-			<br><br>
-			<legend>
-				Contraseña: <input type="password" name="contra" required>
-			</legend>
-			<br>
-			<label>Tipo de usuario:
-				<select name="tipo" >
-					<option value="Lector">Lector</option>
-					<option value="Bibliotecario">Bibliotecario</option>
-					<option value="Administrador">Carlos Alf</option>
-				  </select>
-			</label>
-			<br><br>
-			<input type="submit" name="enviar">
-		</form>
-		<br><br>
-		<a href="./index.php"><button>regresar</button></a>
-	</fieldset>';
-}
 if (isset($_POST["num_cuenta"])) {
 	$id = strtoupper($_POST["num_cuenta"]);
 	$nombre = strtoupper($_POST["nombre"]);
@@ -107,7 +59,7 @@ else {
 }
 
 //Redirigir a la página de inicio
-if (! (isset($error) && $error != "" &&$_SESSION["tipo_usuario"]!='Administrador')) {
+if (! (isset($error) && $error != "" &&)) {
 	session_start();
 
 	//Guardado de los datos del usuario en variables de sesión.
@@ -115,9 +67,6 @@ if (! (isset($error) && $error != "" &&$_SESSION["tipo_usuario"]!='Administrador
 	$_SESSION["nombre"] = $nombre;
 	$_SESSION["tipo_usuario"] = $tipo;
 
-	header("location: ./index.php");
-} 
-elseif(! (isset($error) && $error != "" &&$_SESSION["tipo_usuario"]='Administrador')){
 	header("location: ./index.php");
 } 
 //Redirigir a la pagina de registro

@@ -15,12 +15,15 @@ redireccionarSiSesionInvalida();
 </head>
 <body>
 <?php
+    //Funcion de encabezados
     encabezados($_SESSION["tipo_usuario"]);
     $c = connectdb();
+    //Seleccionar los datos de el libro reportado y el reporte
     $consulta="SELECT id_reporte, titulo, razon FROM reporte t1
     INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
     $r = mysqli_query($c, $consulta);
     echo "<table border='1'>";
+    //Imprimir el titulo del libro y la razón del reporte
     while($row=mysqli_fetch_array($r)) {
         echo "<tr>";
         echo "<td>";

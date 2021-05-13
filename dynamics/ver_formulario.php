@@ -15,12 +15,14 @@
 </head>
 <body>
 <?php
+//Función de encabezados
     encabezados($_SESSION["tipo_usuario"]);
     $c = connectdb();
+    //Agarrar la información de los formularios
     $consulta="SELECT * FROM formulario;";
     $r = mysqli_query($c, $consulta);
     $row=mysqli_fetch_array($r);
-
+    //Imprimir las solicitudes de libro realizadas por todos los lectores
     while($row=mysqli_fetch_array($r)) {
             echo "<tr>";
             echo "<td>";

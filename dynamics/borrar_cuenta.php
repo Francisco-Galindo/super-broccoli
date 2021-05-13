@@ -25,7 +25,7 @@
 			$contadorCoincidencias ++;
 		}
 		mysqli_close($c);
-
+		//si coincide la contraseña con el usuario, eliminar cuenta
 		if ($contadorCoincidencias === 1) {
 			usuarioEliminar($id_usuario);
 
@@ -34,6 +34,7 @@
 			header("location: ./login.php");
 
 		}
+		//En caso de ser incorrecta 
 		else {
 			echo '<a href="./confirm.php"><button>Contraseña incorrecta, volver a intentar</button></a>';
 		}

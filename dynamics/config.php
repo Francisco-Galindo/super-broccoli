@@ -4,9 +4,10 @@
     define("DBHOST", "localhost");
     define("PASSWORD", "");
     define("DB", "biblioteca");
-
+    //Funcion para conectar con base de datos
     function connectdb()
     {
+        //Conección con base de datos
         $c = mysqli_connect(DBHOST, DBUSER, PASSWORD, DB);
         if (!$c) {
             $usuario = DBUSER;
