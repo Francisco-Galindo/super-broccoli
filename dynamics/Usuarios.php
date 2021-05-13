@@ -29,7 +29,7 @@ redireccionarSiSesionInvalida();
         echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
 	echo "</tbody></table>";
-	echo"<th><a href=\"register.php\"><button>Agregar nuevo usuario</button></a></th>";
+	echo"<th><a href=\"NuevoUsuario\"><button>Agregar nuevo usuario</button></a></th>";
 
 
 ?>
