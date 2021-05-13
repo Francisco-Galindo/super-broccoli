@@ -11,61 +11,55 @@ redireccionarSiSesionInvalida();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="../Super brocoli.png"/>
-	<title>Log in</title>
+	<title>Reportar un libro</title>
 </head>
 <body>
 <?php
     encabezados($_SESSION["tipo_usuario"]);
- if (isset($_POST["reportar"])) {
-     echo'
+    $id_libro=$_POST["id_libro"];
+ if (isset($_POST["reporte"])) {
+
+    echo'
     <fieldset>
-    <legend>Reporte de libro (inserta su id)</legend>
+    <legend>Reporte de libro</legend>
     <form action="reporte.php" method="POST">
-        <legend>
-					Libro <input type="text" name="libro" required>
-        </legend>
         <br><br>
-        <legend>Razón: 
+        <label>Razón: 
 					<select name="razon">
-						<option value="mayor">Contiene material para personas mayores de edad</option>
-						<option value="odio">Contiene discurso de odio</option>
-						<option value="desinfo">Difunde desinformación</option>
-						<option value="integridad">Incita acciones que atentan contra la integridad</option>
+						<option value="Contiene material para personas mayores de edad">Contiene material para personas mayores de edad</option>
+						<option value="Contiene discurso de odio">Contiene discurso de odio</option>
+						<option value="Difunde desinformación">Difunde desinformación</option>
+						<option value="Incita acciones que atentan contra la integridad">Incita acciones que atentan contra la integridad</option>
 					</select>
-        </legend>
+        </label>
 
         <br><br>
+        <input type="hidden" name="id_libro" value="' . $id_libro . '">
         <input type="submit" name="enviar">
     </form>
     </fieldset>';
-    if (isset($_POST["enviar"])){
-    $libro=isset($_POST["libro"]);
-    $razon=isset($_POST["razon"]);
-    
-   
+ }
+ elseif (isset($_POST["enviar"])){
+    $razon=$_POST["razon"];
     
     $c = connectdb();
 
-    $consulta = "SELECT id_libro FROM libro WHERE id_libro='$libro';";
-    $r = mysqli_query($c, $consulta);
-    while($row=mysqli_fetch_array($r)){
-	echo "id del libro no corresponde con ningun libro en existencia, 
-    por favor asegurese de ingresar el id correcto";
-    echo'
-    <form action="./reporte.php" method="POST">
-			<input type="submit" value="Reportar" name="reportar">
-    </form>';
-	$contadorCoincidencias ++;
-    }
+    $consulta = "INSERT INTO reporte (id_libro, razon) VALUES ($id_libro, '$razon') ;";
+    
+    $r=mysqli_query($c, $consulta);
 
-    if ($contadorCoincidencias===1) {
-			$consulta = "INSERT INTO reporte (id_libro, razon) VALUES ('$libro', '$razon');";
-    $r = mysqli_query($c, $consulta);
-    header("location: index.php");
-    mysqli_close($c);
+    if(!$r)
+    {
+        echo "No ha sido posible reportar el libro";
+        echo $razon;
+
     }
+    else{
+        echo "El libro ha sido reportado";
+        echo "<br>";
     }
- }
+    echo "<a href=\"./index.php\"><button>Volver</button></a>";
+}
  else{
     header("location: index.php");
  }

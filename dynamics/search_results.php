@@ -146,6 +146,12 @@ if (isset($_POST["busqueda"])) {
 			<input type="hidden" name="id_libro" value="' . $id_libro . '">
 			<input type="submit" value="Mas información" name="mas información">
 			</form>';
+
+			echo'<form action="./reporte.php" method= "POST">
+			<input type="hidden" name="id_libro" value="' . $id_libro . '">
+			<input type="submit" value="Reportar libro" name="reporte">
+			</form>';
+
 			echo "</td>";
 			
 			echo "</tr>";
