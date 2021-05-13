@@ -91,9 +91,13 @@ elseif (isset($_POST["id_libro"])) {
         <input type="submit" value="' . $mensajeBoton . '" name="' . $mensajeBoton . '">
     </form>';
 
-
+    echo '<form action="formulario_libro.php" method="POST">
+            <input type="hidden" name="id_libro" value="'. $id_libro .'">
+            <input type="submit" value="Editar libro" name="prellenar">
+        </form>';
     mysqli_close($c);
 }
+
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
