@@ -59,7 +59,7 @@ else {
 }
 
 //Redirigir a la página de inicio
-if (! (isset($error) && $error != "" &&)) {
+if (! (isset($error) && $error != "" )) {
 	session_start();
 
 	//Guardado de los datos del usuario en variables de sesión.

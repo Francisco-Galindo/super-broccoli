@@ -13,13 +13,20 @@
     <title>Confirmación</title>
 </head>
 <body>
-    <h1>¿Estas seguro que quieres elimar tu cuenta?</h1>
+    <h1>¿Estas seguro que quieres eliminar la cuenta?</h1>
     <br><br>
     <form action="./borrar_cuenta.php" method="POST">
         <label>Para confirmar, por favor introduce tu contraseña:
             <br><br>
             <input type="password" name="passwrd" required>
             <br><br>
+            <?php
+                if(isset($_POST["admin_borra"])){
+                    
+                    $otro_usuario = $_POST["cuenta_a_eliminar"];
+                    echo '<input type="hidden" name="cuenta_a_eliminar" value="'.$otro_usuario.'">';
+                }
+            ?>
             <input type="submit" name="boton" value="Confirmar">
         </label>
     </form>

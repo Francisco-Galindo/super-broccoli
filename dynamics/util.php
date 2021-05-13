@@ -56,7 +56,7 @@ function encabezados($tipo) {
 
 function usuarioEliminar($id_usuario) {
     //Conexión con base de datos
-    connectdb();
+    $c=connectdb();
 
     // Eliminando los registros de las tablas que dependan del usuario
     $consulta = "DELETE FROM formulario WHERE id_usuario='$id_usuario'";
@@ -77,8 +77,8 @@ function usuarioEliminar($id_usuario) {
 function redireccionarSiSesionInvalida($existe_sesion = TRUE, $tipo_usuario = "Lector", $tipo_requerido = "Lector") {
     
     if (!$existe_sesion) {
-        //header("location: ./login.php");
-        echo "EJEMPLOOOO";
+        header("location: ./login.php");
+        
     }
 
     $c = connectdb();

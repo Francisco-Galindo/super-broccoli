@@ -29,11 +29,15 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuari
 		echo "<td>";
 		echo "<br>Usuario" . $row["nombre"] .$row["primer_apellido"].$row["segundo_apellido"]. "'>";
 		echo "<br><strong>id_usuario </strong>" . $row["num_cuenta_rfc"];
-        echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
+        echo '<form action="./confirm.php" method="POST">
+				<input type="hidden" name="cuenta_a_eliminar" value="'.$row["num_cuenta_rfc"].'">
+				<input type="submit" name="admin_borra" value="Eliminar usuario">
+			</form>';
 	}
 	echo "</tbody></table>";
 	//Formulario para crear nuevos usuarios
 	echo"<th><a href=\"NuevoUsuario.php\"><button>Agregar nuevo usuario</button></a></th>";
-
+	
+	
 
 ?>

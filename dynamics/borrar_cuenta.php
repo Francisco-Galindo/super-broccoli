@@ -7,12 +7,12 @@
 
 	if(isset($_POST["passwrd"]) || (!isset($_POST["passwrd"])  && $_SESSION["tipo_usuario"]) == "Administrador"){
 
-		session_start();
+		//session_start();
 
 		//ACCEDER A LA BASE DE DATOS Y ELIMINAR LOS REGISTROS
 
 		//Conexión con base de datos
-		$c = mysqli_connect("localhost", "root", "", "biblioteca");
+		$c = connectdb();
 		//Insertar valores para nuevos usuarios
 		$id_usuario = $_SESSION["id_usuario"];
 
@@ -26,13 +26,24 @@
 			$contadorCoincidencias ++;
 		}
 		mysqli_close($c);
+
+		if(isset($_POST["cuenta_a_eliminar"]))
+		{
+			$id_usuario = $_POST["cuenta_a_eliminar"];
+		}
+
 		//si coincide la contraseña con el usuario, eliminar cuenta
 		if ($contadorCoincidencias === 1) {
-			usuarioEliminar($id_usuario);
-
-			session_unset();
-			session_destroy();
-			header("location: ./login.php");
+			echo usuarioEliminar($id_usuario);
+				
+			if(!isset($_POST["cuenta_a_eliminar"]))
+			{
+				session_unset();
+				session_destroy();
+				header("location: ./login.php");
+			}
+			
+			header("location: ./Usuarios.php");
 
 		}
 		//En caso de ser incorrecta 
