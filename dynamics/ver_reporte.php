@@ -18,9 +18,9 @@
 	//Funcion de encabezados
 	encabezados($_SESSION["tipo_usuario"]);
 	$c = connectdb();
-	
+
 	//Seleccionar los datos de el libro reportado y el reporte
-	$consulta="SELECT id_reporte, titulo, razon FROM reporte t1
+	$consulta="SELECT id_reporte, id_libro, titulo, razon FROM reporte t1
 	INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
 	$r = mysqli_query($c, $consulta);
 	echo "<table border='1'>";
@@ -37,3 +37,7 @@
 	echo "</tr></table>";
 	mysqli_close($c);
 ?>
+<form action="./mas_informacion.php">
+	<input type="hidden" value="'.$row["id_libro"]'.">
+</form>
+<a href="./mas_informacion.php"><button>Más información del libro</button></a>

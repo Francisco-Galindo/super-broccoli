@@ -45,6 +45,8 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
         <input type="submit" value="Regresar al libro">
     </form>';
 }
+
+
 //Mostrar más información del libro
 elseif (isset($_POST["id_libro"])) {
 
@@ -103,11 +105,7 @@ elseif (isset($_POST["id_libro"])) {
         </form>';
     mysqli_close($c);
 }
-<<<<<<< HEAD
 //Descargar libro
-=======
-
->>>>>>> 7764891e56d122b515fcddb52fe3081b043b36e6
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
