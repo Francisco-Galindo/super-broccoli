@@ -13,8 +13,8 @@
 	require_once("./util.php");
 	require_once("./config.php");
 
-
-	redireccionarSiSesionInvalida();
+	session_start();
+	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
 	encabezados($_SESSION["tipo_usuario"]);
 
     if (isset($_POST["formulario"])) {

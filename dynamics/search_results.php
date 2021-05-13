@@ -12,7 +12,8 @@
 require_once("./util.php");
 require_once("./config.php");
 
-redireccionarSiSesionInvalida();
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 
 encabezados($_SESSION["tipo_usuario"]);
 echo "<br>";

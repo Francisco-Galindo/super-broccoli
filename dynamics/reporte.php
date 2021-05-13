@@ -2,7 +2,8 @@
 require_once("./util.php");
 require_once("./config.php");
 
-redireccionarSiSesionInvalida();
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -48,12 +49,10 @@ redireccionarSiSesionInvalida();
     
     $r=mysqli_query($c, $consulta);
 
-    if(!$r)
-    {
+    if(!$r){
         echo "No ha sido posible reportar el libro";
-        echo $razon;
-
     }
+
     else{
         echo "El libro ha sido reportado";
         echo "<br>";
