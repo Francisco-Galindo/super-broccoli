@@ -1,8 +1,8 @@
 <?php
 require_once("./util.php");
 require_once("./config.php");
-
-redireccionarSiSesionInvalida();
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +17,18 @@ redireccionarSiSesionInvalida();
 <?php
     encabezados($_SESSION["tipo_usuario"]);
     $c = connectdb();
-    $consulta="SELECT titulo, razon FROM reporte t1
+    $consulta="SELECT id_reporte, titulo, razon FROM reporte t1
     INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
     $r = mysqli_query($c, $consulta);
-    $row=mysqli_fetch_array($r);
+    echo "<table border='1'>";
     while($row=mysqli_fetch_array($r)) {
-            echo "<tr>";
-            echo "<td>";
-            echo "<br>titulo:" . $row["titulo"]."'>";
-            echo "<br>razon:" . $row["razon"];
-        }
-        mysqli_close($c);
+        echo "<tr>";
+        echo "<td>";
+        echo "<br><strong>Titulo: </strong>" . $row["titulo"]."";
+        echo "<br><strong>Razón: </strong>" . $row["razon"]."<br>";
+        echo "<br>";
+        echo "</td>";
+    }
+    echo "</tr></table>";
+    mysqli_close($c);
 ?>

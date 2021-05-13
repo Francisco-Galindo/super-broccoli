@@ -1,7 +1,9 @@
 <?php
 require_once("./util.php");
 require_once("./config.php");
-redireccionarSiSesionInvalida();
+
+session_start();
+redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Administrador');
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +31,7 @@ redireccionarSiSesionInvalida();
         echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
 	echo "</tbody></table>";
-	echo"<th><a href=\"register.php\"><button>Agregar nuevo usuario</button></a></th>";
+	echo"<th><a href=\"NuevoUsuario.php\"><button>Agregar nuevo usuario</button></a></th>";
 
 
 ?>

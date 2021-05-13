@@ -1,6 +1,7 @@
 <?php
     require "./util.php";
-    redireccionarSiSesionInvalida();
+    session_start();
+    redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
