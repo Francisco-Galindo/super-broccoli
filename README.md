@@ -3,10 +3,10 @@
 ## Nombre del proyecto Biblioteca Super-Brocoli
 ## Nombre de equipo Los secretarios de Super-Brocoli
 ## Nombre de los integrantes:
-● Alan Morales
-● Arturo Alfaro
-● Francisco Galindo
-● Heli Aguilar
+1. Alan Morales
+2. Arturo Alfaro
+3. Francisco Galindo
+4. Heli Aguilar
 
 
 ## Guía de instalación del proyecto:
