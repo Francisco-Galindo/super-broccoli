@@ -16,12 +16,13 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuari
 </head>
 <body>
 <?php
+//Función de encabezado
 	encabezados($_SESSION["tipo_usuario"]);
-
+	//Seleccionar los valores dentro de la tabla de usuarios
     $c = connectdb();
     $consulta = "SELECT * FROM usuario";
     $r = mysqli_query($c, $consulta);
-
+	//Imprimir los usuarios existentes
     echo "<table border='1'><tbody>";
 	while($row=mysqli_fetch_array($r)) {
         echo "<tr>";
@@ -31,6 +32,7 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuari
         echo '<br><a href="./borrar_cuenta.php"><button>Eliminar usuario</button></a>';
 	}
 	echo "</tbody></table>";
+	//Formulario para crear nuevos usuarios
 	echo"<th><a href=\"NuevoUsuario.php\"><button>Agregar nuevo usuario</button></a></th>";
 
 

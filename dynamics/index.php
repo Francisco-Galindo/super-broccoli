@@ -18,6 +18,7 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 	<h1>La biblioteca de Super-broccoli</h1>
 
 	<?php
+		//Nombre del usuario
 		echo "Bienvenido, <strong>" . $_SESSION["nombre"] . "</strong>";
 		encabezados($_SESSION["tipo_usuario"]);
 		
@@ -43,11 +44,11 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 					<td>
 						<?php
 						$c = connectdb();
-
+						//Los géneros que se pueden escoger para buscar 
 						$consulta = "SELECT id_genero, genero FROM genero ORDER BY genero";
 
 						$r = mysqli_query($c, $consulta);
-
+						//mientra haya generos imporimirlos
 						$generos = [];
 						while($row=mysqli_fetch_array($r)) {
 							$generos += [$row["id_genero"]=>$row["genero"]];
@@ -61,11 +62,11 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 					</td>
 					<td>
 						<?php
-
+						//Opciones de autores para buscar 
 						$consulta = "SELECT id_autor, nombre FROM autor ORDER BY nombre";
 
 						$r = mysqli_query($c, $consulta);
-
+						//mientra haya autores imporimirlos
 						$autores = [];
 						while($row=mysqli_fetch_array($r)) {
 							$autores += [$row["id_autor"]=>$row["nombre"]];
@@ -79,10 +80,11 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 					</td>
 					<td>
 						<?php
+						//Opciones de editoriales para buscar 
 						$consulta = "SELECT id_editorial, editorial FROM editorial ORDER BY editorial";
 
 						$r = mysqli_query($c, $consulta);
-						
+						//mientra haya editoriales imporimirlas
 						$editoriales = [];
 						while($row=mysqli_fetch_array($r)) {
 							$editoriales += [$row["id_editorial"]=>$row["editorial"]];
@@ -103,10 +105,11 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 					</td>
 					<td>
 					<?php
+					//Opciones de categorías para buscar 
 						$consulta = "SELECT id_categoria, categoria FROM categoria";
 
 						$r = mysqli_query($c, $consulta);
-						
+						//mientra haya categorías imporimirlas
 						$categorias = [];
 						while($row=mysqli_fetch_array($r)) {
 							$categorias += [$row["id_categoria"]=>$row["categoria"]];

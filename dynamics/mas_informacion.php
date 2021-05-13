@@ -16,14 +16,15 @@ session_start();
 redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
 encabezados($_SESSION["tipo_usuario"]);
 
-
+//Si se quiere agregar a favoritos o quitar de favoritos
 if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])) {
 
     $c = connectdb();
     $id_libro = $_POST["id_libro"];
     $id_usuario = $_POST["id_usuario"];
-
+    //En caso de querer agregarse a favoritos
     if (isset($_POST["Agregar_a_favoritos"])) {
+        //Seleccionar el libro y agregar los datos a la base de favoritos
         $consulta = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
         $r = mysqli_query($c, $consulta);
         if (!$r || mysqli_num_rows($r) == 0) {
@@ -31,6 +32,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
         }
     }
     else {
+        //Eliminar de la tabla favoritos el libro seleccionado
         $consulta = "DELETE FROM favorito WHERE id_libro='$id_libro' AND id_usuario='$id_usuario';";
     }
     
@@ -43,6 +45,7 @@ if (isset($_POST["Agregar_a_favoritos"]) || isset($_POST["Quitar_de_favoritos"])
         <input type="submit" value="Regresar al libro">
     </form>';
 }
+//Mostrar más información del libro
 elseif (isset($_POST["id_libro"])) {
 
     $c = connectdb();
@@ -71,20 +74,21 @@ elseif (isset($_POST["id_libro"])) {
 
     echo "<br><strong>Descripción: </strong>" .$row["descripcion"];
 
-    //Falta agregar liga hacia favorito y de descarga
+    //Abrir el libro en otra pestaña
     echo'<br><a href="' . $row["libro"] . '" target="_blank"><button>Abrir en otra pestaña</button></a> 
 
     <br>
     <form action="mas_informacion.php" method="POST">
+
         <input type="hidden" value="'. $id_libro .'" name="id_descarga">
         <input type="hidden" value="'. $row["libro"] .'" name="contenido">
         <input type="submit" value="Descargar libro" name="descarga">
     </form>';
-
+    //Agregar a favoritos
     $id_usuario = $_SESSION["id_usuario"];
     $consulta = "SELECT * FROM favorito WHERE id_libro=$id_libro AND id_usuario='$id_usuario';";
     $r = mysqli_query($c, $consulta);
-
+    //Cambiar el mensaje del boton si esta o no en favoritos del usuario
     $mensajeBoton = !$r || mysqli_num_rows($r) == 0 ? "Agregar a favoritos" : "Quitar de favoritos";
     echo '<form action="./mas_informacion.php" method="POST">
         <input type="hidden" value="' . $id_usuario . '" name="id_usuario">
@@ -99,17 +103,21 @@ elseif (isset($_POST["id_libro"])) {
         </form>';
     mysqli_close($c);
 }
+<<<<<<< HEAD
+//Descargar libro
+=======
 
+>>>>>>> 7764891e56d122b515fcddb52fe3081b043b36e6
 elseif (isset($_POST["id_descarga"])) {
     $id_usuario = $_SESSION["id_usuario"];
     $id_libro = $_POST["id_descarga"];
-
+    //Insertar en el historial de descargas el libro seleccionado
     $c = connectdb();
     $db = mysqli_select_db($c, "biblioteca");
     $consulta = "INSERT INTO historial_descargas (id_usuario, id_libro) VALUES ('$id_usuario', $id_libro);";
     $r = mysqli_query($c, $consulta);
 
-
+    //Header para descargar libro
     header("Content-type: application/pdf");
     header("Content-Disposition: attachment; filename=xd.pdf");
     readfile($_POST["contenido"]);

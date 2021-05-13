@@ -1,6 +1,6 @@
 <?php
 require "./config.php";
-
+//Funcion de encabezados
 function encabezados($tipo) {
 
     echo"<table>
@@ -10,9 +10,11 @@ function encabezados($tipo) {
     echo"<tbody>";
     echo"<tr><td>";
     
-
+    //Casos para considerar los encabezados
     switch ($tipo)
     {
+        //En caso de ser lector mostrar opciones de ir a Inicio, FAvoritos, Solicitar un libro, su perfil
+        //y poder cerrar sesión
         case 'Lector': 
             echo "<a href=\"./index.php\"><button>Inicio</button></a>";
             echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
@@ -20,7 +22,8 @@ function encabezados($tipo) {
             echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
             echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;
-
+        /*En caso de ser biblotecario mostrar opciones de ir a Inicio, FAvoritos, Subir un libro, su perfil,
+        cerrar sesión, acceder al historial de descargas, ver reportes y solicitudes de libros*/
         case 'Bibliotecario':
             echo "<a href=\"./index.php\"><button>Inicio</button></a>";
             echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
@@ -31,7 +34,9 @@ function encabezados($tipo) {
             echo "<a href=\"./perfil.php\"><button>Ver Perfil</button></a>";
             echo "<a href=\"cerrar.php\"><button>Cerrar sesión</button></a>";
             break;
-                                                                              
+        /*En caso de ser biblotecario mostrar opciones de ir a Inicio, FAvoritos, Subir un libro, su perfil,
+        cerrar sesión, acceder al historial de descargas, ver reportes y solicitudes de libros y ver los usuarios
+        y poder crear o eliminarlos*/                                                                
         case 'Administrador':
             echo "<a href=\"./index.php\"><button>Inicio</button></a>";
             echo "<a href=\"./favoritos.php\"><button>Favoritos</button></a>";
