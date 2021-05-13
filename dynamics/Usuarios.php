@@ -1,9 +1,9 @@
 <?php
-require_once("./util.php");
-require_once("./config.php");
+	require_once("./util.php");
+	require_once("./config.php");
 
-session_start();
-redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Administrador');
+	session_start();
+	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Administrador');
 ?>
     <!DOCTYPE html>
 <html lang="en">
@@ -16,12 +16,14 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuari
 </head>
 <body>
 <?php
-//Función de encabezado
+	//Función de encabezado
 	encabezados($_SESSION["tipo_usuario"]);
+
 	//Seleccionar los valores dentro de la tabla de usuarios
     $c = connectdb();
     $consulta = "SELECT * FROM usuario";
     $r = mysqli_query($c, $consulta);
+		
 	//Imprimir los usuarios existentes
     echo "<table border='1'><tbody>";
 	while($row=mysqli_fetch_array($r)) {

@@ -1,8 +1,8 @@
 <?php
-require_once("./util.php");
-require_once("./config.php");
-session_start();
-redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
+	require_once("./util.php");
+	require_once("./config.php");
+	session_start();
+	redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuario"], 'Bibliotecario');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,23 +15,25 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]), $_SESSION["tipo_usuari
 </head>
 <body>
 <?php
-    //Funcion de encabezados
-    encabezados($_SESSION["tipo_usuario"]);
-    $c = connectdb();
-    //Seleccionar los datos de el libro reportado y el reporte
-    $consulta="SELECT id_reporte, titulo, razon FROM reporte t1
-    INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
-    $r = mysqli_query($c, $consulta);
-    echo "<table border='1'>";
-    //Imprimir el titulo del libro y la razón del reporte
-    while($row=mysqli_fetch_array($r)) {
-        echo "<tr>";
-        echo "<td>";
-        echo "<br><strong>Titulo: </strong>" . $row["titulo"]."";
-        echo "<br><strong>Razón: </strong>" . $row["razon"]."<br>";
-        echo "<br>";
-        echo "</td>";
-    }
-    echo "</tr></table>";
-    mysqli_close($c);
+	//Funcion de encabezados
+	encabezados($_SESSION["tipo_usuario"]);
+	$c = connectdb();
+	
+	//Seleccionar los datos de el libro reportado y el reporte
+	$consulta="SELECT id_reporte, titulo, razon FROM reporte t1
+	INNER JOIN libro t2 ON t1.id_libro= t2.id_libro;";
+	$r = mysqli_query($c, $consulta);
+	echo "<table border='1'>";
+
+	//Imprimir el titulo del libro y la razón del reporte
+	while($row=mysqli_fetch_array($r)) {
+		echo "<tr>";
+		echo "<td>";
+		echo "<br><strong>Titulo: </strong>" . $row["titulo"]."";
+		echo "<br><strong>Razón: </strong>" . $row["razon"]."<br>";
+		echo "<br>";
+		echo "</td>";
+	}
+	echo "</tr></table>";
+	mysqli_close($c);
 ?>

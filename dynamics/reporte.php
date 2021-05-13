@@ -50,30 +50,19 @@ redireccionarSiSesionInvalida(isset($_SESSION["nombre"]));
     $consulta = "INSERT INTO reporte (id_libro, razon) VALUES ($id_libro, '$razon') ;";
     
     $r=mysqli_query($c, $consulta);
-<<<<<<< HEAD
-//En caso de que no se pueda hacer el reporte
-    if(!$r)
-    {
-        echo "No ha sido posible reportar el libro";
-        echo $razon;
-    
-    }
-    //En caso de reportar el libro
-=======
 
     if(!$r){
-        echo "No ha sido posible reportar el libro";
+			echo "No ha sido posible reportar el libro";
     }
 
->>>>>>> 7764891e56d122b515fcddb52fe3081b043b36e6
     else{
-        echo "El libro ha sido reportado";
-        echo "<br>";
+			echo "El libro ha sido reportado";
+			echo "<br>";
     }
     //Boton para regresar a la pagina de inicio
     echo "<a href=\"./index.php\"><button>Volver</button></a>";
-}
- else{
+	}
+ 	else{
     header("location: index.php");
- }
+ 	}
 ?>
