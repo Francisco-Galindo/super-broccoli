@@ -1,23 +1,23 @@
 # super-broccoli
 
-##Nombre del proyecto Biblioteca Super-Brocoli
-##Nombre de equipo Los secretarios de Super-Brocoli
-##Nombre de los integrantes:
+## Nombre del proyecto Biblioteca Super-Brocoli
+## Nombre de equipo Los secretarios de Super-Brocoli
+## Nombre de los integrantes:
 ● Alan Morales
 ● Arturo Alfaro
 ● Francisco Galindo
 ● Heli Aguilar
 
 
-##Guía de instalación del proyecto:
+## Guía de instalación del proyecto:
 1. Clonar el repositorio en la carpeta htdocs dentro de una carpeta vacía
 2. Crear una base de datos en la cual se va clonar el respaldo que venga en el repositorio
 
 
-##Guía de configuración del proyecto:
+## Guía de configuración del proyecto:
 
 
-##Características del proyecto:
+## Características del proyecto:
 Super-Brocolí es una biblioteca digital que cuenta con más de 20 libros de dominio público, en ella se pueden crear cuentas para los lectores que deseen acceder a nuestro 
 contenido, Para poder crear cualquier cuenta con más permisos (biblotecario o administrador) deberá de hacerse a traves de una cuenta administrador.
 El lector va a tener la capacidad de acceder a todo nuestro contenido, así como tener una descripción del libro para ver si le interesa la lectura y la capacidad de agregarlo
@@ -35,4 +35,4 @@ Cabe aclarar que para crear una cuenta es necesario contar con un correo institu
 contenido.
 En caso de que un administrador quiera eliminar una cuenta de cualquier tipo o crearla, este tipo de cuentas va a ser la única con los permisos para realizar dicha acción.
 
-##Comentarios adicionales a su proyecto
+## Comentarios adicionales a su proyecto
