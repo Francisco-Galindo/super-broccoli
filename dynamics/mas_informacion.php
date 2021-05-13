@@ -92,6 +92,7 @@ elseif (isset($_POST["id_libro"])) {
         <input type="submit" value="' . $mensajeBoton . '" name="' . $mensajeBoton . '">
     </form>';
 
+    if ($_SESSION["tipo_usuario"] == "Bibliotecario" || $_SESSION["tipo_usuario"] == "Administrador")
     echo '<form action="formulario_libro.php" method="POST">
             <input type="hidden" name="id_libro" value="'. $id_libro .'">
             <input type="submit" value="Editar libro" name="prellenar">
